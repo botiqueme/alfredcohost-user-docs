@@ -1,0 +1,17 @@
+name: Redocly Docs (ts-ciam-portal) link checker
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install markdown-link-check
+        run: npm install -g markdown-link-check
+      - name: Run link check
+        run: |
+          find docs -name '*.md' | xargs -n1 markdown-link-check -q
