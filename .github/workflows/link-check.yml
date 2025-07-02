@@ -1,4 +1,4 @@
-name: Docsify Docs (Alfredalfredcohost-user-docs-portal) link checker
+name: Docsify Docs (alfredcohost-user-docs-portal) link checker
 
 on:
   pull_request:
