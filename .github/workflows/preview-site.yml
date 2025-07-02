@@ -1,8 +1,10 @@
-name: alfredcohost-user-docs Docs (preview)
+name: Docs Preview
 
+# Trigger su pull request verso main
 on:
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -10,23 +12,26 @@ permissions:
 jobs:
   preview:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
 
-      - name: Setup Node
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: '18'
 
       - name: Install docsify CLI
         run: npm install -g docsify-cli
 
-      - name: Build docs (generate .nojekyll)
+      - name: Generate .nojekyll
         run: echo "" > docs/.nojekyll
 
       - name: Deploy preview
-        uses: peaceiris/actions-gh-pages-preview@v2
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.event_name == 'pull_request'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
           publish_branch: preview/${{ github.event.pull_request.number }}
+          publish_dir: ./docs
