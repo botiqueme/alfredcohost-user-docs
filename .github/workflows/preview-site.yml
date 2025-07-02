@@ -1,4 +1,4 @@
-name: Redocly Docs (preview)
+name: alfredcohost-user-docs Docs (preview)
 
 on:
   pull_request:
