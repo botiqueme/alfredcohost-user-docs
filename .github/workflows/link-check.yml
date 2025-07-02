@@ -1,4 +1,4 @@
-name: Redocly Docs (ts-ciam-portal) link checker
+name: Docsify Docs (Alfredalfredcohost-user-docs-portal) link checker
 
 on:
   pull_request:
