@@ -1,0 +1,63 @@
+name: Jira-Ticket-Validation
+
+# Si attiva su ogni pull request verso main
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate-jira-ticket:
+    name: Validate Jira ticket in PR title
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Extract PR title
+        id: get_pr_title
+        run: |
+          echo "PR_TITLE<<EOF" >> $GITHUB_OUTPUT
+          echo "${{ github.event.pull_request.title }}" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Validate Jira ticket format
+        id: validate_ticket
+        run: |
+          PR_TITLE="${{ steps.get_pr_title.outputs.PR_TITLE }}"
+          echo "PR title is: $PR_TITLE"
+          # Regex per ticket JIRA tipo ABC-1234
+          if [[ ! "$PR_TITLE" =~ [A-Z]{2,}-[0-9]+ ]]; then
+            echo "::error ::PR title must include a valid Jira ticket (e.g. PROJ-123)"
+            exit 1
+          fi
+          echo "✅ Jira ticket found in PR title."
+
+      - name: Optionally verify ticket exists in Jira
+        if: success()  # solo se il regex passa
+        env:
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          JIRA_USER:      ${{ secrets.JIRA_USER }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        run: |
+          PR_TITLE="${{ steps.get_pr_title.outputs.PR_TITLE }}"
+          # Estrai ticket (prima occorrenza)
+          TICKET=$(echo "$PR_TITLE" | grep -oE '[A-Z]{2,}-[0-9]+' | head -n1)
+          echo "Checking existence of ticket $TICKET on Jira..."
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -u "$JIRA_USER:$JIRA_API_TOKEN" \
+            "$JIRA_BASE_URL/rest/api/2/issue/$TICKET")
+          if [ "$HTTP_STATUS" != "200" ]; then
+            echo "::error ::Jira ticket $TICKET not found or inaccessible (HTTP $HTTP_STATUS)"
+            exit 1
+          fi
+          echo "✅ Jira ticket $TICKET exists."
+
+      - name: Report success
+        if: success()
+        run: echo "All Jira ticket checks passed."
