@@ -50,3 +50,56 @@ p {
   color: var(--color-text);
   margin-bottom: 1em;
 }
+
+/* Hide default Docsify title in sidebar */
+.sidebar .app-name {
+  display: none;
+}
+
+/* Header layout */
+.custom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background-color: white;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Logo on the left */
+.header-left .logo {
+  height: 36px;
+}
+
+/* Center navigation links */
+.header-center {
+  display: flex;
+  gap: 24px;
+}
+
+.header-center a {
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.header-center a:hover {
+  text-decoration: underline;
+}
+
+/* Search box on the right */
+.header-right .search {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+/* Prevent sidebar from overlapping with sticky header */
+.sidebar {
+  padding-top: 80px; !important;
+}
