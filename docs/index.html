@@ -42,21 +42,21 @@
   <!-- Docsify app mount -->
   <div id="app"></div>
 
-  <script>
-    window.$docsify = {
-      name: '',
-      loadSidebar: true,
-      subMaxLevel: 2,
-      themeColor: '#FF3B3C',
-      search: {
-        maxAge: 86400000,
-        paths: 'auto',
-        placeholder: 'Search...',
-        noData: 'No results!',
-        depth: 3
-      }
-    };
-  </script>
+ <script>
+  window.$docsify = {
+    name: '',
+    loadSidebar: true,     // carica _sidebar.md
+    subMaxLevel: 1,        // opzionale, ma ignorato se usi _sidebar.md
+    themeColor: '#FF3B3C',
+    search: {
+      maxAge: 86400000,
+      paths: 'auto',
+      placeholder: 'Search...',
+      noData: 'No results!',
+      depth: 1
+    }
+  };
+</script>
 
   <!-- Docsify Core + Plugins -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
