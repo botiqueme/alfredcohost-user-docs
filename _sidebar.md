@@ -1,7 +1,10 @@
 * [Home](README.md)
 * [Quickstart](intro.md)
+
 * [Overview](get_started.md)
-* [CLI Installation](setup.md)
-* [Web Editor](web-editor.md)
+   * [Properties](properties_p.md)
+   * [Labels](labels.md)
+
 * [Components](components.md)
-* [Components](components.md)
+   * [Cards](components/cards.md)
+   * [Search](components/search.md)
