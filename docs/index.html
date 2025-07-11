@@ -22,43 +22,44 @@
 
 <body>
   <!-- Custom Header -->
-<header class="custom-header">
-  <div class="header-left">
-    <img src="media/alfred_logo.jpg" alt="Alfred Logo" class="logo" />
-  </div>
+  <header class="custom-header">
+    <div class="header-left">
+      <img src="media/alfred_logo.jpg" alt="Alfred Logo" class="logo" />
+    </div>
 
-  <div class="header-actions">
-    <div class="header-center">
-      <a href="#/">Home</a>
-      <a href="#/quickstart">Quickstart</a>
-      <a href="#/components">Components</a>
+    <div class="header-actions">
+      <div class="header-center">
+        <a href="#/">Home</a>
+        <a href="#/quickstart">Quickstart</a>
+        <a href="#/components">Components</a>
+      </div>
+      <div class="header-right">
+        <input type="text" class="custom-search" placeholder="Search the docs">
+      </div>
     </div>
-    <div class="header-right">
-      <input type="text" class="custom-search" placeholder="Search the docs">
-    </div>
-  </div>
-</header>
+  </header>
 
   <!-- Docsify app mount -->
-  <div id="app"></div>
+  <div id="app" data-app></div>
 
- <script>
-  window.$docsify = {
-  name: '',
-  loadSidebar: true,
-  subMaxLevel: 1,  // sidebar solo con H1 auto-generati quando entri in una pagina
-  themeColor: '#FF3B3C',
-  search: {
-    maxAge: 86400000,
-    paths: 'auto',
-    placeholder: 'Search...',
-    noData: 'No results!',
-    depth: 1
-  }
-};
-</script>
+  <script>
+    window.$docsify = {
+      name: '',
+      loadSidebar: true,
+      subMaxLevel: 1,
+      themeColor: '#FF3B3C',
+      search: {
+        maxAge: 86400000,
+        paths: 'auto',
+        placeholder: 'Search...',
+        noData: 'No results!',
+        depth: 1
+      }
+    };
+  </script>
 
   <!-- Docsify Core + Plugins -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+</body>
 </html>
