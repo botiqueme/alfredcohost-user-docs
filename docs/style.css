@@ -207,7 +207,8 @@ a:hover, .sidebar a:hover {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 0.5em;
+  margin-top: 1em;         
+  margin-bottom: 0.2em;
   color: inherit;
 }
 
