@@ -5,9 +5,9 @@
   --color-background: #ffffff;
 }
 
-/* ---------------------- */
-/* Global Typography and Base */
-/* ---------------------- */
+/* ------------------------ */
+/* Typography and Base Style */
+/* ------------------------ */
 body, .content {
   font-family: var(--font-body);
   color: var(--color-text);
@@ -32,9 +32,9 @@ h1, h2, h3,
   font-weight: 200;
 }
 
-/* ---------------------- */
+/* ------------------------ */
 /* Links */
-/* ---------------------- */
+/* ------------------------ */
 a, .sidebar a {
   color: var(--color-primary);
   text-decoration: none;
@@ -44,9 +44,9 @@ a:hover, .sidebar a:hover {
   opacity: 0.8;
 }
 
-/* ---------------------- */
-/* Inline Code Styling */
-/* ---------------------- */
+/* ------------------------ */
+/* Inline code style */
+/* ------------------------ */
 .markdown-section code {
   background: #f5f5f5;
   font-family: monospace;
@@ -55,27 +55,25 @@ a:hover, .sidebar a:hover {
   color: var(--color-text);
 }
 
-/* ---------------------- */
-/* Sidebar */
-/* ---------------------- */
+/* ------------------------ */
+/* Sidebar settings */
+/* ------------------------ */
 .sidebar {
-  padding-top: 80px !important; /* Prevent overlap with sticky header */
+  padding-top: 80px !important;
 }
 
 .sidebar .app-name,
 .sidebar .search {
   display: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
 }
 
-/* ---------------------- */
-/* Header Layout */
-/* ---------------------- */
+/* ------------------------ */
+/* Custom Header */
+/* ------------------------ */
 .custom-header {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Vertically center logo, nav, and search */
+  align-items: center;
   padding: 12px 24px;
   height: 64px;
   background-color: white;
@@ -85,7 +83,6 @@ a:hover, .sidebar a:hover {
   z-index: 1000;
 }
 
-/* Left: Logo */
 .header-left {
   display: flex;
   align-items: center;
@@ -93,50 +90,39 @@ a:hover, .sidebar a:hover {
 
 .header-left .logo {
   height: 36px;
-  display: block;
 }
 
-/* Right: Navigation + Search Group */
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 32px; /* spacing between nav and search */
+  gap: 32px;
 }
 
-/* Navigation Links */
 .header-center {
   display: flex;
   align-items: center;
   gap: 24px;
 }
 
-/* Header links */
 .header-center a {
-  font-weight: 500 !important;
-  font-size: 16px !important;
-  color: var(--color-text) !important;
-  text-decoration: none !important;
-  line-height: 36px !important;
-  padding: 0 !important;
-  margin: 0 12px !important;
-  height: 36px !important;
-  display: flex !important;
-  align-items: center !important;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text);
+  text-decoration: none;
+  height: 36px;
+  display: flex;
+  align-items: center;
 }
-
 
 .header-center a:hover {
   text-decoration: underline;
 }
 
-/* Search Box */
 .header-right {
   display: flex;
   align-items: center;
 }
 
-
-/* Search box */
 .header-right .custom-search {
   height: 36px;
   padding: 0 12px;
@@ -147,60 +133,129 @@ a:hover, .sidebar a:hover {
   line-height: 36px;
   box-sizing: border-box;
   transition: border 0.2s ease;
-
-  /* 👇 override at focus */
 }
 
 .header-right .custom-search:focus {
   outline: none;
-  border: 2px solid var(--color-primary); /* your red */
-  font-weight: 400;
+  border: 2px solid var(--color-primary);
 }
 
-/* Base blockquote style */
+/* ------------------------ */
+/* Callout blocks */
+/* ------------------------ */
 .markdown-section blockquote {
   border-left: 6px solid #FF3B3C;
   padding: 1em;
-  background: white;
   border-radius: 4px;
   margin: 1.5em 0;
+  background-color: rgba(255, 59, 60, 0.15);
 }
 
-/* Text inside blockquote */
 .markdown-section blockquote p {
   margin: 0;
   font-weight: normal;
 }
 
-/* Label at the beginning (Tip, Note, Warning) */
 .markdown-section blockquote p strong:first-child {
   display: block;
   margin-bottom: 0.5em;
 }
 
-/* Tip */
+/* TIP */
 .markdown-section blockquote.callout-tip {
   border-left-color: #2ecc71;
+  background-color: rgba(46, 204, 113, 0.15);
 }
 .markdown-section blockquote.callout-tip p strong:first-child {
   color: #2ecc71;
   font-weight: bold;
 }
 
-/* Note */
+/* NOTE */
 .markdown-section blockquote.callout-note {
-  border-left-color: #6980FF;
+  border-left-color: #6980ff;
+  background-color: rgba(105, 128, 255, 0.15);
 }
 .markdown-section blockquote.callout-note p strong:first-child {
-  color: #6980FF;
+  color: #6980ff;
   font-weight: bold;
 }
 
-/* Warning (default style) */
+/* WARNING */
 .markdown-section blockquote.callout-warning {
   border-left-color: #FF3B3C;
+  background-color: rgba(255, 59, 60, 0.15);
 }
 .markdown-section blockquote.callout-warning p strong:first-child {
   color: #FF3B3C;
   font-weight: bold;
+}
+
+/* Italics color fix */
+.markdown-section em,
+.markdown-section i {
+  color: inherit;
+  font-style: italic;
+}
+
+/* === HEADINGS CLEANUP === */
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section h4 {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.5em;
+  color: inherit;
+}
+
+/* Disabilita gli stili di Docsify sugli anchor */
+.markdown-section h1 > a,
+.markdown-section h2 > a,
+.markdown-section h3 > a,
+.markdown-section h4 > a {
+  text-decoration: none !important;
+  color: inherit !important;
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+/* Nessun effetto all’hover */
+.markdown-section h1 > a:hover,
+.markdown-section h2 > a:hover,
+.markdown-section h3 > a:hover,
+.markdown-section h4 > a:hover {
+  text-decoration: none !important;
+  color: inherit !important;
+  opacity: 1 !important;
+}
+
+/* === COPY INDICATOR === */
+.copy-indicator {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #FF3B3C !important;; /* rosso */ 
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  margin-left: 6px;
+  position: relative;
+  top: -3px; /* sollevato leggermente */
+}
+
+/* Mostra solo su hover del titolo */
+.markdown-section h1:hover .copy-indicator,
+.markdown-section h2:hover .copy-indicator,
+.markdown-section h3:hover .copy-indicator,
+.markdown-section h4:hover .copy-indicator {
+  opacity: 1;
+}
+
+/* Copied: stile identico ma testo più marcato */
+.copy-indicator[data-copied="true"] {
+  font-weight: 600;
 }

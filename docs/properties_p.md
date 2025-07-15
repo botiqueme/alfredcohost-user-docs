@@ -13,12 +13,8 @@ In the platform, go to **My properties** > **Add a property**. Enter a recogniza
 
 > **TIP!**
 > For rooms in the same property, use a clear and consistent naming convention — something that matches how you refer to it in real life.  
-> For example: _“Old Town Rooms – Room A”_ if “Room A” is how you and your staff usually refer to it with guests.
+> For example: **Old Town Rooms – Room A** if **Room A** is how you and your staff usually refer to it with guests.
 
-> **Note!**
-> For rooms in the same property, use a clear and consistent naming convention — something that matches how you refer to it in real life.  
-> For example: _“Old Town Rooms – Room A”_ if “Room A” is how you and your staff usually refer to it with guests.
+## Next step
 
-> **warning!**
-> For rooms in the same property, use a clear and consistent naming convention — something that matches how you refer to it in real life.  
-> For example: _“Old Town Rooms – Room A”_ if “Room A” is how you and your staff usually refer to it with guests.
+Once a property is created, you need to fill in its library — this is the information Alfred will use to provide tailored replies based on that property's specific features. Proceed to filling the [library](libraries_c.md).
