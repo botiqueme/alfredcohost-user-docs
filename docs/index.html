@@ -61,5 +61,30 @@
   <!-- Docsify Core + Plugins -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script>
+  window.addEventListener('DOMContentLoaded', () => {
+    function styleCallouts() {
+      document.querySelectorAll('.markdown-section blockquote').forEach(block => {
+        const firstLine = block.querySelector('p strong');
+        if (!firstLine) return;
+
+        const label = firstLine.textContent.trim().toLowerCase();
+
+        block.classList.remove('callout-tip', 'callout-note', 'callout-warning');
+
+        if (label === 'tip!' || label === 'tip') {
+          block.classList.add('callout-tip');
+        } else if (label === 'note!' || label === 'note') {
+          block.classList.add('callout-note');
+        } else if (label === 'warning!' || label === 'warning') {
+          block.classList.add('callout-warning');
+        }
+      });
+    }
+
+    window.addEventListener('hashchange', () => setTimeout(styleCallouts, 100));
+    setTimeout(styleCallouts, 500);
+  });
+</script>
 </body>
 </html>

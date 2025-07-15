@@ -156,3 +156,51 @@ a:hover, .sidebar a:hover {
   border: 2px solid var(--color-primary); /* your red */
   font-weight: 400;
 }
+
+/* Base blockquote style */
+.markdown-section blockquote {
+  border-left: 6px solid #FF3B3C;
+  padding: 1em;
+  background: white;
+  border-radius: 4px;
+  margin: 1.5em 0;
+}
+
+/* Text inside blockquote */
+.markdown-section blockquote p {
+  margin: 0;
+  font-weight: normal;
+}
+
+/* Label at the beginning (Tip, Note, Warning) */
+.markdown-section blockquote p strong:first-child {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+/* Tip */
+.markdown-section blockquote.callout-tip {
+  border-left-color: #2ecc71;
+}
+.markdown-section blockquote.callout-tip p strong:first-child {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+/* Note */
+.markdown-section blockquote.callout-note {
+  border-left-color: #6980FF;
+}
+.markdown-section blockquote.callout-note p strong:first-child {
+  color: #6980FF;
+  font-weight: bold;
+}
+
+/* Warning (default style) */
+.markdown-section blockquote.callout-warning {
+  border-left-color: #FF3B3C;
+}
+.markdown-section blockquote.callout-warning p strong:first-child {
+  color: #FF3B3C;
+  font-weight: bold;
+}
