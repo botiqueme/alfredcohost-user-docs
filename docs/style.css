@@ -268,3 +268,8 @@ a:hover, .sidebar a:hover {
   opacity: 1 !important;
   transition: none !important;
 }
+
+/* reguòar table formatting */
+.markdown-section table tr:nth-child(even) {
+  background-color: transparent;
+}
