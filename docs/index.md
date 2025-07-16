@@ -22,7 +22,7 @@
   <a class="card" href="setup.md" rel="noopener">
     <img src="https://img.icons8.com/ios-filled/50/code.png" alt="Code icon" />
     <h3>How the platform works</h3>
-    <p>Concepts: properties, guest info, and Alfred’s logic</p>
+    <p>Learn how Alfred structures properties and guest information</p>
   </a>
 
   <a class="card" href="web-editor.md" rel="noopener">
