@@ -260,3 +260,11 @@ a:hover, .sidebar a:hover {
 .copy-indicator[data-copied="true"] {
   font-weight: 600;
 }
+
+/* Effects on logo */
+.header-left a:hover,
+.header-left a img:hover {
+  filter: none !important;
+  opacity: 1 !important;
+  transition: none !important;
+}
