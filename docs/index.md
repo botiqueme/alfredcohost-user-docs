@@ -1,12 +1,16 @@
-<h1 align="center">Welcome to Alfred Co.Host documentation!</h1>
-<p align="center">
-  This is your space to understand how Alfred works and manage everything you need day to day — clearly and efficiently.
-</p>
+<div class="home-wrapper">
 
-<hr />
+  <h1>Welcome to Alfred Co.Host documentation!</h1>
+  <p>
+    This is where Alfred helps you take your hosting to the next level.<br>
+    In this portal, you’ll find everything you need to set up Alfred and improve how it supports your guests — from adding properties to adjusting how Alfred responds.<br>
+    Whether you're just getting started or want to manage your current setup, this space is here to help you at every step.
+  </p>
 
-<h2 align="center">Learn how Alfred works</h2>
-<p align="center">If you're new to Alfred or want to understand how it’s structured, start here.</p>
+  <hr />
+
+  <h2>Learn how Alfred works</h2>
+  <p>If you're new to Alfred or want to understand how it’s structured, start here.</p>
 
 <div class="grid">
   <a class="card" href="intro.md" rel="noopener">
@@ -28,24 +32,46 @@
   </a>
 </div>
 
-<hr />
+  <hr />
 
-<h2 align="center">Work with Alfred</h2>
-<p align="center">Know what you want to do? Go straight to it.</p>
+  <h2>Work with Alfred</h2>
+  <p>Know what you want to do? Go straight to it.</p>
 
-<ul style="max-width: 720px; margin: 0 auto; line-height: 1.8;">
-  <li>🏡 <strong><a href="procedures/manage-properties.md">Manage properties</a></strong> — Add, edit, or deactivate guest units</li>
-  <li>🗂️ <strong><a href="procedures/manage-libraries.md">Manage property information</a></strong> — Update the content Alfred uses to answer guests</li>
-  <li>💳 <strong><a href="overview/subscriptions.md">Manage subscription</a></strong> — View or update your current plan</li>
-</ul>
+  <ul>
+    <li>🏡 <strong><a href="procedures/manage-properties.md">Manage properties</a></strong> — Add, edit, or deactivate guest units</li>
+    <li>🗂️ <strong><a href="procedures/manage-libraries.md">Manage property information</a></strong> — Update the content Alfred uses to answer guests</li>
+    <li>💳 <strong><a href="overview/subscriptions.md">Manage subscription</a></strong> — View or update your current plan</li>
+  </ul>
 
-<hr />
+  <hr />
 
-<p align="center">
-  Can’t find what you’re looking for? <a href="mailto:support@alfredco.host">Contact support</a> — we’ll be happy to help.
-</p>
+  <p>
+    Can’t find what you’re looking for? <a href="mailto:support@alfredco.host">Contact support</a> — we’ll be happy to help.
+  </p>
+
+</div>
 
 <style>
+.home-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.home-wrapper h1,
+.home-wrapper h2,
+.home-wrapper p,
+.home-wrapper ul {
+  text-align: center;
+}
+
+.home-wrapper ul {
+  list-style: none;
+  padding-left: 0;
+  line-height: 1.8;
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;
