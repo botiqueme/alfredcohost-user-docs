@@ -13,7 +13,7 @@
   <p>If you're new to Alfred or want to understand how it’s structured, start here.</p>
 
 <div class="grid">
-  <a class="card" href="intro.md" rel="noopener">
+  <a class="card" href="get-started.md" rel="noopener">
     <img src="https://img.icons8.com/ios-filled/50/rocket.png" alt="Rocket icon" />
     <h3>Quickstart</h3>
     <p>Set up Alfred in just a few steps</p>

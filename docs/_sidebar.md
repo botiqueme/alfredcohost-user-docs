@@ -1,4 +1,4 @@
-* [Home](index.md)
+* [Home](home.md)
 * [Get started](get_started.md)
 
 * About
