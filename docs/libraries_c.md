@@ -59,6 +59,10 @@ For example:
 | How to launch the washing machine | Tutorial to launch washing machine cycle | `washing_machine_tutorial.mp4`|
 | Fridge shelves detail | Detail about assigned shelf | `roomA_fridge_shelf.png` |
 
+Format supported:
+- image: MP4, 3GP up to 25Mb
+- video: JPG, JPEG, PNG up to 25Mb
+
 ### Custom media information
 
 Custom fields where you define the label, an optional description, and the media file.  
@@ -68,3 +72,7 @@ For example:
 | --- | --- |--- |
 |`How to unlock the backyard door` | `Procedure to unlock the backyard door` | `backyard_door_opening_demo.mp4`
 |`How to open/close the terrace curtain` | `Detail of the curtain mechanism` | `curtain_lock.png`| 
+
+Format supported:
+- image: MP4, 3GP up to 25Mb
+- video: JPG, JPEG, PNG up to 25Mb
