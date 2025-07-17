@@ -35,7 +35,7 @@ Alfred uses this information **as-is**, or combines it with other sources depend
 Predefined fields where you can enter a text value.  
 For example:
 
-|Information unit | Description | Custom value |
+| Information unit | Description | Custom value |
 | --- | --- | --- |
 | Property address | Address to locate the property | `123 Oxford Street, London` |
 
@@ -45,7 +45,7 @@ Fill in only what you need — leave the rest blank.
 Custom fields where you define both the label and the text value.  
 For example:
 
-|Custom information unit | Custom description | Custom value |
+| Custom information unit | Custom description | Custom value |
 | --- | --- | --- |
 | `Parking instructions` | `Procedure to trigger parking gate opening` | `Use the garage remote stored in the kitchen cupboard` |
 

@@ -207,12 +207,12 @@ a:hover, .sidebar a:hover {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-top: 1em;         
-  margin-bottom: 0.2em;
+  margin-top: 0.2em;         
+  margin-bottom: 0.2em; 
   color: inherit;
 }
 
-/* Disabilita gli stili di Docsify sugli anchor */
+/* Disable Docsify styles on title anchors */
 .markdown-section h1 > a,
 .markdown-section h2 > a,
 .markdown-section h3 > a,
@@ -223,7 +223,7 @@ a:hover, .sidebar a:hover {
   transition: none !important;
 }
 
-/* Nessun effetto all’hover */
+/* Disable effect on title anchors hover */
 .markdown-section h1 > a:hover,
 .markdown-section h2 > a:hover,
 .markdown-section h3 > a:hover,
@@ -269,7 +269,64 @@ a:hover, .sidebar a:hover {
   transition: none !important;
 }
 
-/* reguòar table formatting */
+/* regular table formatting */
 .markdown-section table tr:nth-child(even) {
   background-color: transparent;
+}
+
+
+/* === MODERN TABLE STYLE WITH BORDERS AND ROUNDED CORNERS === */
+.markdown-section table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1.5em 0;
+  background-color: #fff;
+  table-layout: fixed;
+}
+
+.markdown-section thead,
+.markdown-section tbody {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.markdown-section th,
+.markdown-section td {
+  padding: 1em;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid #eee;
+  font-size: 0.95rem;
+  word-break: break-word;
+  background-color: #fff;
+}
+
+/* Header */
+.markdown-section thead th {
+  background-color: #f9f9f9;
+  font-weight: 600;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Remove double border between rows */
+.markdown-section tbody td {
+  border-top: none;
+}
+
+/* Rounded corners on table */
+.markdown-section thead tr:first-child th:first-child {
+  border-top-left-radius: 8px;
+}
+.markdown-section thead tr:first-child th:last-child {
+  border-top-right-radius: 8px;
+}
+.markdown-section tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+.markdown-section tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
 }
