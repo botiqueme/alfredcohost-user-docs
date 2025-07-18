@@ -13,6 +13,19 @@ body, .content {
   color: var(--color-text);
   background-color: var(--color-background);
   line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+.markdown-section {
+  max-width: 100% !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  margin: 0 auto !important;
+}
+
+.markdown-section h1:first-of-type {
+  margin-top: 0.5em !important;
 }
 
 p {
@@ -318,7 +331,6 @@ a:hover, .sidebar a:hover {
   border-bottom-right-radius: 8px;
 }
 
-
 /* === Background solo in homepage === */
 body.home-background {
   position: relative;
@@ -338,4 +350,47 @@ body.home-background::before {
   opacity: 0.08;
   z-index: -1;
   pointer-events: none;
+}
+
+/* === HOMEPAGE HERO CON BACKGROUND DECORATIVO === */
+
+.homepage-hero {
+  position: relative;
+  aspect-ratio: 16 / 5; /* ✅ altezza fluida basata sulla larghezza */
+  background-image: url('media/bg_visual.jpg');
+  background-size: contain;         /* ✅ mostra tutta l'immagine */
+  background-position: top center;  /* ✅ centrata in alto */
+  background-repeat: no-repeat;
+  margin: 0 auto 2em auto;          /* ✅ nessun margine sopra */
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.homepage-hero-overlay {
+  position: absolute;
+  inset: 0;
+  padding-top: 4em;
+  padding-bottom: 4em;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.9) 80%, #fff 100%); /* ✅ nuovo gradient sfumato */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* ✅ allinea il testo verso il basso */
+  align-items: center;
+  text-align: center;
+  padding: 4em 2em 6em 2em; /* ✅ più spazio sopra e sotto */
+  color: #171614;
+}
+
+.homepage-hero-overlay h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5em;
+  color: var(--color-primary);
+}
+
+.homepage-hero-overlay p {
+  font-size: 1.1rem;
+  margin: 0;
 }
