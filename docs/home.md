@@ -1,5 +1,13 @@
+<div class="homepage-hero">
+  <div class="homepage-hero-overlay">
+    <h1>Welcome to Alfred Co.Host!</h1>
+    <p>This is where Alfred helps you take your hosting to the next level.<br>
+    In this portal, you’ll find everything you need to set up Alfred and improve how it supports your guests — from adding properties to adjusting how Alfred responds.<br>
+    Whether you're just getting started or want to manage your current setup, this space is here to help you at every step.</p>
+  </div>
+</div>
 <div class="home-wrapper">
-
+<!--
   <h1>Welcome to Alfred Co.Host documentation!</h1>
   <p>
     This is where Alfred helps you take your hosting to the next level.<br>
@@ -7,7 +15,7 @@
     Whether you're just getting started or want to manage your current setup, this space is here to help you at every step.
   </p>
 
-  <hr />
+  <hr /> -->
 
   <h2>Learn how Alfred works</h2>
   <p>If you're new to Alfred or want to understand how it’s structured, start here.</p>

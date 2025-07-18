@@ -1,5 +1,5 @@
 * [Home](home.md)
-* [Get started](get_started.md)
+* [Get started](get-started.md)
 
 * About
    * [Properties](properties_c.md)
