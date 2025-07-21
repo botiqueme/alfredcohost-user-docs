@@ -20,7 +20,7 @@
 
 <div class="grid">
   <a class="card" href="get-started.md" rel="noopener">
-    <img src="media/quickstart-icon.png" alt="Rocket icon" />
+    <img src="media/quickstart-icon.png" width=1000px alt="Rocket icon" />
     <h3>Quickstart</h3>
     <p>Set up Alfred in just a few steps</p>
   </a>
