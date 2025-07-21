@@ -79,7 +79,6 @@ h1, h2, h3,
   height: auto !important; /* ✅ altezza flessibile */
   padding: 24px 20px !important;
   text-align: center !important;
-  box-shadow: 0 8px 24px rgba(255, 59, 60, 0.08) !important;
   transition: transform 0.15s ease, box-shadow 0.15s ease !important;
   text-decoration: none !important;
   color: inherit !important;
