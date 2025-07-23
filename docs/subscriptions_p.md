@@ -12,7 +12,7 @@ To activate a subscription, go to **My properties**, find the property you want 
 
 The assistant goes live instantly after activating.
 
-## Cancel a subscription
+## Cancel a subscription 
 
 You can cancel a subscription at any time. To do so, go to **My subscriptions**, find the subscription you want to cancel, and click **Delete**.
 
