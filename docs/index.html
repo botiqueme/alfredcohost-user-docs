@@ -71,13 +71,15 @@
           const firstLine = block.querySelector('p strong');
           if (!firstLine) return;
           const label = firstLine.textContent.trim().toLowerCase();
-          block.classList.remove('callout-tip', 'callout-note', 'callout-warning');
+          block.classList.remove('callout-tip', 'callout-note', 'callout-warning', 'callout-important');
           if (label === 'tip!' || label === 'tip') {
             block.classList.add('callout-tip');
           } else if (label === 'note!' || label === 'note') {
             block.classList.add('callout-note');
           } else if (label === 'warning!' || label === 'warning') {
             block.classList.add('callout-warning');
+          } else if (label === 'important!' || label === 'important') {
+            block.classList.add('callout-important');
           }
         });
       }

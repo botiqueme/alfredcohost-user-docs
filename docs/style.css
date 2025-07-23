@@ -276,6 +276,16 @@ a:hover, .sidebar a:hover {
   font-weight: bold;
 }
 
+/* IMPORTANT */
+.markdown-section blockquote.callout-important {
+  border-left-color: #6980ff;
+  background-color: rgba(105, 128, 255, 0.15);
+}
+.markdown-section blockquote.callout-note p strong:first-child {
+  color: #6980ff;
+  font-weight: bold;
+}
+
 /* WARNING */
 .markdown-section blockquote.callout-warning {
   border-left-color: #FF3B3C;
@@ -292,6 +302,19 @@ a:hover, .sidebar a:hover {
   color: inherit;
   font-style: italic;
 }
+
+/* Bullet color fix in callout blocks */
+.markdown-section blockquote ul li,
+.markdown-section blockquote ol li {
+  color: var(--color-text) !important;
+  opacity: 1 !important;
+}
+.markdown-section blockquote ul li::marker,
+.markdown-section blockquote ol li::marker {
+  color: var(--color-text) !important;
+  opacity: 1 !important;
+}
+
 
 /* === HEADINGS CLEANUP === */
 .markdown-section h1,
