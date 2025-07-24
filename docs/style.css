@@ -532,3 +532,7 @@ body.home-background::before {
   color: var(--color-text);
   opacity: 0.5;
 }
+
+[data-toc-depth] {
+  display: none;
+}

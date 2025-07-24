@@ -1,3 +1,5 @@
+<div data-toc-depth="3"></div>
+
 # Libraries
 
 In the Alfred Co.Host platform, a **library** is the structured set of information Alfred uses to respond to guest questions for a specific property.

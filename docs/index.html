@@ -129,9 +129,23 @@ window.addEventListener('DOMContentLoaded', () => {
     const content = document.querySelector('.markdown-section');
     if (!content) return;
 
-    const headings = content.querySelectorAll('h2[id]');
-    if (!headings.length || content.querySelector('.inline-toc')) return;
+    // 🔧 Leggi il livello massimo dalla pagina
+    const depthAttr = document.querySelector('[data-toc-depth]');
+    const maxDepth = depthAttr ? parseInt(depthAttr.getAttribute('data-toc-depth')) : 2;
 
+    // ⛔ Se esiste già la TOC, non rigenerarla
+    if (content.querySelector('.inline-toc')) return;
+
+    // 🔍 Prendi tutti gli heading fino al livello max
+    const allHeadings = content.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
+    const headings = Array.from(allHeadings).filter(h => {
+      const level = parseInt(h.tagName.replace('H', ''));
+      return level <= maxDepth;
+    });
+
+    if (!headings.length) return;
+
+    // 📌 Crea container
     const tocContainer = document.createElement('div');
     tocContainer.className = 'inline-toc';
 
@@ -140,6 +154,7 @@ window.addEventListener('DOMContentLoaded', () => {
     label.textContent = 'On this page:';
     tocContainer.appendChild(label);
 
+    // ➕ Aggiungi i link
     headings.forEach((heading, index) => {
       const anchor = heading.querySelector('a');
       if (!anchor) return;
@@ -159,6 +174,7 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // 🧷 Inserisci prima del contenuto
     content.insertBefore(tocContainer, content.firstChild);
   }
 
