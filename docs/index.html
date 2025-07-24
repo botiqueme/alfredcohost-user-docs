@@ -123,5 +123,48 @@
       setTimeout(injectCopyLinks, 500);
     });
   </script>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  function createInlineTOC() {
+    const content = document.querySelector('.markdown-section');
+    if (!content) return;
+
+    const headings = content.querySelectorAll('h2[id]');
+    if (!headings.length || content.querySelector('.inline-toc')) return;
+
+    const tocContainer = document.createElement('div');
+    tocContainer.className = 'inline-toc';
+
+    const label = document.createElement('span');
+    label.className = 'inline-toc-label';
+    label.textContent = 'On this page:';
+    tocContainer.appendChild(label);
+
+    headings.forEach((heading, index) => {
+      const anchor = heading.querySelector('a');
+      if (!anchor) return;
+
+      const cleanText = heading.textContent.replace('Click to copy', '').trim();
+      const link = document.createElement('a');
+      link.href = anchor.getAttribute('href');
+      link.textContent = cleanText;
+
+      tocContainer.appendChild(link);
+
+      if (index < headings.length - 1) {
+        const sep = document.createElement('span');
+        sep.className = 'pipe-separator';
+        sep.textContent = ' | ';
+        tocContainer.appendChild(sep);
+      }
+    });
+
+    content.insertBefore(tocContainer, content.firstChild);
+  }
+
+  window.addEventListener('hashchange', () => setTimeout(createInlineTOC, 300));
+  setTimeout(createInlineTOC, 500);
+});
+</script>
 </body>
 </html>

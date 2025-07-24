@@ -499,3 +499,36 @@ body.home-background::before {
   font-size: 1.1rem;
   margin: 0;
 }
+
+.inline-toc {
+  margin-top: 0.25rem;   /* molto più vicino al titolo */
+  margin-bottom: 0.7rem; /* lascia spazio sotto verso il testo */
+  font-size: 0.85rem;
+  color: var(--color-text);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3em;
+}
+
+.inline-toc-label {
+  color: var(--color-text);
+  margin-right: 0.5em;
+  margin-bottom: auto;
+  text-transform: uppercase;
+}
+
+.inline-toc a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: normal;
+}
+
+.inline-toc a:hover {
+  text-decoration: underline;
+}
+
+.pipe-separator {
+  color: var(--color-text);
+  opacity: 0.5;
+}
