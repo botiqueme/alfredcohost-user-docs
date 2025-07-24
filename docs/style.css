@@ -134,6 +134,7 @@ h1, h2, h3,
 a, .sidebar a {
   color: var(--color-primary);
   text-decoration: none;
+
 }
 
 a:hover, .sidebar a:hover {
@@ -502,7 +503,7 @@ body.home-background::before {
 
 .inline-toc {
   margin-top: 0.25rem;   /* molto più vicino al titolo */
-  margin-bottom: 0.7rem; /* lascia spazio sotto verso il testo */
+  margin-bottom: 0.6rem; /* lascia spazio sotto verso il testo */
   font-size: 0.85rem;
   color: var(--color-text);
   display: flex;
@@ -515,7 +516,7 @@ body.home-background::before {
   color: var(--color-text);
   margin-right: 0.5em;
   margin-bottom: auto;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .inline-toc a {

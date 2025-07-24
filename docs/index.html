@@ -124,63 +124,55 @@
     });
   </script>
 <script>
-window.addEventListener('DOMContentLoaded', () => {
-  function createInlineTOC() {
-    const content = document.querySelector('.markdown-section');
-    if (!content) return;
+  window.addEventListener('DOMContentLoaded', () => {
+    const maxDepth = 2; // cambialo in 3 se vuoi anche gli h3
+    const selector = ['h2', 'h3', 'h4'].slice(0, maxDepth - 1).map(t => `${t}[id]`).join(', ');
 
-    // 🔧 Leggi il livello massimo dalla pagina
-    const depthAttr = document.querySelector('[data-toc-depth]');
-    const maxDepth = depthAttr ? parseInt(depthAttr.getAttribute('data-toc-depth')) : 2;
+    function createInlineTOC() {
+      const content = document.querySelector('.markdown-section');
+      if (!content || content.querySelector('.inline-toc')) return;
 
-    // ⛔ Se esiste già la TOC, non rigenerarla
-    if (content.querySelector('.inline-toc')) return;
+      const headings = content.querySelectorAll(selector);
+      if (!headings.length) return;
 
-    // 🔍 Prendi tutti gli heading fino al livello max
-    const allHeadings = content.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
-    const headings = Array.from(allHeadings).filter(h => {
-      const level = parseInt(h.tagName.replace('H', ''));
-      return level <= maxDepth;
-    });
+      const tocContainer = document.createElement('div');
+      tocContainer.className = 'inline-toc';
 
-    if (!headings.length) return;
+      const label = document.createElement('span');
+      label.className = 'inline-toc-label';
+      label.textContent = 'On this page:';
+      tocContainer.appendChild(label);
 
-    // 📌 Crea container
-    const tocContainer = document.createElement('div');
-    tocContainer.className = 'inline-toc';
+      headings.forEach((heading, index) => {
+        const anchor = heading.querySelector('a');
+        if (!anchor) return;
 
-    const label = document.createElement('span');
-    label.className = 'inline-toc-label';
-    label.textContent = 'On this page:';
-    tocContainer.appendChild(label);
+        const cleanText = heading.textContent.replace('Click to copy', '').trim();
+        const link = document.createElement('a');
+        link.href = anchor.getAttribute('href');
+        link.textContent = cleanText;
 
-    // ➕ Aggiungi i link
-    headings.forEach((heading, index) => {
-      const anchor = heading.querySelector('a');
-      if (!anchor) return;
+        tocContainer.appendChild(link);
 
-      const cleanText = heading.textContent.replace('Click to copy', '').trim();
-      const link = document.createElement('a');
-      link.href = anchor.getAttribute('href');
-      link.textContent = cleanText;
+        if (index < headings.length - 1) {
+          const sep = document.createElement('span');
+          sep.className = 'pipe-separator';
+          sep.textContent = ' | ';
+          tocContainer.appendChild(sep);
+        }
+      });
 
-      tocContainer.appendChild(link);
-
-      if (index < headings.length - 1) {
-        const sep = document.createElement('span');
-        sep.className = 'pipe-separator';
-        sep.textContent = ' | ';
-        tocContainer.appendChild(sep);
+      const firstH1 = content.querySelector('h1');
+      if (firstH1) {
+        content.insertBefore(tocContainer, firstH1);
+      } else {
+        content.insertBefore(tocContainer, content.firstChild);
       }
-    });
+    }
 
-    // 🧷 Inserisci prima del contenuto
-    content.insertBefore(tocContainer, content.firstChild);
-  }
-
-  window.addEventListener('hashchange', () => setTimeout(createInlineTOC, 300));
-  setTimeout(createInlineTOC, 500);
-});
+    window.addEventListener('hashchange', () => setTimeout(createInlineTOC, 300));
+    setTimeout(createInlineTOC, 500);
+  });
 </script>
 </body>
 </html>
