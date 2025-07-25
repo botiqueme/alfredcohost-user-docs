@@ -262,7 +262,13 @@ a:hover, .sidebar a:hover {
   border-left-color: #2ecc71;
   background-color: rgba(46, 204, 113, 0.15);
 }
+
 .markdown-section blockquote.callout-tip p strong:first-child {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+.markdown-section blockquote.callout-tip a {
   color: #2ecc71;
   font-weight: bold;
 }
@@ -277,6 +283,11 @@ a:hover, .sidebar a:hover {
   font-weight: bold;
 }
 
+.markdown-section blockquote.callout-note a {
+  color: #6980ff;
+  font-weight: bold;
+}
+
 /* IMPORTANT */
 .markdown-section blockquote.callout-important {
   border-left-color: #6980ff;
@@ -287,12 +298,23 @@ a:hover, .sidebar a:hover {
   font-weight: bold;
 }
 
+.markdown-section blockquote.callout-note a {
+  color: #6980ff;
+  font-weight: bold;
+}
+
 /* WARNING */
 .markdown-section blockquote.callout-warning {
   border-left-color: #FF3B3C;
   background-color: rgba(255, 59, 60, 0.15);
 }
+
 .markdown-section blockquote.callout-warning p strong:first-child {
+  color: #FF3B3C;
+  font-weight: bold;
+}
+
+.markdown-section blockquote.callout-warning a {
   color: #FF3B3C;
   font-weight: bold;
 }
