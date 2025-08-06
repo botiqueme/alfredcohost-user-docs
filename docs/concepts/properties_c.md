@@ -1,4 +1,4 @@
-# Properties
+# About properties
 
 Properties in Alfred's platform reflect your real-life rentable units — that is, units guests can book, such as:
 - an entire house or apartment  

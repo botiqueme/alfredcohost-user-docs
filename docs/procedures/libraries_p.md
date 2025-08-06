@@ -1,12 +1,12 @@
 # Work with libraries
 
-## Fill native textual information
+## Fill standard textual information
 
 ## Add custom textual information
 
 ## Modify textual information 
 
-## Add native media information
+## Add standard media information
 
 ## Add custom media information
 

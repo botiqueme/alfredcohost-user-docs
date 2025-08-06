@@ -21,18 +21,18 @@ Each property’s library is made of **information units**. Some are predefined 
 
 When Alfred identifies the guest’s property, it uses the related library to answer questions — whether the guest is asking for practical help, descriptive details, or trying to reach a human host.
 
-Information units come in two types: **Native**, which we provide as predefined fields, and **custom**, which you can fully define.
+Information units come in two types: **Standard**, which we provide as predefined fields, and **custom**, which you can fully define.
 
 Information can also be either **textual** or **media-based**:
 
-- [Native textual information](#native-textual-information)
+- [Standard textual information](#standard-textual-information)
 - [Custom textual information](#custom-textual-information)
-- [Native media information](#native-media-information)
+- [Standard media information](#standard-media-information)
 - [Custom media information](#custom-media-information)
 
 Alfred uses this information **as-is**, or combines it with other sources depending on the complexity of the guest’s request.
 
-### Native textual information
+### Standard textual information
 
 Predefined fields where you can enter a text value.  
 For example:
@@ -51,7 +51,7 @@ For example:
 | --- | --- | --- |
 | `Parking instructions` | `Procedure to trigger parking gate opening` | `Use the garage remote stored in the kitchen cupboard` |
 
-### Native media information
+### Standard media information
 
 Predefined fields where you can add media (e.g. photos or videos).  
 For example:

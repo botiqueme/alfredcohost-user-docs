@@ -290,16 +290,17 @@ a:hover, .sidebar a:hover {
 
 /* IMPORTANT */
 .markdown-section blockquote.callout-important {
-  border-left-color: #6980ff;
-  background-color: rgba(105, 128, 255, 0.15);
+  border-left-color: #f8e378 !important;
+  background-color: rgba(250, 226, 130, 0.30); /* giallo molto chiaro */
 }
-.markdown-section blockquote.callout-note p strong:first-child {
-  color: #6980ff;
+
+.markdown-section blockquote.callout-important p strong:first-child {
+  color: #f4c91c !important;
   font-weight: bold;
 }
 
-.markdown-section blockquote.callout-note a {
-  color: #6980ff;
+.markdown-section blockquote.callout-important a {
+  color: #f4c91c !important;
   font-weight: bold;
 }
 

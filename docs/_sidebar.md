@@ -2,11 +2,12 @@
 * [Get started](get-started.md)
 
 * About
-   * [Properties](properties_c.md)
-   * [Libraries](libraries_c.md)
+   * [Properties](concepts/properties_c.md)
+   * [Libraries](concepts/libraries_c.md)
+   * [Plans & billing cycles](concepts/plans_billing_cycles_c.md)
    
 * How to
-   * [Manage properties](properties_p.md)
-   * [Manage libraries](libraries_p.md)
-   * [Manage subscriptions](subscriptions_p.md)
-
+   * [Manage properties](procedures/properties_p.md)
+   * [Manage libraries](procedures/libraries_p.md)
+   * [Manage subscriptions](procedures/subscriptions_p.md)
+   * [Change payment card](procedures/change_payment_card_p.md)
