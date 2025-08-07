@@ -23,7 +23,15 @@ When you cancel a subscription, it will **remain active until the end of the cur
 > **NOTE** Deleted one by mistake? You can simply [subscribe again](#activate-a-subscription).
 
 
-## FAQs
+## Pause a subscription
+
+If you want to make changes in a property library while hiding your assistant, you can [temporarily unpublish your assistant](#). This removes it from all guest-facing touchpoints.
+
+If you want to unpublish your assistant before the subscription expires:
+1. [Cancel the subscription](#cancel-a-subscription).
+2. [Temporarily unpublish the assistant](#) so it’s hidden until the end of the billing cycle.
+
+<!-- ## FAQs
 
 <details><summary><b>Can I pause a subscription?</b></summary>
 
@@ -33,4 +41,8 @@ If you want to unpublish your assistant before the subscription expires:
 1. [Cancel the subscription](#cancel-a-subscription).
 2. [Temporarily unpublish the assistant](#) so it’s hidden until the end of the billing cycle.
 
-</details>
+</details> -->
+
+## Next steps
+
+Want to know the details of plans and billing cycles? See [Plans & Billing Cycles](../concepts/plans_billing_cycles_c.md).

@@ -8,37 +8,39 @@ Your first subscription includes a **15-day free trial**. At the end of the tria
 
 > **NOTE** You won’t be charged during the trial period. The first payment is made automatically when the trial ends.
 
-## Changing Your Payment Card
+## Billing cycles across properties
 
-You can update your saved payment card at any time by going to **My host profile** > **My saved card**.
+You can subscribe **each property individually with its own plan and billing cycle**.  
+For example, one property can be on a monthly Essential plan, another on a yearly Premium plan. — it's fully flexible.
 
-> **IMPORTANT** Regardless of the billing cycle, any new card you add will take effect **starting from the next billing cycle**.
+When subscribing an additional property to an existing billing cycle, you’ll only pay a **prorated amount**. The new property’s billing cycle automatically aligns with the existing one.  
 
-## Changing Plans & Billing Cycles
+For example, if your first property renews on **Jan 31**, and you subscribe a second one on **Jan 28**, you’ll pay a prorated amount for the remaining 3 days, and both properties will renew together.
 
-You can change the plan or billing cycle associated with a property at any time.  
-Plan changes take effect immediately, while billing cycle changes apply at the next renewal date.
+## Changing plans & billing cycles
 
-## Multiple Properties and Mixed Subscriptions
+Since **each property has its own plan and billing cycle**, you can change the plan or billing cycle associated with a property at any time.
 
-If you manage multiple properties, you can assign a **different subscription and billing cycle to each one**.  
-For example, one property can be on the Essential plan with a monthly cycle, and another on the Premium plan with a yearly cycle — it's fully flexible.
+- **Switching plans** takes effect immediately.
+- **Changing the billing cycle** also takes effect immediately:
+  - If no similar subscriptions exist, a new billing cycle starts right away, and you’ll be charged a prorated amount (credit or debit, if applicable).
+  - If other subscriptions of the same type already exist (monthly or yearly), the billing cycle aligns with their renewal date, and you’ll be charged a prorated amount (credit or debit, if applicable).
 
-When subscribing additional properties that share the same billing cycle as existing ones, you’ll only pay a **prorated amount** based on the current cycle.  
-The new property’s billing cycle will align with the existing one.  
-For example, if your first property is subscribed to the Essential Concierge plan (monthly) with a renewal date of January 31st, and you subscribe a second property on January 28th, you’ll only pay a prorated amount.
+## Understand invoices
+
+Invoices are issued a few days after each payment and are grouped by billing cycle type, regardless of the subscribed plan.  
+If you have:
+- Multiple monthly subscriptions, each month you'll receive a single monthly invoice grouping all subscriptions.
+- Multiple yearly subscriptions, each year you'll receive a single monthly invoice grouping all subscriptions.
 
 ## Stopping Billing Cycles
 
 All billing cycles are tied to active subscriptions.  
 When you [cancel a subscription](../procedures/subscriptions_p.md#cancel-a-subscription), you stop the automatic renewal of its billing cycle.  
-The subscription remains **active until the end of the current billing cycle**.  
-After that, it won’t renew and the associated assistant will be unpublished.
+The subscription stays active **until the end of the current cycle**, after which:
+- it won’t renew.
+- the AI assistant will be unpublished.
 
-## Invoices
-
-Invoices are issued a few days after each payment and are grouped by billing cycle type, regardless of the subscribed plan.  
-For example, if you have multiple subscriptions with different billing cycles, you’ll receive one invoice for all properties on a monthly plan, and one for all properties on a yearly plan.
 
 ## Related Topics
 
