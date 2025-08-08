@@ -19,22 +19,22 @@
   <p>If you're new to Alfred or want to understand how it’s structured, start here.</p>
 
 <div class="grid">
-  <a class="card" href="get-started.md" rel="noopener">
+  <a class="card" href="#/get-started.md" rel="noopener">
     <img src="media/quickstart-icon.png" width=1000px alt="Rocket icon" />
     <h3>Quickstart</h3>
-    <p>Set up Alfred in just a few steps</p>
+    <p>Get Alfred up and running in just a few simple steps.</p>
   </a>
 
-  <a class="card" href="setup.md" rel="noopener">
+  <a class="card" href="#/setup.md" rel="noopener">
     <img src="media/how-it-works-icon.png" alt="Code icon" />
     <h3>How the platform works</h3>
-    <p>Learn how Alfred structures properties and guest information</p>
+    <p>Discover the key concepts behind Alfred’s success.</p>
   </a>
 
-  <a class="card" href="web-editor.md" rel="noopener">
+  <a class="card" href="#/web-editor.md" rel="noopener">
     <img src="media/stepbystep-icon.png" alt="Edit icon" />
     <h3>Step-by-step guides</h3>
-    <p>Follow practical instructions to configure Alfred</p>
+    <p>From setup to success — follow our step-by-step guides for Alfred.</p>
   </a>
 </div>
 
@@ -42,15 +42,15 @@
   <p>Know what you want to do? Go straight to it.</p>
 
   <ul>
-    <li>🏡 <strong><a href="procedures/manage-properties.md">Manage properties</a></strong> — Add, edit, or deactivate guest units</li>
-    <li>🗂️ <strong><a href="procedures/manage-libraries.md">Manage property information</a></strong> — Update the content Alfred uses to answer guests</li>
-    <li>💳 <strong><a href="overview/subscriptions.md">Manage subscription</a></strong> — View or update your current plan</li>
+    <li>🏡 <strong><a href="#/procedures/manage-properties.md">Manage properties</a></strong> — Add, edit, or deactivate guest units</li>
+    <li>🗂️ <strong><a href="#/procedures/manage-libraries.md">Manage property information</a></strong> — Update the content Alfred uses to answer guests</li>
+    <li>💳 <strong><a href="#/overview/subscriptions.md">Manage subscription</a></strong> — View or update your current plan</li>
   </ul>
 
   <hr />
 
   <p>
-    Can’t find what you’re looking for? <a href="mailto:support@alfredco.host">Contact support</a> — we’ll be happy to help.
+    Can’t find what you’re looking for? <a href="#/mailto:support@alfredco.host">Contact support</a> — we’ll be happy to help.
   </p>
 
 </div>
