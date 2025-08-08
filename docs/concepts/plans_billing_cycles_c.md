@@ -1,39 +1,49 @@
-# Plans & Billing Cycles
+# Plans & billing cycles
 
-When choosing a plan on [our pricing page](https://alfredhospitalityai.com/pricing/), you can select a **billing cycle** — either **monthly** or **yearly** — for any of the available plans: **Essential Concierge** or **Premium Host**.
+When you subscribe on [our pricing page](https://alfredhospitalityai.com/pricing/) or in the Platform, you choose a **plan** and a **billing cycle** — either **monthly** or **yearly** — for each property.  
+This page explains how to manage plans and billing cycles across your properties.
 
-## Free Trial
+## Before you start: key concepts
 
-Your first subscription includes a **15-day free trial**. At the end of the trial, your selected billing cycle will start automatically and be billed to the card you used when subscribing.
+Understanding these terms will help you follow the rest of this guide.
 
-> **NOTE** You won’t be charged during the trial period. The first payment is made automatically when the trial ends.
+- **Plan** — The level of service for a property.  
+  Example: *Essential Concierge* (basic features) or *Premium Host* (full features).
+
+- **Subscription** — The active agreement linking a property to a plan. An active subscription is required for Alfred to interact with your guests.  
+  Example: Subscribing *Seaside Villa* to a Premium Host plan.
+
+- **Billing cycle** — The period of time covered by each payment (**monthly** or **yearly**).  
+  Example: Monthly billing means you are charged every 30 days.
+
+Each property has its own plan, subscription, and billing cycle — managed independently from those of other properties.  
+
+If multiple properties share the same billing cycle type, the system automatically aligns their renewal dates and groups them into a single invoice.
 
 ## Billing cycles across properties
 
-You can subscribe **each property individually with its own plan and billing cycle**.  
-For example, one property can be on a monthly Essential plan, another on a yearly Premium plan. — it's fully flexible.
+When you subscribe a new property, if there’s already an active subscription of the same type (monthly or yearly), its billing cycle automatically aligns with that of the **existing active subscription** of the same type.  
+At the time of subscription, the system may calculate a prorated amount so the new cycle matches the existing one (more on prorated amounts in [Changing plans & billing cycles](#changing-plans--billing-cycles)).
 
-When subscribing an additional property to an existing billing cycle, you’ll only pay a **prorated amount**. The new property’s billing cycle automatically aligns with the existing one.  
+Example:  
+- You subscribe **Lakeview Apartment** on a yearly plan with a renewal date of **June 6**.  
+- A few weeks later, you subscribe **Seaside Villa**, also on a yearly plan.  
+- **Seaside Villa** automatically aligns with **Lakeview Apartment**’s billing cycle, so both renew on **June 6**.
 
-For example, if your first property renews on **Jan 31**, and you subscribe a second one on **Jan 28**, you’ll pay a prorated amount for the remaining 3 days, and both properties will renew together.
+This automatic alignment ensures that all properties with the same billing cycle type renew together. More about invoices in [Understanding invoices](#understand-invoices).
 
 ## Changing plans & billing cycles
 
-Since **each property has its own plan and billing cycle**, you can change the plan or billing cycle associated with a property at any time.
+You can change the plan or billing cycle for a property at any time.
 
-- **Switching plans** takes effect immediately.
+- **Switching plans** takes effect immediately. New plan features (or limits) apply right away, and any price difference is calculated as a prorated charge or credit on your next invoice.
 - **Changing the billing cycle** also takes effect immediately:
-  - If no similar subscriptions exist, a new billing cycle starts right away, and you’ll be charged a prorated amount (credit or debit, if applicable).
-  - If other subscriptions of the same type already exist (monthly or yearly), the billing cycle aligns with their renewal date, and you’ll be charged a prorated amount (credit or debit, if applicable).
+  - If no other subscriptions of the same type exist, a new billing cycle starts right away.
+  - If other subscriptions of the same type exist, the new cycle aligns with their renewal date, and a prorated amount (debit or credit) is applied so they renew together.
 
-## Understand invoices
+> **NOTE** Any credit is applied to your next invoice, not refunded directly.
 
-Invoices are issued a few days after each payment and are grouped by billing cycle type, regardless of the subscribed plan.  
-If you have:
-- Multiple monthly subscriptions, each month you'll receive a single monthly invoice grouping all subscriptions.
-- Multiple yearly subscriptions, each year you'll receive a single monthly invoice grouping all subscriptions.
-
-## Stopping Billing Cycles
+## End of a billing cycle
 
 All billing cycles are tied to active subscriptions.  
 When you [cancel a subscription](../procedures/subscriptions_p.md#cancel-a-subscription), you stop the automatic renewal of its billing cycle.  
@@ -41,9 +51,20 @@ The subscription stays active **until the end of the current cycle**, after whic
 - it won’t renew.
 - the AI assistant will be unpublished.
 
+## Free trial
 
-## Related Topics
+Your first subscription includes a **15-day free trial**.  
+At the end of the trial, your selected billing cycle starts automatically and is billed to the card used at subscription.
 
-- [Change your payment card](change-card.md)  
-- [Manage subscriptions](manage-subscriptions.md)  
-- [Plans and pricing](https://alfredhospitalityai.com/pricing/)
+> **NOTE** You won’t be charged during the trial. The first payment happens automatically when the trial ends.
+
+## Understand invoices
+
+Invoices are issued a few days after each payment and are grouped by billing cycle type, regardless of the subscribed plan.  
+If you have:
+- Multiple monthly subscriptions, each month you'll receive a single invoice grouping all monthly subscriptions.
+- Multiple yearly subscriptions, each year you'll receive a single invoice grouping all yearly subscriptions.
+
+
+## Next step  
+Now that you understand the key concepts for managing plans & billing cycles, see [Manage plans & billing cyces](../procedures/plans_billing_cycles_p.md) for step-by-step instructions.
