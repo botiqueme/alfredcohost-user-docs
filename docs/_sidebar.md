@@ -8,7 +8,7 @@
    
 * How to
    * [Manage properties](procedures/properties_p.md)
-   * [Manage libraries](procedures/libraries_p.md)
+   * [Add content to libraries](procedures/libraries_p.md)
    * [Manage subscriptions](procedures/subscriptions_p.md)
    * [Change payment card](procedures/change_payment_card_p.md)
 
