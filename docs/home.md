@@ -42,9 +42,9 @@
   <p>Know what you want to do? Go straight to it.</p>
 
   <ul>
-    <li>🏡 <strong><a href="#/procedures/manage-properties.md">Manage properties</a></strong> — Add, edit, or deactivate guest units</li>
-    <li>🗂️ <strong><a href="#/procedures/manage-libraries.md">Manage property information</a></strong> — Update the content Alfred uses to answer guests</li>
-    <li>💳 <strong><a href="#/overview/subscriptions.md">Manage subscription</a></strong> — View or update your current plan</li>
+    🏡 <strong><a href="#/procedures/manage-properties.md">Manage properties</a></strong> — Add, edit, or deactivate guest units </br>
+    🗂️ <strong><a href="#/procedures/manage-libraries.md">Manage property information</a></strong> — Update the content Alfred uses to answer guests</br>
+    💳 <strong><a href="#/overview/subscriptions.md">Manage subscription</a></strong> — View or update your current plan
   </ul>
 
   <hr />
