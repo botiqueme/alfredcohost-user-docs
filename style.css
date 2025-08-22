@@ -5,14 +5,27 @@
   --color-background: #ffffff;
 }
 
-/* ---------------------- */
-/* Global Typography and Base */
-/* ---------------------- */
+/* ------------------------ */
+/* Typography and Base Style */
+/* ------------------------ */
 body, .content {
   font-family: var(--font-body);
   color: var(--color-text);
   background-color: var(--color-background);
   line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+.markdown-section {
+  max-width: 100% !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  margin: 0 auto !important;
+}
+
+.markdown-section h1:first-of-type {
+  margin-top: 0.5em !important;
 }
 
 p {
@@ -21,32 +34,116 @@ p {
 }
 
 h1, h2, h3,
-.sidebar h1, .sidebar h2,
-.card h3 {
+.sidebar h1, .sidebar h2 {
   color: var(--color-primary);
   font-weight: 600;
 }
 
-.card p {
-  color: var(--color-text);
-  font-weight: 200;
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 40px;
+  border-color: #FF3B3C;
 }
 
-/* ---------------------- */
+.grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 32px !important;
+  margin-top: 40px !important;
+}
+
+.grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 32px !important;
+  margin-top: 40px !important;
+  margin-bottom: 64px !important;     /* 🛠️ Spazio sotto per non tagliare ombre */
+  padding: 0 32px !important;         /* 🛠️ Spazio ai lati per evitare troncamenti */
+  box-sizing: border-box !important; /* 🛠️ Fondamentale se hai border/padding */
+  overflow: visible !important;       /* 🛠️ Anche questo evita clip */
+  width: 100%;
+}
+
+.card {
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  border: 1.2px solid #FF3B3C !important;
+  width: calc(33.333% - 22px) !important; /* 3 per riga */
+  max-width: 300px !important;
+  min-width: 240px !important;
+  height: auto !important; /* ✅ altezza flessibile */
+  padding: 24px 20px !important;
+  text-align: center !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  text-decoration: none !important;
+  color: inherit !important;
+  flex-shrink: 0;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: space-between !important; /* ✅ elimina lo spazio morto */
+}
+
+.card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 12px 28px rgba(255, 59, 60, 0.18) !important;
+  border-color: #FF3B3C !important;
+}
+
+.card img {
+  width: 80px !important;
+  height: auto !important;
+  max-height: 120px !important;
+  margin: 0 auto 16px auto !important;
+  display: block !important;
+  object-fit: contain !important;
+}
+
+.card h3 {
+  font-size: 1.2rem !important;
+  color: #FF3B3C !important;
+  font-weight: 600 !important;
+  margin: 0 0 8px 0 !important;
+}
+
+.card p {
+  font-size: 0.95rem !important;
+  font-weight: normal !important;
+  color: #171614 !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  padding-top: 4px !important;
+}
+
+/* ✅ Mobile (solo sotto i 600px): 1 card per riga */
+@media (max-width: 600px) {
+  .card {
+    width: 100% !important;
+  }
+}
+
+/* ------------------------ */
 /* Links */
-/* ---------------------- */
+/* ------------------------ */
 a, .sidebar a {
   color: var(--color-primary);
   text-decoration: none;
+
 }
 
 a:hover, .sidebar a:hover {
   opacity: 0.8;
 }
 
-/* ---------------------- */
-/* Inline Code Styling */
-/* ---------------------- */
+/* ------------------------ */
+/* Inline code style */
+/* ------------------------ */
 .markdown-section code {
   background: #f5f5f5;
   font-family: monospace;
@@ -55,27 +152,25 @@ a:hover, .sidebar a:hover {
   color: var(--color-text);
 }
 
-/* ---------------------- */
-/* Sidebar */
-/* ---------------------- */
+/* ------------------------ */
+/* Sidebar settings */
+/* ------------------------ */
 .sidebar {
-  padding-top: 80px !important; /* Prevent overlap with sticky header */
+  padding-top: 80px !important;
 }
 
 .sidebar .app-name,
 .sidebar .search {
   display: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
 }
 
-/* ---------------------- */
-/* Header Layout */
-/* ---------------------- */
+/* ------------------------ */
+/* Custom Header */
+/* ------------------------ */
 .custom-header {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Vertically center logo, nav, and search */
+  align-items: center;
   padding: 12px 24px;
   height: 64px;
   background-color: white;
@@ -85,7 +180,6 @@ a:hover, .sidebar a:hover {
   z-index: 1000;
 }
 
-/* Left: Logo */
 .header-left {
   display: flex;
   align-items: center;
@@ -93,50 +187,39 @@ a:hover, .sidebar a:hover {
 
 .header-left .logo {
   height: 36px;
-  display: block;
 }
 
-/* Right: Navigation + Search Group */
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 32px; /* spacing between nav and search */
+  gap: 32px;
 }
 
-/* Navigation Links */
 .header-center {
   display: flex;
   align-items: center;
   gap: 24px;
 }
 
-/* Header links */
 .header-center a {
-  font-weight: 500 !important;
-  font-size: 16px !important;
-  color: var(--color-text) !important;
-  text-decoration: none !important;
-  line-height: 36px !important;
-  padding: 0 !important;
-  margin: 0 12px !important;
-  height: 36px !important;
-  display: flex !important;
-  align-items: center !important;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text);
+  text-decoration: none;
+  height: 36px;
+  display: flex;
+  align-items: center;
 }
-
 
 .header-center a:hover {
   text-decoration: underline;
 }
 
-/* Search Box */
 .header-right {
   display: flex;
   align-items: center;
 }
 
-
-/* Search box */
 .header-right .custom-search {
   height: 36px;
   padding: 0 12px;
@@ -147,12 +230,349 @@ a:hover, .sidebar a:hover {
   line-height: 36px;
   box-sizing: border-box;
   transition: border 0.2s ease;
-
-  /* 👇 override at focus */
 }
 
 .header-right .custom-search:focus {
-  outline: none;
-  border: 2px solid var(--color-primary); /* your red */
-  font-weight: 400;
+  border: 2px solid var(--color-primary);
+}
+
+/* ------------------------ */
+/* Callout blocks */
+/* ------------------------ */
+.markdown-section blockquote {
+  border-left: 6px solid #FF3B3C;
+  padding: 1em;
+  border-radius: 4px;
+  margin: 1.5em 0;
+  background-color: rgba(255, 59, 60, 0.15);
+}
+
+.markdown-section blockquote p {
+  margin: 0;
+  font-weight: normal;
+}
+
+.markdown-section blockquote p strong:first-child {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+/* TIP */
+.markdown-section blockquote.callout-tip {
+  border-left-color: #2ecc71;
+  background-color: rgba(46, 204, 113, 0.15);
+}
+
+.markdown-section blockquote.callout-tip p strong:first-child {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+.markdown-section blockquote.callout-tip a {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+/* NOTE */
+.markdown-section blockquote.callout-note {
+  border-left-color: #6980ff;
+  background-color: rgba(105, 128, 255, 0.15);
+}
+.markdown-section blockquote.callout-note p strong:first-child {
+  color: #6980ff;
+  font-weight: bold;
+}
+
+.markdown-section blockquote.callout-note a {
+  color: #6980ff;
+  font-weight: bold;
+}
+
+/* IMPORTANT */
+.markdown-section blockquote.callout-important {
+  border-left-color: #f8e378 !important;
+  background-color: rgba(250, 226, 130, 0.30); /* giallo molto chiaro */
+}
+
+.markdown-section blockquote.callout-important p strong:first-child {
+  color: #f4c91c !important;
+  font-weight: bold;
+}
+
+.markdown-section blockquote.callout-important a {
+  color: #f4c91c !important;
+  font-weight: bold;
+}
+
+/* WARNING */
+.markdown-section blockquote.callout-warning {
+  border-left-color: #FF3B3C;
+  background-color: rgba(255, 59, 60, 0.15);
+}
+
+.markdown-section blockquote.callout-warning p strong:first-child {
+  color: #FF3B3C;
+  font-weight: bold;
+}
+
+.markdown-section blockquote.callout-warning a {
+  color: #FF3B3C;
+  font-weight: bold;
+}
+
+/* EXAMPLE */
+.markdown-section blockquote.callout-example {
+  border-left-color: #c4c4c4;
+  background-color: rgba(178, 174, 174, 0.15);
+}
+
+.markdown-section blockquote.callout-exampla p strong:first-child {
+  color: #c4c4c4;
+  font-weight: bold;
+}
+
+.markdown-section blockquote.callout-example a {
+  color: #c4c4c4;
+  font-weight: bold;
+}
+
+/* Italics color fix */
+.markdown-section em,
+.markdown-section i {
+  color: inherit;
+  font-style: italic;
+}
+
+/* Bullet color fix in callout blocks */
+.markdown-section blockquote ul li,
+.markdown-section blockquote ol li {
+  color: var(--color-text) !important;
+  opacity: 1 !important;
+}
+.markdown-section blockquote ul li::marker,
+.markdown-section blockquote ol li::marker {
+  color: var(--color-text) !important;
+  opacity: 1 !important;
+}
+
+
+/* === HEADINGS CLEANUP === */
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section h4 {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  color: inherit;
+}
+
+.markdown-section h1 > a,
+.markdown-section h2 > a,
+.markdown-section h3 > a,
+.markdown-section h4 > a {
+  text-decoration: none !important;
+  color: inherit !important;
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+.markdown-section h1 > a:hover,
+.markdown-section h2 > a:hover,
+.markdown-section h3 > a:hover,
+.markdown-section h4 > a:hover {
+  text-decoration: none !important;
+  color: inherit !important;
+  opacity: 1 !important;
+}
+
+/* === COPY INDICATOR === */
+.copy-indicator {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #FF3B3C !important;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  margin-left: 6px;
+  position: relative;
+  top: -3px;
+}
+
+.markdown-section h1:hover .copy-indicator,
+.markdown-section h2:hover .copy-indicator,
+.markdown-section h3:hover .copy-indicator,
+.markdown-section h4:hover .copy-indicator {
+  opacity: 1;
+}
+
+.copy-indicator[data-copied="true"] {
+  font-weight: 600;
+}
+
+/* === Logo hover cleanup === */
+.header-left a:hover,
+.header-left a img:hover {
+  filter: none !important;
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+/* === TABLES === */
+.markdown-section table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1.5em 0;
+  background-color: #fff;
+  table-layout: fixed;
+}
+
+.markdown-section thead,
+.markdown-section tbody {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.markdown-section th,
+.markdown-section td {
+  padding: 1em;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid #eee;
+  font-size: 0.95rem;
+  word-break: break-word;
+  background-color: #fff;
+}
+
+.markdown-section thead th {
+  background-color: #fff;
+  font-weight: 600;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown-section tbody td {
+  border-top: none;
+}
+
+.markdown-section thead tr:first-child th:first-child {
+  border-top-left-radius: 8px;
+}
+.markdown-section thead tr:first-child th:last-child {
+  border-top-right-radius: 8px;
+}
+.markdown-section tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+.markdown-section tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+/* === Background solo in homepage === */
+body.home-background {
+  position: relative;
+}
+
+body.home-background::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('media/bg_visual.jpeg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  opacity: 0.08;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* === HOMEPAGE HERO CON BACKGROUND DECORATIVO === */
+
+.homepage-hero {
+  position: relative;
+  aspect-ratio: 16 / 5; /* ✅ altezza fluida basata sulla larghezza */
+  background-image: url('media/bg_visual.jpg');
+  background-size: contain;         /* ✅ mostra tutta l'immagine */
+  background-position: top center;  /* ✅ centrata in alto */
+  background-repeat: no-repeat;
+  margin: 0 auto 2em auto;          /* ✅ nessun margine sopra */
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.homepage-hero-overlay {
+  position: absolute;
+  inset: 0;
+  padding-top: 4em;
+  padding-bottom: 4em;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.9) 80%, #fff 100%); /* ✅ nuovo gradient sfumato */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* ✅ allinea il testo verso il basso */
+  align-items: center;
+  text-align: center;
+  padding:  18em 2em 6em 2e; /* ✅ più spazio sopra e sotto */
+  color: #171614;
+}
+
+.homepage-hero-overlay h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5em;
+  color: var(--color-primary);
+}
+
+.homepage-hero-overlay p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.inline-toc {
+  margin-top: 0.25rem;   /* molto più vicino al titolo */
+  margin-bottom: 0.6rem; /* lascia spazio sotto verso il testo */
+  font-size: 0.85rem;
+  color: var(--color-text);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3em;
+}
+
+.inline-toc-label {
+  color: var(--color-text);
+  margin-right: 0.5em;
+  margin-bottom: auto;
+  /* text-transform: uppercase; */
+}
+
+.inline-toc a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: normal;
+}
+
+.inline-toc a:hover {
+  text-decoration: underline;
+}
+
+.pipe-separator {
+  color: var(--color-text);
+  opacity: 0.5;
+}
+
+[data-toc-depth] {
+  display: none;
 }
