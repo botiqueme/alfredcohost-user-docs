@@ -1,4 +1,4 @@
-# Work with libraries
+<!-- # Work with libraries
 
 ## Fill standard textual information
 
@@ -10,7 +10,4 @@
 
 ## Add custom media information
 
-## Modify media information
-
-
-
+## Modify media information -->

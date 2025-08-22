@@ -11,3 +11,6 @@
    * [Manage libraries](procedures/libraries_p.md)
    * [Manage subscriptions](procedures/subscriptions_p.md)
    * [Change payment card](procedures/change_payment_card_p.md)
+
+* Tips & tricks
+   * [Write great library items!](procedures/writing_tips.md)
