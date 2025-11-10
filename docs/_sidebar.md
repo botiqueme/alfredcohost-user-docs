@@ -5,6 +5,7 @@
    * [Properties](concepts/properties_c.md)
    * [Libraries](concepts/libraries_c.md)
    * [Plans & billing cycles](concepts/plans_billing_cycles_c.md)
+   * [Property identifiers](concepts/property-identifiers_c.md)
    
 * How to
    * [Manage properties](procedures/properties_p.md)
