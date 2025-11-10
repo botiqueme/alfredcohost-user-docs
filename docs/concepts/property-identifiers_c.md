@@ -19,6 +19,9 @@ The **Internal name** is used only by your team within the dashboard. It helps y
 
 ## Guest-facing identifiers
 
+> **IMPORTANT** 
+> **Read this section carefully!** It explains key concepts that directly affect how guests experience Alfred.
+
 ### Property guest name
 
 When a guest contacts Alfred’s phone number, Alfred asks which apartment they are staying in and expects the **Property guest name**.
