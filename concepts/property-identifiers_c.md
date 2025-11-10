@@ -3,9 +3,9 @@
 Each property in Alfred Co.Host is defined by three identifiers that make it recognizable both internally and to your guests.  
 **These identifiers are essential for Alfred to operate correctly**, as they allow the platform to link the right chatbot to the right apartment and ensure a seamless guest experience.
 
-**In this page you’ll learn about the three identifiers that enable Alfred’s automation and guest interactions:  
-> - The [Internal identifier](#internal-identifier), used only within your dashboard to keep property management organized.  
-> - The **Guest-facing identifiers** — the [Property guest name](#property-guest-name) and [Guest access PIN](#guest-access-pin) — which connect each guest securely to the right property assistant.
+In this page you’ll learn about the three identifiers that enable Alfred’s automation and guest interactions:  
+- The [Internal identifier](#internal-identifier), used only within your dashboard to keep property management organized.  
+- The **Guest-facing identifiers** — the [Property guest name](#property-guest-name) and [Guest access PIN](#guest-access-pin) — which connect each guest securely to the right property assistant.
 
 
 You can set or update these identifiers from **My Properties** > _select a property_ > <img src="./media/modify-property-icon.png" alt="modify property icon" style="height: 1em; vertical-align: middle;">.
