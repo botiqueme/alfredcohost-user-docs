@@ -10,7 +10,7 @@ You can set or update these identifiers from **My Properties** > _select a prope
 The **Internal name** is used only by your team within the dashboard. It helps you and your staff recognize and refer to the property in a consistent way.
 
 - Not visible to guests  
-- Can follow any naming pattern that fits your internal logic (e.g., *WILLOWST77-1A* for Willow Street 77, Apartment 1A)  
+- Can follow any naming pattern that fits your internal logic (e.g., `WILLOWST77-1A` for `Willow Street 77, Apartment 1A`)  
 - Must be unique across the platform  
 - Useful to avoid confusion when managing several similar units  
 
