@@ -3,7 +3,7 @@
 Each property in Alfred Co.Host is defined by three identifiers that make it recognizable both internally and to your guests.  
 They help Alfred connect the right chatbot to the right apartment and keep both internal and guest-facing communications clear.
 
-You can set or update these identifiers from **My Properties** > _select a property_ > ![modify property icon](./media/modify-property-icon.png).
+You can set or update these identifiers from **My Properties** > _select a property_ > <img src="./media/modify-property-icon.png" alt="modify property icon" style="height: 1em; vertical-align: middle;">.
 
 ## Internal identifier
 
@@ -14,7 +14,7 @@ The **Internal name** is used only by your team within the dashboard. It helps y
 - Must be unique across the platform  
 - Useful to avoid confusion when managing several similar units  
 
-> **TIP:** Use clear and consistent internal names so your team can identify properties at a glance.
+> **TIP** Use clear and consistent internal names so your team can identify properties at a glance.
 
 
 ## Guest-facing identifiers
@@ -30,7 +30,7 @@ The **Property guest name** is displayed to guests in Alfred’s chat and in oth
 - Used by Alfred to connect the guest to the correct apartment chatbot  
 - You can modify it at any time from **My Properties**
 
-> **WARNING:**  
+> **WARNING**
 > - Use the exact same name guests see on Booking.com or Airbnb to keep communications consistent and avoid confusion.  
 > - Always share the Property guest name together with the **Guest access PIN**, otherwise your guest won’t be able to access Alfred.
 
@@ -45,6 +45,6 @@ It prevents unauthorized users from accessing Alfred and ensures that only real 
 - Acts as a lightweight security check before chat access is granted  
 - You can modify it at any time from **My Properties**
 
-> **WARNING:**  
+> **WARNING**
 > - Always share the PIN together with the **Property guest name**, otherwise your guest won’t be able to access Alfred.  
 > - If you change the **Property guest name** or **Guest access PIN**, make sure to update your communications (emails, OTA messages, printed materials) accordingly to avoid guest confusion.
