@@ -12,17 +12,17 @@ As they say, three is the magic number — and that’s exactly how many steps i
 
 In Alfred Co.Host, each **property** represents one of your real-life rentals — an apartment, a suite, a holiday home.  
 A property contains everything Alfred needs to assist your guests with the right answers. You can add, edit, duplicate, or remove properties at any time.  
-Want to learn more? See [Manage properties](/docs/procedures/properties_p.md).
+Want to learn more? See [Manage properties](../procedures/properties_p.md).
 
 ### Step 2: Add a library to your property
 
 Each property has its own **library** — a space where you upload all the **pieces of information** your guests might ask about: how to check in, where to park, what’s the Wi-Fi code, and so on.  
 These can be short texts, images, or videos. Alfred will use them to reply accurately, at the right time.  
-Want to learn more? See [About libraries](/docs/concepts/libraries_c.md).
+Want to learn more? See [About libraries](../concepts/libraries_c.md).
 
 ### Step 3: Go live!
 
 That’s it — you’re ready!  
 Once your property and library are complete, choose your subscription and **go live**.  
 Alfred starts working immediately, turning your guest messages into smooth conversations.  
-Want to learn more? See [Manage subscriptions](/docs/concepts/manage_subscriptions_c.md).
+Want to learn more? See [Manage subscriptions](../concepts/manage_subscriptions_c.md).
