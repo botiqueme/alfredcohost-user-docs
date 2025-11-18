@@ -9,5 +9,5 @@ When contacted, **Alfred will locate the guest in the correct property** and mak
 
 ## Next steps
 
-- Now that you understand how properties work, go set them up: [Manage properties](properties_p.md)
-- Once a property is created, you need to fill in its library — this is the information Alfred will use to provide tailored replies based on that property's specific features. Proceed to filling the [library](libraries_c.md).
+- Now that you understand how properties work, go set them up: [Manage properties](/docs/procedures/properties_p.md)
+- Once a property is created, you need to fill in its library — this is the information Alfred will use to provide tailored replies based on that property's specific features. Proceed to filling the [library](/docs/concepts/libraries_c.md).
