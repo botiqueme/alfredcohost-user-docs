@@ -8,7 +8,7 @@ In this page you’ll learn about the three identifiers that enable Alfred’s a
 - The **Guest-facing identifiers** — the [Property guest name](#property-guest-name) and [Guest access PIN](#guest-access-pin) — which connect each guest securely to the right property assistant.
 
 
-You can set or update these identifiers from **My Properties** > _select a property_ > <img src="./media/modify-property-icon.png" alt="modify property icon" style="height: 1em; vertical-align: middle;">.
+You can set or update these identifiers from **My Properties** > _select a property_ > <img src="/docs/media/modify-property-icon.png" alt="modify property icon" style="height: 1em; vertical-align: middle;">.
 
 ## Internal identifier
 
