@@ -15,3 +15,4 @@
 
 * Tips & tricks
    * [Write great library items!](procedures/writing_tips.md)
+   * [Test Alfred](procedures/test_assistant.md)
