@@ -13,7 +13,7 @@ To create a property, go to **Manage my properties** > **Add a property**. Enter
 
 > **WARNING** Deleting a property is irreversible!
 
-To delete a property, go to **Manage my properties**, find the property you want to delete, and click the <img src="/docs/media/delete-icon.png" alt="delete icon" style="height: 1em; vertical-align: middle;"> icon:
+To delete a property, go to **Manage my properties**, find the property you want to delete, and click the <img src="../media/delete-icon.png" alt="delete icon" style="height: 1em; vertical-align: middle;"> icon:
 - **If the property has no active subscription**, it will be permanently deleted after a few minutes.
 - **If the property has an active subscription**, deleting the property will also delete the subscription. The property will be permanently removed at the **end of the billing cycle**. Check your property billing cycle at **My Host Profile** > **My subscriptions**.
 
