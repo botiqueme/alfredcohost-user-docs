@@ -2,7 +2,7 @@
 
 # Step-by-step guides
 
-Use these workflows when you want to perform a concrete task in Alfred Co.Host.
+Clear, practical workflows that show you exactly how to complete tasks in Alfred Co.Host — from setup to daily operations.
 
 <div class="ts-guides-grid">
 
