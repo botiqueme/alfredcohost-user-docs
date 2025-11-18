@@ -1,8 +1,8 @@
 # Add content to your property library
 
-This page shows how to fill in the Property Library with information Alfred can use to answer your guests. If you’re not sure what the Property Library is for, check the concept first: [What’s the Property Library?](/docs/concepts/libraries_c.md)
+This page shows how to fill in the Property Library with information Alfred can use to answer your guests. If you’re not sure what the Property Library is for, check the concept first: [What’s the Property Library?](../concepts/libraries_c.md)
 
-To access the Library of a specific property, go to **My Properties** >  <img src="/docs/media/library-icon.png" alt="book icon" style="height: 1em; vertical-align: middle;"> on the property you want to work on > **Item Category** > **Subcategory**.
+To access the Library of a specific property, go to **My Properties** >  <img src="../media/library-icon.png" alt="book icon" style="height: 1em; vertical-align: middle;"> on the property you want to work on > **Item Category** > **Subcategory**.
 
 ## Fill a textual item
 

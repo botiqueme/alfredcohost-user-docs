@@ -1,6 +1,6 @@
 # Work with properties
 
-This page shows how to work with properties in the platform. If you’re not sure how Alfred uses properties, check the concept first: [What’s a property?](/docs/concepts/properties_c.md)
+This page shows how to work with properties in the platform. If you’re not sure how Alfred uses properties, check the concept first: [What’s a property?](../concepts/properties_c.md)
 
 ## Create a property
 
