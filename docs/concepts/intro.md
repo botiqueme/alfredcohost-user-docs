@@ -1,80 +1,102 @@
-# Step-by-step guides
+<div class="ts-guides-section">
 
-Use these workflows when you want to perform a concrete task in Alfred Co.Host.
+# Understand how Alfred works
 
-<div class="grid">
+Not sure where to start? This page walks you through Alfred’s core concepts and the basics of how the platform works — in simple, practical terms, so everything makes sense even if you’re completely new.
 
-  <a class="card" href="#/get-started.md">
-    <h3>Quickstart</h3>
-    <p>Set up Alfred for the first time and connect your properties.</p>
+<div class="ts-guides-grid">
+
+  <a class="card ts-guide-card" href="#/concepts/properties_c.md">
+    <h3>Properties</h3>
+    <p>Learn how properties work and how Alfred links guests to the right unit.</p>
   </a>
 
-  <a class="card" href="#/procedures/properties_p.md">
-    <h3>Manage properties</h3>
-    <p>Add, edit, or deactivate properties and units in your account.</p>
+  <a class="card ts-guide-card" href="#/concepts/libraries_c.md">
+    <h3>Libraries</h3>
+    <p>Build the information Alfred uses to answer guests for each property.</p>
   </a>
 
-  <a class="card" href="#/procedures/libraries_p.md">
-    <h3>Manage property information</h3>
-    <p>Update the content Alfred uses to reply to guests.</p>
+  <a class="card ts-guide-card" href="#/concepts/plans_billing_cycles_c.md">
+    <h3>Plans & billing cycles</h3>
+    <p>Learn how plans, subscriptions, and billing cycles work across your properties.</p>
   </a>
 
-  <a class="card" href="#/procedures/subscriptions_p.md">
-    <h3>Manage subscriptions</h3>
-    <p>View, update, or cancel your current subscription.</p>
+
+  <a class="card ts-guide-card" href="#/concepts/property-identifiers_c.md">
+    <h3>Property identifiers</h3>
+    <p>Understand the identifiers Alfred needs to connect each guest to the right apartment.</p>
   </a>
 
-  <a class="card" href="#/procedures/plans_billing_cycles_p.md">
-    <h3>Plans &amp; billing cycles</h3>
-    <p>Change plans and control how and when you are billed.</p>
-  </a>
 
-  <a class="card" href="#/procedures/change_payment_card_p.md">
-    <h3>Change payment card</h3>
-    <p>Update the card used to charge your subscription.</p>
-  </a>
+</div>
 
 </div>
 
 <style>
-
-/* Grid more compact */
-.grid {
-  gap: 20px !important;         /* meno spazio tra le card */
-  padding: 0 16px !important;   /* un po' meno padding laterale */
+/* Contenitore centrale, come Mosaic */
+.ts-guides-section {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 40px 60px 40px; /* stessa aria SX/DX per titolo, testo e card */
 }
 
-/* Card sizing uniform + radius 5 */
-.card {
-  border-radius: 5px !important;                   /* raggio più piccolo */
-  padding: 24px 20px !important;
-  width: calc(33.333% - 20px) !important;          /* 3 per riga */
-  max-width: 260px !important;
-  min-width: 220px !important;
+/* Titolo + paragrafo allineati a sinistra, come Mosaic */
+.ts-guides-section h1 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  text-align: left;
+}
 
-  /* Equal height magic */
-  height: 180px !important;                        /* ALTEZZA STANDARD */
+.ts-guides-section > p {
+  margin-top: 0;
+  margin-bottom: 1.8em;
+  text-align: left;
+}
+
+/* Griglia in stile Mosaic: 3 card per riga, allineata a sinistra */
+.ts-guides-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: flex-start;   /* NON centrata, parte da sinistra */
+}
+
+/* Card: usiamo .card globale + aggiustiamo solo layout */
+.ts-guide-card {
+  border-radius: 8px !important;
+  width: calc(33.333% - 16px);
+  min-width: 260px;
+  max-width: 280px;
+  height: 140px;
+  padding: 18px 16px !important;
+
   display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;              /* centra titolo + testo */
-  align-items: center !important;
-  text-align: center !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;       /* testo allineato a sinistra come Mosaic */
+
+  text-align: left;
 }
 
-/* Card text spacing più compatto */
-.card h3 {
+/* Testi dentro la card */
+.ts-guide-card h3 {
   margin: 0 0 6px 0 !important;
 }
 
-.card p {
+.ts-guide-card p {
   margin: 0 !important;
 }
 
-/* Mobile: card a larghezza piena */
-@media (max-width: 600px) {
-  .card {
-    width: 100% !important;
-    height: auto !important;     /* Lascia che crescano su mobile */
+/* Responsive */
+@media (max-width: 900px) {
+  .ts-guides-section {
+    padding: 24px 20px 40px 20px;
+  }
+
+  .ts-guide-card {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
   }
 }
 </style>
