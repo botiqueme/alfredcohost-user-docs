@@ -50,7 +50,7 @@
   <hr />
 
   <p>
-    Can’t find what you’re looking for? <a href="#/mailto:support@alfredco.host">Contact support</a> — we’ll be happy to help.
+    Can’t find what you’re looking for? <a href="mailto:support@alfredco.host">Contact support</a> — we’ll be happy to help.
   </p>
 
 </div>
