@@ -15,3 +15,5 @@ jobs:
       - name: Run link check
         run: |
           find docs -name '*.md' -print0 | xargs -0 -n1 markdown-link-check -q -c .markdown-link-check.json
+
+# This script does not check the links from the landing pages (contained in HTML scripts). Make sure you check them manually!
