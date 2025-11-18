@@ -25,13 +25,13 @@
     <p>Get Alfred up and running in just a few simple steps.</p>
   </a>
 
-  <a class="card" href="#/setup.md" rel="noopener">
+  <a class="card" href="#/concepts/intro.md" rel="noopener">
     <img src="media/how-it-works-icon.png" alt="Code icon" />
     <h3>How the platform works</h3>
     <p>Discover the key concepts behind Alfred’s success.</p>
   </a>
 
-  <a class="card" href="#/web-editor.md" rel="noopener">
+  <a class="card" href="#/procedures/intro.md" rel="noopener">
     <img src="media/stepbystep-icon.png" alt="Edit icon" />
     <h3>Step-by-step guides</h3>
     <p>From setup to success — follow our step-by-step guides for Alfred.</p>
@@ -50,7 +50,7 @@
   <hr />
 
   <p>
-    Can’t find what you’re looking for? <a href="#/mailto:support@alfredco.host">Contact support</a> — we’ll be happy to help.
+    Can’t find what you’re looking for? <a href="mailto:support@alfredco.host">Contact support</a> — we’ll be happy to help.
   </p>
 
 </div>
