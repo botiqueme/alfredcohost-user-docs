@@ -43,21 +43,42 @@
 
   <!-- Docsify Configuration -->
   <script>
-    window.$docsify = {
-      name: 'Alfred Co.Host docs',
-      homepage: 'home.md',
-      loadSidebar: true,
-      subMaxLevel: 1,
-      themeColor: '#FF3B3C',
-      search: {
-        maxAge: 86400000,
-        paths: 'auto',
-        placeholder: 'Search...',
-        noData: 'No results!',
-        depth: 1
-      }
-    };
-  </script>
+  window.$docsify = {
+    name: 'Alfred Co.Host docs',
+    homepage: 'home.md',
+    loadSidebar: true,
+    subMaxLevel: 1,
+    themeColor: '#FF3B3C',
+
+    search: {
+      maxAge: 0,
+      placeholder: 'Search...',
+      noData: 'No results!',
+      depth: 2,
+
+      // 👇 IMPORTANTISSIMO: nuova cache separata
+      namespace: 'alfred-docs-v3',
+
+      // 🔒 WHITELIST SOLO pagine valide
+      paths: [
+        '/get-started',
+        '/concepts/properties_c',
+        '/concepts/libraries_c',
+        '/concepts/manage_subscriptions_c',
+        '/concepts/plans_billing_cycles_c',
+        '/concepts/property-identifiers_c',
+
+        '/procedures/properties_p',
+        '/procedures/libraries_p',
+        '/procedures/subscriptions_p',
+        '/procedures/change_payment_card_p',
+        '/procedures/plans_billing_cycles_p',
+        '/procedures/writing_tips',
+        '/procedures/test_assistant'
+      ]
+    }
+  };
+</script>
 
   <!-- Docsify Core & Plugins -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
