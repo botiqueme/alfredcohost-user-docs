@@ -10,4 +10,4 @@ To view or change your payment card, go to **My host profile** > **My saved card
 
 ## Next step
 
-Want to explore the fine details of billing cycles? Visit our [Billing cycles](#) page.
+Want to explore the fine details of billing cycles? Visit our [Billing cycles](../concepts/plans_billing_cycles_c.md) page.
