@@ -159,8 +159,7 @@ a:hover, .sidebar a:hover {
   padding-top: 80px !important;
 }
 
-.sidebar .app-name,
-.sidebar .search {
+.sidebar .app-name {
   display: none !important;
 }
 
@@ -220,20 +219,157 @@ a:hover, .sidebar a:hover {
   align-items: center;
 }
 
-.header-right .custom-search {
-  height: 36px;
-  padding: 0 12px;
-  border-radius: 8px;
-  border: 1px solid var(--color-primary);
-  font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 36px;
-  box-sizing: border-box;
-  transition: border 0.2s ease;
+/* -------- SEARCH NELL'HEADER -------- */
+
+/* wrapper che Docsify usava in sidebar */
+.header-right .search {
+  position: relative;
+  top: 9px;
+  border: none !important;
+  border-bottom: none !important;   /* niente riga sotto */
+  box-shadow: none !important;
 }
 
-.header-right .custom-search:focus {
-  border: 2px solid var(--color-primary);
+/* niente pseudo–lineette */
+.header-right .search::before,
+.header-right .search::after {
+  content: none !important;
+  border: none !important;
+}
+
+/* input vero e proprio: stile “pillola” carino */
+.header-right .search input {
+  height: 40px;
+  padding: 0 16px;
+  min-width: 280px;
+  border-radius: 20px;
+  border: 1px solid var(--color-primary);
+  background: #ffffff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+/* focus con alone morbido, opzionale */
+.header-right .search input:focus {
+  box-shadow: 0 0 0 2px rgba(255, 59, 60, 0.18);
+}
+
+/* ------------------------ */
+/* SEARCH BAR */
+/* ------------------------ */
+
+/* === KILL LINEA SOTTO LA SEARCH NELL'HEADER === */
+
+/* Il wrapper creato da Docsify (era pensato per la sidebar) */
+.header-right .search {
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* Nel dubbio, togliamo anche eventuali pseudo-elementi decorativi */
+.header-right .search::before,
+.header-right .search::after {
+  content: none !important;
+  border: none !important;
+}
+
+/* Ci assicuriamo che l'unico bordo visibile sia quello rosso dell'input,
+   senza nessuna sottolineatura grigia extra. */
+.header-right .search input {
+  border: 1px solid var(--color-primary) !important;
+  border-bottom: 1px solid var(--color-primary) !important;
+  box-shadow: none !important;
+}
+/* === KILL LINEA SOTTO LA SEARCH NELL'HEADER === */
+
+/* Il wrapper creato da Docsify (era pensato per la sidebar) */
+.header-right .search {
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* Nel dubbio, togliamo anche eventuali pseudo-elementi decorativi */
+.header-right .search::before,
+.header-right .search::after {
+  content: none !important;
+  border: none !important;
+}
+
+/* Ci assicuriamo che l'unico bordo visibile sia quello rosso dell'input,
+   senza nessuna sottolineatura grigia extra. */
+.header-right .search input {
+  border: 1px solid var(--color-primary) !important;
+  border-bottom: 1px solid var(--color-primary) !important;
+  box-shadow: none !important;
+}
+
+/* ------------------------ */
+/* SEARCH RESULTS PANEL */
+/* ------------------------ */
+
+/* Base style for the dropdown (results panel) */
+.header-right .search .results-panel {
+  position: absolute;
+  top: 42px; /* just below the search input */
+  right: 0;
+  left: 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  max-height: 60vh;
+  overflow-y: auto;
+  z-index: 2000;
+
+  /* REMOVE the ugly line under search */
+  border-top: none !important;
+}
+
+/* Hide the panel completely when not active */
+.header-right .search .results-panel:not(.show) {
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Slight fade-in when showing */
+.header-right .search .results-panel.show {
+  opacity: 1;
+  transition: opacity 0.15s ease-out;
+}
+
+/* ------------------------ */
+/* RESULTS TEXT FIX */
+/* ------------------------ */
+
+/* Make results look consistent */
+.header-right .search .results-panel .matching-post {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.header-right .search .results-panel .matching-post:last-child {
+  border-bottom: none;
+}
+
+.header-right .search .results-panel .title {
+  color: #f54c4c;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.header-right .search .results-panel .brief {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.4;
+  margin-top: 4px;
 }
 
 /* ------------------------ */
