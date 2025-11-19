@@ -33,7 +33,7 @@
         <a href="https://app.alfredco.host" target="_blank" rel="noopener noreferrer">Go to Platform</a>
       </div>
       <div class="header-right">
-        <input type="text" class="custom-search" placeholder="Search the docs">
+        <div class="header-search-placeholder"></div>
       </div>
     </div>
   </header>
@@ -176,5 +176,78 @@
     setTimeout(createInlineTOC, 500);
   });
 </script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const maxDepth = 2;
+      const selector = ['h2', 'h3', 'h4'].slice(0, maxDepth - 1).map(t => `${t}[id]`).join(', ');
+
+      function createInlineTOC() {
+        const content = document.querySelector('.markdown-section');
+        if (!content || content.querySelector('.inline-toc')) return;
+
+        const headings = content.querySelectorAll(selector);
+        if (!headings.length) return;
+
+        const tocContainer = document.createElement('div');
+        tocContainer.className = 'inline-toc';
+
+        const label = document.createElement('span');
+        label.className = 'inline-toc-label';
+        label.textContent = 'On this page:';
+        tocContainer.appendChild(label);
+
+        headings.forEach((heading, index) => {
+          const anchor = heading.querySelector('a');
+          if (!anchor) return;
+
+          const cleanText = heading.textContent.replace('Click to copy', '').trim();
+          const link = document.createElement('a');
+          link.href = anchor.getAttribute('href');
+          link.textContent = cleanText;
+
+          tocContainer.appendChild(link);
+
+          if (index < headings.length - 1) {
+            const sep = document.createElement('span');
+            sep.className = 'pipe-separator';
+            sep.textContent = ' | ';
+            tocContainer.appendChild(sep);
+          }
+        });
+
+        const firstH1 = content.querySelector('h1');
+        if (firstH1) {
+          content.insertBefore(tocContainer, firstH1);
+        } else {
+          content.insertBefore(tocContainer, content.firstChild);
+        }
+      }
+
+      window.addEventListener('hashchange', () => setTimeout(createInlineTOC, 300));
+      setTimeout(createInlineTOC, 500);
+    });
+  </script>
+
+  <!-- 👇 SOLO QUESTO script per la search -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      function moveDocsifySearch() {
+        const sidebarSearch = document.querySelector('.sidebar .search');
+        const placeholder = document.querySelector('.header-search-placeholder');
+
+        if (!sidebarSearch || !placeholder) return;
+
+        if (placeholder.contains(sidebarSearch)) return;
+
+        placeholder.appendChild(sidebarSearch);
+      }
+
+      setTimeout(moveDocsifySearch, 800);
+      window.addEventListener('hashchange', () => {
+        setTimeout(moveDocsifySearch, 300);
+      });
+    });
+  </script>
+
 </body>
 </html>
