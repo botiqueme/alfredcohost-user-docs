@@ -43,21 +43,42 @@
 
   <!-- Docsify Configuration -->
   <script>
-    window.$docsify = {
-      name: 'Alfred Co.Host docs',
-      homepage: 'home.md',
-      loadSidebar: true,
-      subMaxLevel: 1,
-      themeColor: '#FF3B3C',
-      search: {
-        maxAge: 86400000,
-        paths: 'auto',
-        placeholder: 'Search...',
-        noData: 'No results!',
-        depth: 1
+  window.$docsify = {
+    name: 'Alfred Co.Host docs',
+    homepage: 'home.md',
+    loadSidebar: true,
+    subMaxLevel: 1,
+    themeColor: '#FF3B3C',
+
+    search: {
+      // durante il debug, niente cache
+      maxAge: 0,
+      placeholder: 'Search...',
+      noData: 'No results!',
+      depth: 1,
+
+      paths: function (path, vm) {
+        // Normalizziamo il path
+        const p = String(path).toLowerCase().replace(/^\//, '');
+
+        // 🔥 ESCLUSIONI
+
+        // qualunque README (root o in sottocartelle)
+        if (p === 'readme' || p === 'readme.md') return false;
+        if (p.endsWith('/readme') || p.endsWith('/readme.md')) return false;
+
+        // tutte le landing "intro.md"
+        if (p === 'intro.md' || p.endsWith('/intro.md')) return false;
+
+        // la home "home.md" se non vuoi che compaia
+        if (p === 'home.md' || p.endsWith('/home.md')) return false;
+
+        // tutto il resto lo indicizziamo
+        return true;
       }
-    };
-  </script>
+    }
+  };
+</script>
 
   <!-- Docsify Core & Plugins -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
