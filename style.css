@@ -159,8 +159,7 @@ a:hover, .sidebar a:hover {
   padding-top: 80px !important;
 }
 
-.sidebar .app-name,
-.sidebar .search {
+.sidebar .app-name {
   display: none !important;
 }
 
@@ -220,21 +219,36 @@ a:hover, .sidebar a:hover {
   align-items: center;
 }
 
-.header-right .custom-search {
+/* Stile della search spostata in header */
+.header-right .search {
+  position: relative;
+}
+
+.header-right .search input {
   height: 36px;
   padding: 0 12px;
   border-radius: 8px;
   border: 1px solid var(--color-primary);
   font-family: var(--font-body);
   font-size: 14px;
-  line-height: 36px;
   box-sizing: border-box;
-  transition: border 0.2s ease;
+  min-width: 260px;
 }
 
-.header-right .custom-search:focus {
-  border: 2px solid var(--color-primary);
+/* Dropdown risultati */
+.header-right .search .results-panel {
+  position: absolute;
+  top: 40px;          /* subito sotto l’input */
+  right: 0;
+  left: 0;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  z-index: 2000;
 }
+
 
 /* ------------------------ */
 /* Callout blocks */
