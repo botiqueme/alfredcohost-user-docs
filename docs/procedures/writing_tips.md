@@ -51,7 +51,12 @@ Write as if you're explaining something to a guest in person. Be clear, but don�
 
 Be direct. Don’t use words like “available”, “present”, or “see photo” — they don’t actually tell the guest where to look or what to do. Instead, give clear and specific details.
 
-> **Example** ❌ “A hairdryer is available in the bathroom”  
-> ✅ “You’ll find the hairdryer in the cabinet under the sink”
+> **Example** ❌ "A hairdryer is available in the bathroom"  
+> ✅ "You'll find the hairdryer in the cabinet under the sink"
 
+---
 
+### You might also like
+
+- [Writing custom items](writing_custom_items.md) — Learn how to add property-specific information beyond standard items
+- [Writing internal policies](writing_policies.md) — Control when Alfred escalates conversations or takes specific actions

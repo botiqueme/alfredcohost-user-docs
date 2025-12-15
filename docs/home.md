@@ -85,7 +85,7 @@
 
 <style>
 .home-wrapper {
-  max-width: 00px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 16px;
   text-align: center;
@@ -95,13 +95,6 @@
 .home-wrapper h2,
 .home-wrapper p,
 .home-wrapper ul {
-  text-align: center;
-}
-
-.home-wrapper {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 16px;
   text-align: center;
 }
 
