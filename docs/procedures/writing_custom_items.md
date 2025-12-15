@@ -1,6 +1,6 @@
 # 🪡 Writing custom items
 
-We've already mapped the key information your guests may need. You can add custom items to your [libraries](concepts/libraries_c.md) anytime to cover extra details. Follow these tips to give Alfred the most accurate information about your property and policies.
+We've already mapped the key information your guests may need. You can add custom items to your [libraries](../concepts/libraries_c.md) anytime to cover extra details. Follow these tips to give Alfred the most accurate information about your property and policies.
 
 </br>
 
