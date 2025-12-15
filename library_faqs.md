@@ -185,7 +185,7 @@ Learn more: [About libraries](concepts/libraries_c.md)
 /* FAQ Page Styling */
 .markdown-section details {
   margin-bottom: 0;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #FF3B3C;
   padding-bottom: 0.75rem;
   margin-bottom: 0.75rem;
 }
@@ -198,7 +198,6 @@ Learn more: [About libraries](concepts/libraries_c.md)
 .markdown-section details summary {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #FF3B3C;
   cursor: pointer;
   list-style: none;
   padding: 0.75rem 0;
@@ -218,8 +217,8 @@ Learn more: [About libraries](concepts/libraries_c.md)
   transform: translateY(-50%) rotate(-45deg);
   width: 8px;
   height: 8px;
-  border-right: 2px solid #000;
-  border-bottom: 2px solid #000;
+  border-right: 2px solid #FF3B3C;
+  border-bottom: 2px solid #FF3B3C;
   transition: transform 0.2s ease;
 }
 
@@ -227,11 +226,11 @@ Learn more: [About libraries](concepts/libraries_c.md)
   transform: translateY(-50%) rotate(45deg);
 }
 
-.markdown-section details summary strong {
-  color: #FF3B3C;
-}
-
 .markdown-section details[open] summary {
   margin-bottom: 1rem;
+}
+
+.markdown-section details + h2 {
+  margin-top: 2.5rem;
 }
 </style>

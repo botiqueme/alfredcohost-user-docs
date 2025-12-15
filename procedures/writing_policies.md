@@ -4,7 +4,7 @@ Policies are a special type of library item used to control Alfred’s behavior 
 
 We’ve already defined core policies for Alfred. If you need to create custom ones, these tips will help you do it right.
 
-### 🧠 What a good policy needs
+## 🧠 What a good policy needs
 
 A well-written policy should:
 - Be **specific** about the scenario it applies to  
@@ -13,7 +13,7 @@ A well-written policy should:
 - Be written in **natural, human-readable language** (no placeholders, no technical shorthand)
 
 
-### ✅ Structure to follow
+## ✅ Structure to follow
 
 Before writing a policy item, take a moment to think about the exact scope:  
 - What situation does it cover?  
@@ -32,5 +32,11 @@ Then use this structure:
 
 3. **Message (if needed)**  
    Provide the exact message Alfred should send.  
-   _Example: “No worries, we’ll get back to you shortly!”_
+   _Example: "No worries, we'll get back to you shortly!"_
 
+---
+
+### You might also like
+
+- [How to write great library items](writing_tips.md) — General principles and tone of voice for writing effective library content
+- [Writing custom items](writing_custom_items.md) — Learn how to add property-specific information beyond standard items

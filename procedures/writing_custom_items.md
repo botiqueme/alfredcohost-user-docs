@@ -1,6 +1,6 @@
-# 🪡 Writing custom items
+# Writing custom items
 
-We've already mapped the key information your guests may need. You can add custom items to your [libraries](concepts/libraries_c.md) anytime to cover extra details. Follow these tips to give Alfred the most accurate information about your property and policies.
+We've already mapped the key information your guests may need. You can add custom items to your [libraries](../concepts/libraries_c.md) anytime to cover extra details. Follow these tips to give Alfred the most accurate information about your property and policies.
 
 </br>
 
@@ -32,5 +32,9 @@ For procedures like opening a lockbox or resetting the boiler, use short, number
 > 2. Pull down the black lever.  
 > 3. After use, scramble the code to keep it private.
 
+---
 
+### You might also like
 
+- [How to write great library items](writing_tips.md) — General principles and tone of voice for writing effective library content
+- [Writing internal policies](writing_policies.md) — Control when Alfred escalates conversations or takes specific actions

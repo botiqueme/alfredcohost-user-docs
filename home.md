@@ -45,7 +45,12 @@
 
   <a class="card ts-guide-card" href="#/procedures/writing_tips.md">
     <h3>Writing tips</h3>
-    <p>Learn how to write clear, effective library items that help Alfred answer guests accurately.</p>
+    <p>Learn how to write clear, effective library items, custom content, and policies that help Alfred answer guests accurately.</p>
+  </a>
+
+  <a class="card ts-guide-card" href="#/concepts/property-identifiers_c.md#how-guest-authentication-works">
+    <h3>Guest authentication</h3>
+    <p>Understand how guests authenticate with Alfred, including case-sensitive property names and PIN verification.</p>
   </a>
 
   <a class="card ts-guide-card" href="#/procedures/test_assistant.md">
@@ -53,24 +58,19 @@
     <p>Test how Alfred responds before going live. Make sure everything works perfectly for your guests.</p>
   </a>
 
-  <a class="card ts-guide-card" href="#/library_faqs.md">
-    <h3>Library FAQs</h3>
-    <p>Quick answers to common questions about writing and managing your library content.</p>
-  </a>
-
   <a class="card ts-guide-card" href="#/concepts/hands_off_c.md">
     <h3>Hands off</h3>
     <p>Understand how Alfred escalates conversations to your team when guests need human help.</p>
   </a>
 
-  <a class="card ts-guide-card" href="#/procedures/writing_custom_items.md">
-    <h3>Writing custom items</h3>
-    <p>Add property-specific information beyond standard items. Learn how to create effective custom content.</p>
+  <a class="card ts-guide-card" href="#/library_faqs.md">
+    <h3>Library FAQs</h3>
+    <p>Quick answers to common questions about writing and managing your library content.</p>
   </a>
 
-  <a class="card ts-guide-card" href="#/procedures/writing_policies.md">
-    <h3>Writing policies</h3>
-    <p>Control when Alfred escalates conversations or takes specific actions. Set up custom policies for your needs.</p>
+  <a class="card ts-guide-card" href="#/concepts/plans_billing_cycles_c.md">
+    <h3>Billing cycles</h3>
+    <p>Understand how billing cycles work across multiple properties, automatic alignment, and prorated charges.</p>
   </a>
 
   </div>
@@ -85,7 +85,7 @@
 
 <style>
 .home-wrapper {
-  max-width: 00px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 16px;
   text-align: center;
@@ -95,13 +95,6 @@
 .home-wrapper h2,
 .home-wrapper p,
 .home-wrapper ul {
-  text-align: center;
-}
-
-.home-wrapper {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 16px;
   text-align: center;
 }
 
