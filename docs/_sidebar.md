@@ -2,6 +2,7 @@
 * [Get started](get-started.md)
 
 * About
+   * [What Alfred can do](concepts/what-alfred-can-do_c.md)
    * [Properties](concepts/properties_c.md)
    * [Libraries](concepts/libraries_c.md)
    * [Plans & billing cycles](concepts/plans_billing_cycles_c.md)
