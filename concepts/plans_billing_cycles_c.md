@@ -65,6 +65,7 @@ If you have:
 - Multiple monthly subscriptions, each month you'll receive a single invoice grouping all monthly subscriptions.
 - Multiple yearly subscriptions, each year you'll receive a single invoice grouping all yearly subscriptions.
 
+---
 
 ## Next step  
 Now that you understand the key concepts for managing plans & billing cycles, see [Manage plans & billing cyces](../procedures/plans_billing_cycles_p.md) for step-by-step instructions.

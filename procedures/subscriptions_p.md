@@ -43,6 +43,8 @@ If you want to unpublish your assistant before the subscription expires:
 
 </details> -->
 
+---
+
 ## Next steps
 
 Want to know the details of plans and billing cycles? See [Plans & Billing Cycles](../concepts/plans_billing_cycles_c.md).
