@@ -27,7 +27,7 @@
 
   <a class="card" href="#/concepts/intro.md" rel="noopener">
     <img src="media/how-it-works-icon.png" alt="Code icon" />
-    <h3>How the platform works</h3>
+    <h3>Understand the platform</h3>
     <p>Discover the key concepts behind Alfred’s success.</p>
   </a>
 
@@ -38,17 +38,45 @@
   </a>
 </div>
 
-  <h2>Work with Alfred</h2>
-  <p>Know what you want to do? Go straight to it.</p>
+  <h2>Get the most out of Alfred</h2>
+  <p>Essential guides and tools to help you succeed.</p>
 
-  <ul>
-    🏡 <strong><a href="#/procedures/manage-properties.md">Manage properties</a></strong> — Add, edit, or deactivate guest units </br>
-    🗂️ <strong><a href="#/procedures/manage-libraries.md">Manage property information</a></strong> — Update the content Alfred uses to answer guests</br>
-    💳 <strong><a href="#/overview/subscriptions.md">Manage subscription</a></strong> — View or update your current plan
-  </ul>
+  <div class="ts-guides-grid">
 
-  <hr />
+  <a class="card ts-guide-card" href="#/procedures/writing_tips.md">
+    <h3>Writing tips</h3>
+    <p>Learn how to write clear, effective library items, custom content, and policies that help Alfred answer guests accurately.</p>
+  </a>
 
+  <a class="card ts-guide-card" href="#/concepts/property-identifiers_c.md#how-guest-authentication-works">
+    <h3>Guest authentication</h3>
+    <p>Understand how guests authenticate with Alfred, including case-sensitive property names and PIN verification.</p>
+  </a>
+
+  <a class="card ts-guide-card" href="#/procedures/test_assistant.md">
+    <h3>Test assistant</h3>
+    <p>Test how Alfred responds before going live. Make sure everything works perfectly for your guests.</p>
+  </a>
+
+  <a class="card ts-guide-card" href="#/concepts/hands_off_c.md">
+    <h3>Hands off</h3>
+    <p>Understand how Alfred escalates conversations to your team when guests need human help.</p>
+  </a>
+
+  <a class="card ts-guide-card" href="#/library_faqs.md">
+    <h3>Library FAQs</h3>
+    <p>Quick answers to common questions about writing and managing your library content.</p>
+  </a>
+
+  <a class="card ts-guide-card" href="#/concepts/plans_billing_cycles_c.md">
+    <h3>Billing cycles</h3>
+    <p>Understand how billing cycles work across multiple properties, automatic alignment, and prorated charges.</p>
+  </a>
+
+  </div>
+
+
+<hr />
   <p>
     Can’t find what you’re looking for? <a href="mailto:support@alfredco.host">Contact support</a> — we’ll be happy to help.
   </p>
@@ -57,7 +85,7 @@
 
 <style>
 .home-wrapper {
-  max-width: 00px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 16px;
   text-align: center;
@@ -67,13 +95,6 @@
 .home-wrapper h2,
 .home-wrapper p,
 .home-wrapper ul {
-  text-align: center;
-}
-
-.home-wrapper {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 16px;
   text-align: center;
 }
 

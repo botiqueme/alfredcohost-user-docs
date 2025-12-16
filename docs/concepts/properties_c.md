@@ -7,6 +7,8 @@ Properties in Alfred's platform reflect your real-life rentable units — that i
 
 When contacted, **Alfred will locate the guest in the correct property** and make sure **to provide answers based only on that specific property**.
 
+---
+
 ## Next steps
 
 - Now that you understand how properties work, go set them up: [Manage properties](../procedures/properties_p.md)

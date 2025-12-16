@@ -26,6 +26,11 @@ Clear, practical workflows that show you exactly how to complete tasks in Alfred
     <p>Update the payment card used for all your Alfred Co.Host subscriptions.</p>
   </a>
 
+  <a class="card ts-guide-card" href="#/procedures/test_assistant.md">
+    <h3>Test assistant</h3>
+    <p>Test how Alfred responds before going live. Make sure everything works perfectly for your guests.</p>
+  </a>
+
 
 </div>
 
