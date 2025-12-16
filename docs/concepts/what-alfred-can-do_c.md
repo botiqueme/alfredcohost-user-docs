@@ -7,7 +7,6 @@ Alfred is your AI assistant that supports your guests 24/7 through messaging pla
 Alfred can answer questions of any type your guests might ask. Whether they're asking about:
 
 - How to check in or check out
-- Where to find the WiFi password
 - How to use appliances or systems in the property
 - Local recommendations for restaurants, transport, or sightseeing
 - House rules and policies
@@ -21,12 +20,12 @@ Alfred uses the information you've added to each property's [library](libraries_
 
 Alfred can share photos and videos with your guests to help them understand instructions or find what they need. For example:
 
-- Photos showing where to find keys, switches, or controls
+- Photos showing where to find appliances, keys, switches, or controls
 - Video tutorials for using appliances or systems
-- Images of the property layout or nearby landmarks
+- Images of the property exterior or nearby landmarks
 - Visual guides for troubleshooting
 
-You can add photos and videos to your library items, and Alfred will send them to guests when relevant to their questions.
+You can add photos and videos to your library items, and Alfred will send them to guests when relevant to their questions. Learn more about [supported file formats](libraries_c.md#standard-media-information).
 
 ## Listen to voice messages
 
