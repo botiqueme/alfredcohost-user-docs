@@ -1,88 +1,69 @@
 43FS3dyqWoeJSLG5 vonage API KEY
-
-In realtà **abbiamo i dati di Vonage**, ma sono meno "famosi" di quelli di Twilio perché Vonage ha cambiato modello di recente (luglio 2025) per essere più competitiva sui volumi alti.
-
-Ecco la panoramica strutturata per Vonage, così puoi confrontarla direttamente con Twilio.
+Ecco la guida aggiornata e strutturata con i dati definitivi per il **2026**. Questa pagina riflette il nuovo modello di Meta (passaggio al costo "per messaggio" per i template) e le tariffe specifiche di Vonage per l'Italia.
 
 ---
+
+# GUIDA COSTI WHATSAPP API: IL MODELLO VONAGE (2026)
+
+L'utilizzo di WhatsApp tramite Vonage si basa sulla somma di due componenti: la **tariffa Meta** (proprietaria di WhatsApp) e la **Platform Fee di Vonage**.
 
 ## 1. Concetti Chiave: VONAGE
 
-Vonage si posiziona come il "fratello maggiore" per chi vuole scalare. A differenza di Twilio, che ha un prezzo fisso e rigido, Vonage usa un sistema che premia chi invia molti messaggi.
+Vonage funge da gateway tecnico e applica un modello di costo "Pay-per-Message" estremamente vantaggioso per chi riceve molti messaggi.
 
-* **Tariffa "Per Messaggio" Variabile:** Mentre Twilio è fisso a $0.005, Vonage parte da circa **$0.0045** e scende drasticamente se superi certe soglie (può arrivare a **$0.00015** per volumi enterprise).
-* **Messaggi Inbound (Entrata) GRATUITI:** Questa è la differenza più grande. Vonage **non ti addebita commissioni** per i messaggi che ricevi dai guest (lato provider). Paghi solo quelli che il bot invia.
-* **Canone Numero:** Simile a Twilio, circa **$0.99 - $1.50/mese**.
-* **Commissione di Conversazione (Markup):** Oltre al costo per messaggio, Vonage applica un piccolo sovrapprezzo (markup) fisso per ogni conversazione Meta aperta, di circa **$0.005**.
+* **Inbound Messages (Ricevuti) GRATUITI:** Vonage non addebita costi per i messaggi che i guest inviano al tuo bot. Questo ti protegge dai costi se un cliente è particolarmente loquace.
+* **Outbound Messages (Inviati):** Paghi una tariffa fissa per ogni messaggio inviato dal tuo bot. Per l'Italia, questa tariffa è inclusa nel prezzo finale che vedi in tabella.
+* **Virtual Number:** Un costo fisso mensile (circa **$1.00 - $1.50**) per il mantenimento del numero di telefono.
+* **Documentazione ufficiale:** [Vonage Messages API Pricing](https://www.vonage.com/communications-apis/messages/pricing/)
+
+## 2. Concetti Chiave: META (WhatsApp)
+
+Dal 2026, Meta ha consolidato il passaggio dal costo "per conversazione" al costo **"per messaggio consegnato"** per i messaggi basati su template.
+
+* **Le 1.000 Sessioni "Service" GRATIS:** Ogni mese, le prime 1.000 conversazioni avviate dai guest (Service) sono **gratuite lato Meta**. Pagherai solo la piccola quota di Vonage per le risposte del bot.
+* **Costo per Messaggio (Utility/Marketing):** I messaggi di notifica (es. alert al manager o codici check-in) non pagano più una "finestra di 24h", ma si pagano **singolarmente** ogni volta che vengono consegnati.
+* **Categorie di Messaggio:** * **Utility:** Notifiche transazionali (le più economiche).
+* **Service:** Risposte libere del bot a domande dei guest.
+* **Marketing:** Promozioni (le più costose).
+
+
 
 ---
 
-## 2. Concetti Chiave: META (con Vonage)
+## 3. Tariffe per l'ITALIA (Dati Rate Card 2026)
 
-Le regole di Meta rimangono identiche (perché le impone Mark Zuckerberg, non il provider), ma Vonage le gestisce in modo leggermente diverso nei log:
+*Valori medi espressi in USD per singolo messaggio consegnato.*
 
-* **Conversazioni Service (Guest):** Le prime 1.000 sono gratis (Quota Meta). Vonage ti fa pagare solo i messaggi in uscita del bot.
-* **Conversazioni Utility (Manager):** Paghi la tariffa Meta + il markup di Vonage.
-
----
-
-## 3. Esempi Pratici (con Vonage)
-
-### Caso A: Il Guest interagisce con il Chatbot
-
-*Scenario: Guest scrive 2 messaggi, il bot risponde con 2 messaggi. Totale 4 messaggi.*
-
-* **Costo Meta:** **€0.00** (Sotto le 1.000 gratis).
-* **Costo Vonage (Inbound):** **$0.00** (Vonage non fa pagare i messaggi ricevuti).
-* **Costo Vonage (Outbound):** .
-* **Totale:** Meno di **1 centesimo**. (Twilio ne costerebbe 2).
+| Categoria | Costo per Messaggio (Meta + Vonage) |
+| --- | --- |
+| **Service (Risposta Bot)** | **$0.00819** |
+| **Utility (Alert/Check-in)** | **$0.00910** |
+| **Marketing (Promo)** | **$0.02098** |
 
 ---
 
-### Caso B: Alert automatico al Property Manager
+## 4. Esempio Pratico (Simulazione su 100 Guest)
 
-*Scenario: Alert (Template Utility) inviato al Manager. Il Manager risponde.*
+Immaginiamo un mese tipo con **100 Guest** che arrivano nelle tue strutture.
+*Ogni guest manda 5 messaggi e il bot risponde con 5 messaggi. Inoltre, il bot invia 1 alert "Utility" al Manager per ogni guest.*
 
-* **Costo Meta:** **~€0.032** (Tariffa Utility Italia).
-* **Costo Vonage (Markup):** **$0.005** (Commissione Vonage per l'apertura).
-* **Costo Vonage (Messaggi):** Solo l'invio dell'alert si paga (~$0.0045).
-* **Totale:** Circa **4.2 centesimi di euro**.
+### A. Interazione Guest-Bot (Service)
 
----
+Meta non addebita la sessione (sei sotto i 1.000). Paghi solo i messaggi che il bot invia tramite Vonage.
 
-### Caso C: Chatbot "Logorroico" (Errore di loop)
+* Messaggi ricevuti (500): **$0.00**
+* Risposte del bot (500): 500 x $0.00819 = **$4.09**
 
-*Scenario: Il bot invia 100 messaggi per errore in una sessione già aperta.*
+### B. Alert al Property Manager (Utility)
 
-* **Costo Meta:** **€0.00**.
-* **Costo Vonage:** . (Contro i $0.50 di Twilio).
+Invio di un template pre-approvato per ogni nuovo guest.
 
----
-Hai ragione, ho saltato il calcolo comparativo per Vonage. Ecco la proiezione basata sugli stessi numeri usati per Twilio (100 Guest), così puoi vedere la differenza reale in euro e centesimi.
+* Alert inviati (100): 100 x $0.00910 = **$0.91**
 
----
+### C. Costi Fissi
 
-### Sintesi Budget Mensile: VONAGE (Stima su 100 Guest)
+* Canone mensile numero: **$1.00**
 
-Ipotizziamo: **100 Guest** (10 messaggi ciascuno: 5 inviati dal guest, 5 inviati dal bot) + **50 Alert** ai manager.
-
-| Voce di Costo | Calcolo | Totale Stimato |
-| --- | --- | --- |
-| **Canone Numero** | Costo fisso mensile | **~$1.00** |
-| **Meta Service (Guest)** | 100 sessioni (Sotto la soglia 1.000) | **$0.00** |
-| **Meta Utility (Manager)** | 50 sessioni x ~€0.032 | **~$1.75** ($1.60) |
-| **Vonage Inbound** | 500 messaggi ricevuti dai guest | **$0.00** (Gratis) |
-| **Vonage Outbound** | 500 risposte bot + 50 alert = 550 x $0.0045 | **$2.47** |
-| **Vonage Session Markup** | 150 sessioni aperte x $0.005 | **$0.75** |
-| **TOTALE MENSILE** |  | **~$5.97** |
+### **TOTALE MENSILE ESTIMATO: $6.00**
 
 ---
-
-### Perché Vonage costa meno in questo scenario?
-
-1. **I messaggi dei guest sono "gratis":** In Twilio, ogni volta che un guest ti scrive "Grazie", "Ok", o "A che ora è la colazione?", paghi $0.005. In Vonage quel costo è zero.
-2. **Scalabilità:** Se un guest diventa "chiacchierone" e manda 50 messaggi al bot, con Twilio paghi **$0.25** extra. Con Vonage paghi solo i messaggi che il bot invia per rispondere, dimezzando di fatto il rischio economico legato ai guest prolissi.
-
-
-
-**Ti serve che adatti la documentazione tecnica dello sviluppatore con i parametri specifici di Vonage?**
