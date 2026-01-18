@@ -1,3 +1,5 @@
+43FS3dyqWoeJSLG5 vonage API KEY
+
 In realtà **abbiamo i dati di Vonage**, ma sono meno "famosi" di quelli di Twilio perché Vonage ha cambiato modello di recente (luglio 2025) per essere più competitiva sui volumi alti.
 
 Ecco la panoramica strutturata per Vonage, così puoi confrontarla direttamente con Twilio.
