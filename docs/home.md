@@ -15,6 +15,20 @@
     Whether you're just getting started or want to manage your current setup, this space is here to help you at every step.
   </p>-->
 
+  <h2>Choose your setup</h2>
+  <p>Get Alfred working for your guests — choose the approach that fits your timeline.</p>
+
+  <div class="setup-cards-container">
+    <a class="card setup-card" href="#/procedures/setup_library_p.md#super-fast-setup-15-minutes">
+      <h3>Quick launch</br> (15 min)</h3>
+      <p>Go live in minutes with the essentials. Get Alfred working with guests right away.</p>
+    </a>
+    <a class="card setup-card" href="#/procedures/setup_library_p.md#complete-setup-your-timeline">
+      <h3>Full control</br> (15 min+)</h3>
+      <p>Build a comprehensive library at your own pace. Control every detail, add everything that matters.</p>
+    </a>
+  </div>
+
   <h2>Learn how Alfred works</h2>
   <p>If you're new to Alfred or want to understand how it’s structured, start here.</p>
 
@@ -98,6 +112,48 @@
   text-align: center;
 }
 
+.setup-cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin: 40px auto 60px;
+  padding: 0 120px;
+  max-width: 100%;
+}
 
+.setup-card {
+  width: 280px !important;
+  height: 280px !important;
+  max-width: 280px !important;
+  min-width: 280px !important;
+  padding: 32px 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.setup-card h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.setup-card p {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .setup-cards-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+    gap: 24px;
+  }
+  
+  .setup-card {
+    width: 100% !important;
+    max-width: 280px !important;
+  }
+}
 
 </style>
