@@ -10,7 +10,7 @@ Some items (like *WiFi name*, *door code*, or *checkout time*) already have a de
 
 To fill them in, enter the value in the **text field** provided.
 
-> **TIP** More guidance on writing library items? Check our [Tips & tricks](./../procedures/writing_tips.md).
+> **TIP** More guidance on defining library items? Check our [Tips & tricks](./../procedures/writing_tips.md).
 
 
 ## Add a custom text item
