@@ -25,4 +25,4 @@ Want to learn more? See [About libraries](concepts/libraries_c.md).
 That’s it — you’re ready!  
 Once your property and library are complete, choose your subscription and **go live**.  
 Alfred starts working immediately, turning your guest messages into smooth conversations.  
-Want to learn more? See [Manage subscriptions](concepts/manage_subscriptions_c.md).
+Want to learn more? See [Manage subscriptions](procedures/subscriptions_p.md).

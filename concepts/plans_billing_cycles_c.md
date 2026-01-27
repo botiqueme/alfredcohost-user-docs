@@ -68,4 +68,4 @@ If you have:
 ---
 
 ## Next step  
-Now that you understand the key concepts for managing plans & billing cycles, see [Manage plans & billing cyces](../procedures/plans_billing_cycles_p.md) for step-by-step instructions.
+Now that you understand the key concepts for managing plans & billing cycles, see [Manage subscriptions](../procedures/subscriptions_p.md) for step-by-step instructions on activating and managing subscriptions.
