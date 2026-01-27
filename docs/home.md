@@ -20,10 +20,12 @@
 
   <div class="setup-cards-container">
     <a class="card setup-card" href="#/procedures/setup_library_p.md#super-fast-setup-15-minutes">
+      <img src="media/quicklaunch-icon.png" alt="Quick launch icon" />
       <h3>Quick launch</br> (15 min)</h3>
       <p>Go live in minutes with the essentials. Get Alfred working with guests right away.</p>
     </a>
     <a class="card setup-card" href="#/procedures/setup_library_p.md#complete-setup-your-timeline">
+      <img src="media/full-control-icon.png" alt="Full control icon" />
       <h3>Full control</br> (15 min+)</h3>
       <p>Build a comprehensive library at your own pace. Control every detail, add everything that matters.</p>
     </a>
@@ -36,7 +38,7 @@
   <a class="card" href="#/get-started.md" rel="noopener">
     <img src="media/quickstart-icon.png" width=1000px alt="Rocket icon" />
     <h3>Quickstart</h3>
-    <p>Get Alfred up and running in just a few simple steps.</p>
+    <p>Get Alfred's Platform up and running in just a few simple steps.</p>
   </a>
 
   <a class="card" href="#/concepts/intro.md" rel="noopener">
@@ -46,7 +48,7 @@
   </a>
 
   <a class="card" href="#/procedures/intro.md" rel="noopener">
-    <img src="media/stepbystep-icon.png" alt="Edit icon" />
+    <img src="media/puzzle-icon.png" alt="Edit icon" />
     <h3>Step-by-step guides</h3>
     <p>From setup to success — follow our step-by-step guides for Alfred.</p>
   </a>
@@ -131,6 +133,12 @@
   flex-direction: column !important;
   justify-content: center !important;
   align-items: center !important;
+}
+
+.setup-card img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 16px;
 }
 
 .setup-card h3 {

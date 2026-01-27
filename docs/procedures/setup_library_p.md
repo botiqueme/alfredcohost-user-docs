@@ -3,6 +3,8 @@
 Ready to get Alfred working for your guests? Great news: you 
 don't need to prepare anything in advance. Alfred's library structure is already mapped out — you just fill in your property information. No prep needed, except for photos and videos if you want to include them (these need to be taken on-site).
 
+> **NOTE** **New to Alfred Platform?** If you're starting from scratch, see [Get started](../get-started.md) for an overview of the complete setup process — from adding your first property to going live.
+
 You can choose how deep you want to go. Start with a **Quick launch** setup that gets you live in 15 minutes, or take your time to build a **Full control** library that covers every detail. Both approaches work — it's all about what fits your timeline and needs.
 
 ## Quick launch setup (15 minutes)
