@@ -25,7 +25,11 @@ When you cancel a subscription, it will **remain active until the end of the cur
 
 ## Pause a subscription
 
-If you want to make changes in a property library while hiding your assistant, you can temporarily unpublish your assistant by toggling **Go live** off in **My properties**. This removes it from all guest-facing touchpoints.
+If you want to make changes in a property library while hiding your assistant, you can temporarily unpublish your assistant by toggling **Go live** off in **My properties**. This removes it from all guest-facing touchpoints. Once you're done, you can toggle **Go live** on again to make the assistant available to guests.
+
+If you want to unpublish your assistant within the process of canceling your subscription:
+1. [Cancel the subscription](#cancel-a-subscription).
+2. Toggle **Go live** off in **My properties** so the assistant is hidden until the end of the billing cycle.
 
 <!-- ## FAQs
 
