@@ -18,18 +18,18 @@ You can cancel a subscription at any time. To do so, go to **My subscriptions**,
 
 When you cancel a subscription, it will **remain active until the end of the current billing cycle**. During this time, your assistant stays live. After that, the subscription will not renew and the assistant will be unpublished.
 
-> **NOTE** Canceling a subscription **does not** delete the associated property or its information. For more, see [how to delete a property]().
+> **NOTE** Canceling a subscription **does not** delete the associated property or its information. For more, see [how to delete a property](properties_p.md#delete-a-property).
 
 > **NOTE** Deleted one by mistake? You can simply [subscribe again](#activate-a-subscription).
 
 
 ## Pause a subscription
 
-If you want to make changes in a property library while hiding your assistant, you can [temporarily unpublish your assistant](#). This removes it from all guest-facing touchpoints.
+If you want to make changes in a property library while hiding your assistant, you can temporarily unpublish your assistant by toggling **Go live** off in **My properties**. This removes it from all guest-facing touchpoints. Once you're done, you can toggle **Go live** on again to make the assistant available to guests.
 
-If you want to unpublish your assistant before the subscription expires:
+If you want to unpublish your assistant within the process of canceling your subscription:
 1. [Cancel the subscription](#cancel-a-subscription).
-2. [Temporarily unpublish the assistant](#) so it’s hidden until the end of the billing cycle.
+2. Toggle **Go live** off in **My properties** so the assistant is hidden until the end of the billing cycle.
 
 <!-- ## FAQs
 

@@ -6,6 +6,11 @@ Not sure where to start? This page walks you through Alfred’s core concepts an
 
 <div class="ts-guides-grid">
 
+  <a class="card ts-guide-card" href="#/concepts/what-alfred-can-do_c.md">
+    <h3>What Alfred can do</h3>
+    <p>Discover Alfred's capabilities and how it helps your guests 24/7 through messaging platforms.</p>
+  </a>
+
   <a class="card ts-guide-card" href="#/concepts/properties_c.md">
     <h3>Properties</h3>
     <p>Learn how properties work and how Alfred links guests to the right unit.</p>
@@ -20,7 +25,6 @@ Not sure where to start? This page walks you through Alfred’s core concepts an
     <h3>Plans & billing cycles</h3>
     <p>Learn how plans, subscriptions, and billing cycles work across your properties.</p>
   </a>
-
 
   <a class="card ts-guide-card" href="#/concepts/property-identifiers_c.md">
     <h3>Property identifiers</h3>
