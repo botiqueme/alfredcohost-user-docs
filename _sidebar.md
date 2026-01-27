@@ -11,6 +11,7 @@
    
 * How to
    * [Manage properties](procedures/properties_p.md)
+   * [Set up your library](procedures/setup_library_p.md)
    * [Add content to libraries](procedures/libraries_p.md)
    * [Test assistant](procedures/test_assistant.md)
    * [Manage subscriptions](procedures/subscriptions_p.md)
