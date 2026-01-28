@@ -69,6 +69,6 @@ For detailed instructions on adding content, see [Add content to libraries](libr
 
 ### You might also like
 - [About libraries](../concepts/libraries_c.md) — Understand how libraries work
-- [How to write great library items!](writing_tips.md) — Tips for creating effective content
+- [How to write great library items](writing_tips.md) — Tips for creating effective content
 - [Test assistant](test_assistant.md) — Test how Alfred responds before going live
 

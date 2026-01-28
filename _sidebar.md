@@ -18,7 +18,7 @@
    * [Change payment card](procedures/change_payment_card_p.md)
 
 * Tips & tricks
-   * [Write great library items!](procedures/writing_tips.md)
+   * [Write great library items](procedures/writing_tips.md)
    * [Writing custom items](procedures/writing_custom_items.md)
    * [Writing internal policies](procedures/writing_policies.md)
    
