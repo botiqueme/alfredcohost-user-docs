@@ -14,6 +14,15 @@ Learn more: [About libraries](concepts/libraries_c.md)
 </details>
 
 <details>
+<summary><strong>Should I do a quick launch or full control setup?</strong></summary>
+
+You can choose based on your timeline. **Quick launch (15 minutes)** gets you live fast with the essentials: check-in information, policies, and basic accommodation details. **Full control** lets you build a comprehensive library at your own pace, adding detailed instructions for devices, household systems, local tips, and custom items. Both approaches work — start with quick launch and expand later, or take your time from the beginning.
+
+Learn more: [Set up your library](procedures/setup_library_p.md)
+
+</details>
+
+<details>
 <summary><strong>Can I edit library items after I've created them?</strong></summary>
 
 Yes. You can edit any library item at any time. Changes take effect immediately, and Alfred will use the updated information in future guest conversations.
@@ -43,7 +52,7 @@ Learn more: [About libraries](concepts/libraries_c.md)
 <details>
 <summary><strong>How long should library items be?</strong></summary>
 
-Keep items short and focused. Each item should cover **one clear piece of information**. For simple items like WiFi passwords, a few words are enough. For instructions, use short, numbered steps when needed.
+Keep items short and focused. Each item should cover **one clear piece of information**. For simple items like WiFi passwords, a few words are enough. For procedures like opening a lockbox or resetting the boiler, use short, numbered steps in a logical order.
 
 Learn more: [Writing custom items](procedures/writing_custom_items.md)
 
@@ -68,25 +77,25 @@ Use custom items to add any information that's not covered by the standard field
 <details>
 <summary><strong>Should I include photos or videos?</strong></summary>
 
-Only if they make the explanation easier. For example, a video showing how to operate a washing machine can be helpful. Avoid adding media just because you have it — focus on what actually helps guests.
+Only if they make the explanation easier. Images and videos are useful **only if** they make the explanation easier — avoid overwhelming guests with unnecessary media. Use dedicated fields like **photo**, **video**, or **instructions**. Don't paste links inside the description.
 
-Learn more: [Writing tips](procedures/writing_tips.md)
+Learn more: [How to write great library items](procedures/writing_tips.md)
 
 </details>
 
 <details>
 <summary><strong>How specific should I be about locations?</strong></summary>
 
-Be as specific as possible. Instead of "in the kitchen," write "inside the cabinet under the kitchen sink." The more precise you are, the less guests will need to ask follow-up questions.
+Be as precise as possible. Always write **clear, detailed locations** that help guests find things without asking. Instead of "in the kitchen," write "inside the cabinet under the kitchen sink." The more precise you are, the less guests will need to ask follow-up questions.
 
-Learn more: [Writing tips](procedures/writing_tips.md)
+Learn more: [How to write great library items](procedures/writing_tips.md)
 
 </details>
 
 <details>
 <summary><strong>What if I'm not sure how to write something?</strong></summary>
 
-Start by thinking: what is the guest trying to do? When will they need this information? Then write a clear, direct answer. If you're still unsure, check our [writing tips](procedures/writing_tips.md) for examples and guidance.
+Start from the guest's perspective: what is the guest trying to do? When will they need this information? Should this item instruct, inform, reassure, or guide? Then write a clear, direct answer. If you're still unsure, check our [writing guide](procedures/writing_tips.md) for examples and guidance.
 
 </details>
 
@@ -104,7 +113,7 @@ Learn more: [Writing custom items](procedures/writing_custom_items.md)
 <details>
 <summary><strong>How do placeholders work in custom items?</strong></summary>
 
-When you write custom items, think about how they might be used in guest messages. For example, if you create a "Garbage collection times" item with the value "from 6:30 PM to 10:30 PM," Alfred can insert it into messages like: "Please remember that trash can be taken out {garbage_collection_times}."
+Think in placeholders when writing custom items — write them so they work seamlessly inside guest messages. For example, if you create a "Garbage collection times" item with the value "from 6:30 PM to 10:30 PM," Alfred can insert it into messages like: "Please remember that trash can be taken out {garbage_collection_times}."
 
 Learn more: [Writing custom items](procedures/writing_custom_items.md)
 
@@ -142,7 +151,7 @@ Learn more: [Writing policies](procedures/writing_policies.md)
 <details>
 <summary><strong>Do I need to create custom policies?</strong></summary>
 
-We've already defined core policies for Alfred. You only need to create custom policies if you have specific situations that require special handling. See our guide on [writing policies](procedures/writing_policies.md) for more details.
+We've already defined core policies for Alfred. You only need to create custom policies if you have specific situations that require special handling. When writing a policy, use this structure: **Trigger** (the condition that activates it), **Action** (what Alfred should do), and **Message** (what Alfred should say, if needed). See our guide on [writing policies](procedures/writing_policies.md) for more details.
 
 </details>
 
@@ -159,7 +168,7 @@ Make sure your items are:
 
 If you're still having issues, check that you've filled in the relevant standard items and that custom items have clear, descriptive labels.
 
-Learn more: [Writing tips](procedures/writing_tips.md), [Writing custom items](procedures/writing_custom_items.md)
+Learn more: [How to write great library items](procedures/writing_tips.md), [Writing custom items](procedures/writing_custom_items.md)
 
 </details>
 
