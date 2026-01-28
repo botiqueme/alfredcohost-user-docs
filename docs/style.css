@@ -1,7 +1,7 @@
 :root {
   --font-body: 'Montserrat', sans-serif;
   --color-primary: #FF3B3C;
-  --color-text: #171614;
+  --color-text: #34495E;
   --color-background: #ffffff;
 }
 
@@ -35,7 +35,7 @@ p {
 
 h1, h2, h3,
 .sidebar h1, .sidebar h2 {
-  color: var(--color-primary);
+  color: #34495E;
   font-weight: 600;
 }
 
@@ -115,7 +115,7 @@ h1, h2, h3,
 .card p {
   font-size: 0.95rem !important;
   font-weight: normal !important;
-  color: #171614 !important;
+  color: #34495E !important;
   line-height: 1.4 !important;
   margin: 0 !important;
   padding-top: 4px !important;
@@ -157,10 +157,17 @@ a:hover, .sidebar a:hover {
 /* ------------------------ */
 .sidebar {
   padding-top: 80px !important;
+  color: #34495E !important;
 }
 
 .sidebar .app-name {
   display: none !important;
+}
+
+.sidebar ul,
+.sidebar li,
+.sidebar a {
+  color: #34495E !important;
 }
 
 /* ------------------------ */
@@ -662,7 +669,7 @@ body.home-background::before {
   align-items: center;
   text-align: center;
   padding:  18em 2em 6em 2e; /* ✅ più spazio sopra e sotto */
-  color: #171614;
+  color: #34495E;
 }
 
 .homepage-hero-overlay h1 {
