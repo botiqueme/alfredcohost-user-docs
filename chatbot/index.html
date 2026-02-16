@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robin – Alfred Docs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-primary: #FF3B3C;
+      --color-text: #34495E;
+      --color-bg: #ffffff;
+      --color-bg-alt: #f8f9fa;
+      --font: 'Montserrat', sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--color-bg);
+      color: var(--color-text);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-header {
+      padding: 10px 12px 10px 16px;
+      border-bottom: 1px solid #eee;
+      background: var(--color-bg);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    /* Avatar: fallback "R" in a circle. To use an image instead: replace the div with
+       <img class="chat-header-avatar" src="media/robin-avatar.png" alt=""> and add
+       object-fit: cover; to this class (remove flex, font, color). Or keep the div
+       and set background-image + background-size: cover; here, and remove the "R" text. */
+    .chat-header-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-right: 10px;
+    }
+    .chat-header-title {
+      flex: 1;
+      min-width: 0;
+    }
+    .chat-header h1 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+    .chat-header p {
+      margin: 2px 0 0 0;
+      font-size: 0.75rem;
+      color: var(--color-text);
+      opacity: 0.85;
+    }
+    .chat-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .chat-header-actions button {
+      padding: 6px 10px;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--color-text);
+      font-family: var(--font);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .chat-header-actions button:hover {
+      background: var(--color-bg-alt);
+    }
+    .chat-header-actions button.minimize-btn {
+      padding: 8px;
+      font-size: 1rem;
+      line-height: 1;
+    }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .message {
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .message.user {
+      align-self: flex-end;
+      background: var(--color-primary);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .message.bot {
+      align-self: flex-start;
+      background: var(--color-bg-alt);
+      border: 1px solid #eee;
+      border-bottom-left-radius: 4px;
+    }
+    .message .time {
+      font-size: 0.7rem;
+      opacity: 0.8;
+      margin-top: 4px;
+    }
+    .typing-indicator {
+      align-self: flex-start;
+      padding: 12px 16px;
+      background: var(--color-bg-alt);
+      border: 1px solid #eee;
+      border-radius: 12px;
+      border-bottom-left-radius: 4px;
+      font-size: 0.85rem;
+      color: #888;
+    }
+    .typing-indicator span {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #bbb;
+      margin: 0 2px;
+      animation: typing-bounce 0.6s ease-in-out infinite;
+    }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.1s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.2s; }
+    @keyframes typing-bounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-4px); }
+    }
+    .chat-input-wrap {
+      padding: 12px 16px;
+      border-top: 1px solid #eee;
+      background: var(--color-bg);
+      flex-shrink: 0;
+    }
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .chat-input-row input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-family: var(--font);
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .chat-input-row input:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px rgba(255, 59, 60, 0.15);
+    }
+    .chat-input-row input:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    .chat-input-row button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 20px;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: var(--font);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .chat-input-row button:hover {
+      opacity: 0.9;
+    }
+    .chat-input-row button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <header class="chat-header">
+    <!-- Avatar: optional image → use <img class="chat-header-avatar" src="media/robin-avatar.png" alt=""> (see .chat-header-avatar in CSS) -->
+    <div class="chat-header-avatar" aria-hidden="true">R</div>
+    <div class="chat-header-title">
+      <h1>Robin</h1>
+      <p>AI assistant for Alfred Co.Host docs</p>
+    </div>
+    <div class="chat-header-actions">
+      <button type="button" class="clear-btn" id="clearBtn" aria-label="Restart conversation">Restart</button>
+      <button type="button" class="minimize-btn" id="minimizeBtn" aria-label="Minimize chat">−</button>
+    </div>
+  </header>
+
+  <div class="chat-messages" id="chatMessages"></div>
+
+  <div class="chat-input-wrap">
+    <div class="chat-input-row">
+      <input
+        type="text"
+        id="messageInput"
+        placeholder="Ask about the docs..."
+        autocomplete="off"
+      />
+      <button type="button" id="sendBtn" aria-label="Send">Send</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var WELCOME = 'Hi! 👋 I\'m Robin, your AI assistant for Alfred Co.Host. I can help you with questions about the Platform. How can I help?';
+
+      var messagesEl = document.getElementById('chatMessages');
+      var inputEl = document.getElementById('messageInput');
+      var sendBtn = document.getElementById('sendBtn');
+      var clearBtn = document.getElementById('clearBtn');
+      var minimizeBtn = document.getElementById('minimizeBtn');
+
+      var threadId = null;
+      var isLoading = false;
+
+      function timeLabel() {
+        return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      }
+
+      function showWelcome() {
+        var hasMessages = messagesEl.querySelectorAll('.message').length > 0;
+        if (hasMessages) return;
+        addMessage(WELCOME, false);
+      }
+
+      function addMessage(text, isUser) {
+        var div = document.createElement('div');
+        div.className = 'message ' + (isUser ? 'user' : 'bot');
+        div.innerHTML = '<span class="text"></span><div class="time">' + timeLabel() + '</div>';
+        div.querySelector('.text').textContent = text;
+        messagesEl.appendChild(div);
+        scrollToBottom();
+      }
+
+      function removeTypingIndicator() {
+        var el = document.getElementById('typing-indicator');
+        if (el && el.parentNode) el.parentNode.removeChild(el);
+      }
+
+      function showTypingIndicator() {
+        removeTypingIndicator();
+        var div = document.createElement('div');
+        div.id = 'typing-indicator';
+        div.className = 'typing-indicator';
+        div.setAttribute('aria-live', 'polite');
+        div.innerHTML = '<span></span><span></span><span></span>';
+        messagesEl.appendChild(div);
+        scrollToBottom();
+      }
+
+      function setLoading(loading) {
+        isLoading = loading;
+        inputEl.disabled = loading;
+        sendBtn.disabled = loading;
+        if (loading) showTypingIndicator();
+        else removeTypingIndicator();
+      }
+
+      function scrollToBottom() {
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      function clearConversation() {
+        threadId = null;
+        messagesEl.innerHTML = '';
+        showWelcome();
+        setLoading(false);
+        // When backend exists: call reset endpoint, then on next send request new thread_id
+      }
+
+      function sendMessage() {
+        var text = (inputEl.value || '').trim();
+        if (!text || isLoading) return;
+        addMessage(text, true);
+        inputEl.value = '';
+
+        setLoading(true);
+        // Placeholder: simulate backend delay. Replace with real API call (send text + threadId, get response + optional new threadId).
+        setTimeout(function () {
+          setLoading(false);
+          addMessage('This is a placeholder reply. Connect your backend to get real answers. (thread_id: ' + (threadId || 'none') + ')', false);
+          if (!threadId) threadId = 'placeholder-thread-' + Date.now();
+        }, 800);
+      }
+
+      function notifyParentMinimize() {
+        try {
+          if (window.parent !== window) {
+            window.parent.postMessage({ type: 'alfred-chat-minimize' }, '*');
+          }
+        } catch (_) {}
+      }
+
+      sendBtn.addEventListener('click', sendMessage);
+      inputEl.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+      clearBtn.addEventListener('click', clearConversation);
+      minimizeBtn.addEventListener('click', notifyParentMinimize);
+
+      showWelcome();
+
+      try {
+        if (window.parent !== window) {
+          window.parent.postMessage({ type: 'alfred-chat-loaded' }, '*');
+        }
+      } catch (_) {}
+    })();
+  </script>
+</body>
+</html>

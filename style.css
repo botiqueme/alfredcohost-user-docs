@@ -1,0 +1,1044 @@
+:root {
+  --font-body: 'Montserrat', sans-serif;
+  --color-primary: #FF3B3C;
+  --color-text: #34495E;
+  --color-background: #ffffff;
+}
+
+/* ------------------------ */
+/* Typography and Base Style */
+/* ------------------------ */
+body, .content {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+.markdown-section {
+  max-width: 100% !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  margin: 0 auto !important;
+}
+
+.markdown-section h1:first-of-type {
+  margin-top: 0.5em !important;
+}
+
+p {
+  color: var(--color-text);
+  margin-bottom: 1em;
+}
+
+h1, h2, h3,
+.sidebar h1, .sidebar h2 {
+  color: #34495E;
+  font-weight: 600;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 40px;
+  border-color: #FF3B3C;
+}
+
+.grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 32px !important;
+  margin-top: 40px !important;
+}
+
+.grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 32px !important;
+  margin-top: 40px !important;
+  margin-bottom: 64px !important;     /* 🛠️ Spazio sotto per non tagliare ombre */
+  padding: 0 32px !important;         /* 🛠️ Spazio ai lati per evitare troncamenti */
+  box-sizing: border-box !important; /* 🛠️ Fondamentale se hai border/padding */
+  overflow: visible !important;       /* 🛠️ Anche questo evita clip */
+  width: 100%;
+}
+
+.card {
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  border: 1.2px solid #FF3B3C !important;
+  width: calc(33.333% - 22px) !important; /* 3 per riga */
+  max-width: 300px !important;
+  min-width: 240px !important;
+  height: auto !important; /* ✅ altezza flessibile */
+  padding: 24px 20px !important;
+  text-align: center !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  text-decoration: none !important;
+  color: inherit !important;
+  flex-shrink: 0;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: space-between !important; /* ✅ elimina lo spazio morto */
+}
+
+.card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 12px 28px rgba(255, 59, 60, 0.18) !important;
+  border-color: #FF3B3C !important;
+}
+
+.card img {
+  width: 80px !important;
+  height: auto !important;
+  max-height: 120px !important;
+  margin: 0 auto 16px auto !important;
+  display: block !important;
+  object-fit: contain !important;
+}
+
+.card h3 {
+  font-size: 1.2rem !important;
+  color: #FF3B3C !important;
+  font-weight: 600 !important;
+  margin: 0 0 8px 0 !important;
+}
+
+.card p {
+  font-size: 0.95rem !important;
+  font-weight: normal !important;
+  color: #34495E !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  padding-top: 4px !important;
+}
+
+/* ✅ Mobile (solo sotto i 600px): 1 card per riga */
+@media (max-width: 600px) {
+  .card {
+    width: 100% !important;
+  }
+}
+
+/* ------------------------ */
+/* Links */
+/* ------------------------ */
+a, .sidebar a {
+  color: var(--color-primary);
+  text-decoration: none;
+
+}
+
+a:hover, .sidebar a:hover {
+  opacity: 0.8;
+}
+
+/* ------------------------ */
+/* Inline code style */
+/* ------------------------ */
+.markdown-section code {
+  background: #f5f5f5;
+  font-family: monospace;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--color-text);
+}
+
+/* ------------------------ */
+/* Sidebar settings */
+/* ------------------------ */
+.sidebar {
+  padding-top: 80px !important;
+  color: #34495E !important;
+}
+
+.sidebar .app-name {
+  display: none !important;
+}
+
+.sidebar ul,
+.sidebar li,
+.sidebar a {
+  color: #34495E !important;
+}
+
+/* ------------------------ */
+/* Custom Header */
+/* ------------------------ */
+.custom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  height: 64px;
+  background-color: white;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-left .logo {
+  height: 36px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header-center a {
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text);
+  text-decoration: none;
+  height: 36px;
+  display: flex;
+  align-items: center;
+}
+
+.header-center a:hover {
+  text-decoration: underline;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+/* -------- SEARCH NELL'HEADER -------- */
+
+/* wrapper che Docsify usava in sidebar */
+.header-right .search {
+  position: relative;
+  top: 9px;
+  border: none !important;
+  border-bottom: none !important;   /* niente riga sotto */
+  box-shadow: none !important;
+}
+
+/* niente pseudo–lineette */
+.header-right .search::before,
+.header-right .search::after {
+  content: none !important;
+  border: none !important;
+}
+
+/* input vero e proprio: stile “pillola” carino */
+.header-right .search input {
+  height: 40px;
+  padding: 0 16px;
+  min-width: 280px;
+  border-radius: 20px;
+  border: 1px solid var(--color-primary);
+  background: #ffffff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+/* focus con alone morbido, opzionale */
+.header-right .search input:focus {
+  box-shadow: 0 0 0 2px rgba(255, 59, 60, 0.18);
+}
+
+/* ------------------------ */
+/* SEARCH BAR */
+/* ------------------------ */
+
+/* === KILL LINEA SOTTO LA SEARCH NELL'HEADER === */
+
+/* Il wrapper creato da Docsify (era pensato per la sidebar) */
+.header-right .search {
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* Nel dubbio, togliamo anche eventuali pseudo-elementi decorativi */
+.header-right .search::before,
+.header-right .search::after {
+  content: none !important;
+  border: none !important;
+}
+
+/* Ci assicuriamo che l'unico bordo visibile sia quello rosso dell'input,
+   senza nessuna sottolineatura grigia extra. */
+.header-right .search input {
+  border: 1px solid var(--color-primary) !important;
+  border-bottom: 1px solid var(--color-primary) !important;
+  box-shadow: none !important;
+}
+/* === KILL LINEA SOTTO LA SEARCH NELL'HEADER === */
+
+/* Il wrapper creato da Docsify (era pensato per la sidebar) */
+.header-right .search {
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* Nel dubbio, togliamo anche eventuali pseudo-elementi decorativi */
+.header-right .search::before,
+.header-right .search::after {
+  content: none !important;
+  border: none !important;
+}
+
+/* Ci assicuriamo che l'unico bordo visibile sia quello rosso dell'input,
+   senza nessuna sottolineatura grigia extra. */
+.header-right .search input {
+  border: 1px solid var(--color-primary) !important;
+  border-bottom: 1px solid var(--color-primary) !important;
+  box-shadow: none !important;
+}
+
+/* ------------------------ */
+/* SEARCH RESULTS PANEL */
+/* ------------------------ */
+
+/* Base style for the dropdown (results panel) */
+.header-right .search .results-panel {
+  position: absolute;
+  top: 42px; /* just below the search input */
+  right: 0;
+  left: 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  max-height: 60vh;
+  overflow-y: auto;
+  z-index: 2000;
+
+  /* REMOVE the ugly line under search */
+  border-top: none !important;
+}
+
+/* Hide the panel completely when not active */
+.header-right .search .results-panel:not(.show) {
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Slight fade-in when showing */
+.header-right .search .results-panel.show {
+  opacity: 1;
+  transition: opacity 0.15s ease-out;
+}
+
+/* ------------------------ */
+/* RESULTS TEXT FIX */
+/* ------------------------ */
+
+/* Make results look consistent */
+.header-right .search .results-panel .matching-post {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.header-right .search .results-panel .matching-post:last-child {
+  border-bottom: none;
+}
+
+.header-right .search .results-panel .title {
+  color: #f54c4c;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.header-right .search .results-panel .brief {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+/* ------------------------ */
+/* Callout blocks */
+/* ------------------------ */
+.markdown-section blockquote {
+  border-left: 6px solid #FF3B3C;
+  padding: 1em;
+  border-radius: 4px;
+  margin: 1.5em 0;
+  background-color: rgba(255, 59, 60, 0.15);
+}
+
+.markdown-section blockquote p {
+  margin: 0;
+  font-weight: normal;
+}
+
+.markdown-section blockquote p strong:first-child {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+/* TIP */
+.markdown-section blockquote.callout-tip {
+  border-left-color: #2ecc71;
+  background-color: rgba(46, 204, 113, 0.15);
+}
+
+.markdown-section blockquote.callout-tip p strong:first-child {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+.markdown-section blockquote.callout-tip a {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+/* NOTE */
+.markdown-section blockquote.callout-note {
+  border-left-color: #6980ff;
+  background-color: rgba(105, 128, 255, 0.15);
+}
+.markdown-section blockquote.callout-note p strong:first-child {
+  color: #6980ff;
+  font-weight: bold;
+}
+
+.markdown-section blockquote.callout-note a {
+  color: #6980ff;
+  font-weight: bold;
+}
+
+/* IMPORTANT */
+.markdown-section blockquote.callout-important {
+  border-left-color: #f8e378 !important;
+  background-color: rgba(250, 226, 130, 0.30); /* giallo molto chiaro */
+}
+
+.markdown-section blockquote.callout-important p strong:first-child {
+  color: #f4c91c !important;
+  font-weight: bold;
+}
+
+.markdown-section blockquote.callout-important a {
+  color: #f4c91c !important;
+  font-weight: bold;
+}
+
+/* WARNING */
+.markdown-section blockquote.callout-warning {
+  border-left-color: #FF3B3C;
+  background-color: rgba(255, 59, 60, 0.15);
+}
+
+.markdown-section blockquote.callout-warning p strong:first-child {
+  color: #FF3B3C;
+  font-weight: bold;
+}
+
+.markdown-section blockquote.callout-warning a {
+  color: #FF3B3C;
+  font-weight: bold;
+}
+
+/* EXAMPLE */
+.markdown-section blockquote.callout-example {
+  border-left-color: #c4c4c4;
+  background-color: rgba(178, 174, 174, 0.15);
+}
+
+.markdown-section blockquote.callout-exampla p strong:first-child {
+  color: #c4c4c4;
+  font-weight: bold;
+}
+
+.markdown-section blockquote.callout-example a {
+  color: #c4c4c4;
+  font-weight: bold;
+}
+
+/* Italics color fix */
+.markdown-section em,
+.markdown-section i {
+  color: inherit;
+  font-style: italic;
+}
+
+/* Bullet color fix in callout blocks */
+.markdown-section blockquote ul li,
+.markdown-section blockquote ol li {
+  color: var(--color-text) !important;
+  opacity: 1 !important;
+}
+.markdown-section blockquote ul li::marker,
+.markdown-section blockquote ol li::marker {
+  color: var(--color-text) !important;
+  opacity: 1 !important;
+}
+
+
+/* === HEADINGS CLEANUP === */
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section h4 {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  color: inherit;
+}
+
+.markdown-section h1 > a,
+.markdown-section h2 > a,
+.markdown-section h3 > a,
+.markdown-section h4 > a {
+  text-decoration: none !important;
+  color: inherit !important;
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+.markdown-section h1 > a:hover,
+.markdown-section h2 > a:hover,
+.markdown-section h3 > a:hover,
+.markdown-section h4 > a:hover {
+  text-decoration: none !important;
+  color: inherit !important;
+  opacity: 1 !important;
+}
+
+/* === COPY INDICATOR === */
+.copy-indicator {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #FF3B3C !important;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  margin-left: 6px;
+  position: relative;
+  top: -3px;
+}
+
+.markdown-section h1:hover .copy-indicator,
+.markdown-section h2:hover .copy-indicator,
+.markdown-section h3:hover .copy-indicator,
+.markdown-section h4:hover .copy-indicator {
+  opacity: 1;
+}
+
+.copy-indicator[data-copied="true"] {
+  font-weight: 600;
+}
+
+/* === Logo hover cleanup === */
+.header-left a:hover,
+.header-left a img:hover {
+  filter: none !important;
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+/* === TABLES === */
+.markdown-section table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1.5em 0;
+  background-color: #fff;
+  table-layout: fixed;
+}
+
+.markdown-section thead,
+.markdown-section tbody {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.markdown-section th,
+.markdown-section td {
+  padding: 1em;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid #eee;
+  font-size: 0.95rem;
+  word-break: break-word;
+  background-color: #fff;
+}
+
+.markdown-section thead th {
+  background-color: #fff;
+  font-weight: 600;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown-section tbody td {
+  border-top: none;
+}
+
+.markdown-section thead tr:first-child th:first-child {
+  border-top-left-radius: 8px;
+}
+.markdown-section thead tr:first-child th:last-child {
+  border-top-right-radius: 8px;
+}
+.markdown-section tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+.markdown-section tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+/* === Background solo in homepage === */
+body.home-background {
+  position: relative;
+}
+
+body.home-background::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('media/bg_visual.jpeg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  opacity: 0.08;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* === HOMEPAGE: HERO + LAYOUT BASE (robusto con e senza chat aperta) === */
+
+.homepage-hero {
+  position: relative;
+  min-height: 220px;
+  aspect-ratio: 16 / 5;
+  max-height: min(40vh, 320px);
+  background-image: url('media/bg_visual.jpg');
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
+  margin: 0 auto 2em auto;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.homepage-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.9) 80%, #fff 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  padding: clamp(2rem, 8vw, 6rem) clamp(1rem, 4vw, 2em) clamp(2rem, 5vw, 4em) clamp(1rem, 4vw, 2em);
+  color: #34495E;
+  box-sizing: border-box;
+}
+
+.homepage-hero-overlay h1 {
+  font-size: clamp(1.35rem, 4vw, 2rem);
+  margin: 0 0 0.5em 0;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.homepage-hero-overlay p {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  margin: 0;
+  line-height: 1.5;
+  max-width: 56em;
+}
+
+/* Home: contenitore principale (titoli e schede centrati) */
+.home-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 32px);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.home-wrapper h1,
+.home-wrapper h2,
+.home-wrapper p,
+.home-wrapper ul {
+  text-align: center;
+}
+
+.setup-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin: 40px auto 60px;
+  padding: 0 clamp(16px, 4vw, 48px);
+  max-width: 100%;
+}
+
+/* Setup cards: icona in alto centrata, altezza dinamica col testo (come le altre card) */
+.setup-card {
+  width: 280px !important;
+  max-width: 280px !important;
+  min-width: 0;
+  height: auto !important;
+  min-height: 200px !important;
+  padding: 28px 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.setup-card img {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 16px auto;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.setup-card h3 {
+  margin: 0 0 12px 0;
+  text-align: center;
+}
+
+.setup-card p {
+  margin: 0;
+  text-align: center;
+  flex: 1;
+  min-height: 0;
+}
+
+@media (max-width: 768px) {
+  .setup-cards-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  .setup-card {
+    width: 100% !important;
+    max-width: 280px !important;
+    height: auto !important;
+    min-height: 180px;
+  }
+}
+
+.inline-toc {
+  margin-top: 0.25rem;   /* molto più vicino al titolo */
+  margin-bottom: 0.6rem; /* lascia spazio sotto verso il testo */
+  font-size: 0.85rem;
+  color: var(--color-text);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3em;
+}
+
+.inline-toc-label {
+  color: var(--color-text);
+  margin-right: 0.5em;
+  margin-bottom: auto;
+  /* text-transform: uppercase; */
+}
+
+.inline-toc a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: normal;
+}
+
+.inline-toc a:hover {
+  text-decoration: underline;
+}
+
+.pipe-separator {
+  color: var(--color-text);
+  opacity: 0.5;
+}
+
+[data-toc-depth] {
+  display: none;
+}
+
+/* === INTRO PAGES AND LANDING LOWER SECTION CARDS === */
+/* Contenitore centrale, come Mosaic */
+.ts-guides-section {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 40px 60px 40px; /* stessa aria SX/DX per titolo, testo e card */
+}
+
+/* Titolo + paragrafo allineati a sinistra, come Mosaic */
+.ts-guides-section h1 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  text-align: left;
+}
+
+.ts-guides-section > p {
+  margin-top: 0;
+  margin-bottom: 1.8em;
+  text-align: left;
+}
+
+/* Griglia in stile Mosaic: 3 card per riga, allineata a sinistra */
+.ts-guides-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: flex-start;   /* NON centrata, parte da sinistra */
+}
+
+/* Card: usiamo .card globale + aggiustiamo solo layout */
+.ts-guide-card {
+  border-radius: 8px !important;
+  width: calc(33.333% - 16px);
+  min-width: 260px;
+  max-width: 280px;
+  height: 140px;
+  padding: 18px 16px !important;
+
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;       /* testo allineato a sinistra come Mosaic */
+
+  text-align: left;
+}
+
+/* Testi dentro la card */
+.ts-guide-card h3 {
+  margin: 0 0 6px 0 !important;
+}
+
+.ts-guide-card p {
+  margin: 0 !important;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .ts-guides-section {
+    padding: 24px 20px 40px 20px;
+  }
+
+  .ts-guide-card {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* ------------------------ */
+/* Chatbot widget (iframe)   */
+/* ------------------------ */
+.chat-widget {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 9999;
+  font-family: var(--font-body);
+}
+
+/* Full height: from below header to above the toggle, with spacing from edges */
+.chat-widget-panel {
+  position: fixed;
+  top: 72px;
+  bottom: 96px;
+  right: 32px;
+  left: auto;
+  width: 380px;
+  max-width: calc(100vw - 80px);
+  height: auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.chat-widget-panel[aria-hidden="true"] {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+.chat-widget-panel[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.chat-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.chat-widget-toggle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(255, 59, 60, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.chat-widget-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 59, 60, 0.4);
+}
+
+.chat-widget-toggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 59, 60, 0.4);
+}
+
+.chat-widget-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* Main content adapts when chat is open: non deve andare sotto la chat (titolo sempre visibile) */
+body.chat-panel-open .content {
+  margin-right: 428px; /* 380px panel + 16px gap + 32px from viewport edge */
+  max-width: calc(100% - 428px); /* forza il contenuto a restringersi e non finire sotto la chat */
+  min-width: 0; /* permette al flex child di restringersi */
+  transition: margin-right 0.2s ease, max-width 0.2s ease;
+  overflow: visible; /* evita che titolo/hero vengano tagliati */
+  box-sizing: border-box;
+}
+
+/* === Chat open: stato ottimizzato === */
+body.chat-panel-open .markdown-section {
+  min-width: 0;
+  overflow: visible;
+}
+
+/* Hero e titolo home sempre visibili: altezza minima solida, niente collapse */
+body.chat-panel-open .homepage-hero {
+  min-height: 260px !important;
+  height: auto;
+  aspect-ratio: auto;
+  overflow: visible;
+}
+
+body.chat-panel-open .homepage-hero-overlay {
+  min-height: 220px;
+  padding: 2rem 1.5rem 2rem 1.5rem;
+}
+
+/* Schede centrate nella colonna ridotta */
+body.chat-panel-open .grid,
+body.chat-panel-open .ts-guides-grid {
+  justify-content: center !important;
+}
+
+/* Setup cards con chat aperta: stessa riga, altezza dinamica col testo */
+body.chat-panel-open .home-wrapper {
+  padding-right: 32px;
+}
+
+body.chat-panel-open .setup-cards-container {
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 24px;
+  margin-bottom: 40px;
+  padding-right: 24px; /* ulteriore spazio dalla chat */
+}
+
+body.chat-panel-open .setup-card {
+  width: 220px !important;
+  max-width: 220px !important;
+  height: auto !important;
+  min-height: 160px !important;
+  padding: 20px 14px !important;
+}
+
+/* Icona centrata, proporzioni ridotte; card si allunga col testo come il blocco successivo */
+body.chat-panel-open .setup-card img {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 12px auto;
+  display: block;
+  object-fit: contain;
+}
+
+body.chat-panel-open .setup-card h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+body.chat-panel-open .setup-card p {
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+/* Mobile: full-screen or bottom-sheet, input always visible */
+@media (max-width: 768px) {
+  .chat-widget-panel {
+    top: 64px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 16px 16px 0 0;
+  }
+
+  body.chat-panel-open .content {
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Alfred Co.Host Docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Alfred Co-Host documentation" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="media/alfred_favicon.png" />
+
+  <!-- Font: Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Docsify Theme -->
+  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="home-background">
+  <!-- Custom Header -->
+  <header class="custom-header">
+    <div class="header-left">
+      <a href="#/home.md">
+      <img src="media/alfred_logo.jpg" alt="Alfred Logo" class="logo" />
+      </a>
+    </div>
+    <div class="header-actions">
+      <div class="header-center">
+        <a href="#/get-started.md">Get started</a>
+        <a href="#/library_faqs.md">FAQ</a>
+        <a href="https://app.alfredco.host" target="_blank" rel="noopener noreferrer">Go to Platform</a>
+      </div>
+      <div class="header-right">
+        <div class="header-search-placeholder"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Docsify mount point -->
+  <div id="app" data-app></div>
+
+  <!-- Chatbot widget: button + panel with iframe -->
+  <div id="chat-widget" class="chat-widget">
+    <div class="chat-widget-panel" id="chat-widget-panel" aria-hidden="true">
+      <iframe
+        id="chat-iframe"
+        src="chatbot/index.html"
+        title="Alfred Docs Chat"
+        class="chat-iframe"
+      ></iframe>
+    </div>
+    <button
+      type="button"
+      class="chat-widget-toggle"
+      id="chat-widget-toggle"
+      aria-label="Open documentation chat"
+      aria-expanded="false"
+      aria-controls="chat-widget-panel"
+    >
+      <span class="chat-widget-icon" aria-hidden="true">💬</span>
+    </button>
+  </div>
+  <script>
+    (function () {
+      var STORAGE_KEY = 'alfred-docs-chat-open';
+      var toggle = document.getElementById('chat-widget-toggle');
+      var panel = document.getElementById('chat-widget-panel');
+
+      function getIsOpen() {
+        return panel && panel.getAttribute('aria-hidden') !== 'true';
+      }
+
+      function setPanelOpen(open) {
+        if (!panel || !toggle) return;
+        panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.classList.toggle('chat-panel-open', open);
+        try {
+          sessionStorage.setItem(STORAGE_KEY, open ? '1' : '0');
+        } catch (_) {}
+      }
+
+      function initChatWidget() {
+        if (!toggle || !panel) return;
+        var stored = false;
+        try {
+          stored = sessionStorage.getItem(STORAGE_KEY) === '1';
+        } catch (_) {}
+        setPanelOpen(stored);
+
+        toggle.addEventListener('click', function () {
+          setPanelOpen(!getIsOpen());
+        });
+      }
+
+      window.addEventListener('DOMContentLoaded', initChatWidget);
+      window.addEventListener('hashchange', function () {
+        if (getIsOpen()) setPanelOpen(true);
+      });
+
+      window.addEventListener('message', function (e) {
+        if (e.data && e.data.type === 'alfred-chat-minimize') {
+          setPanelOpen(false);
+        }
+      });
+    })();
+  </script>
+
+  <!-- Docsify Configuration -->
+  <script>
+  window.$docsify = {
+    name: 'Alfred Co.Host docs',
+    homepage: 'home.md',
+    loadSidebar: true,
+    subMaxLevel: 1,
+    themeColor: '#FF3B3C',
+
+    search: {
+      maxAge: 0,
+      placeholder: 'Search...',
+      noData: 'No results!',
+      depth: 2,
+
+      // 👇 IMPORTANTISSIMO: nuova cache separata
+      namespace: 'alfred-docs-v3',
+
+      // 🔒 WHITELIST SOLO pagine valide
+      paths: [
+        '/get-started',
+        '/concepts/properties_c',
+        '/concepts/libraries_c',
+        '/concepts/manage_subscriptions_c',
+        '/concepts/plans_billing_cycles_c',
+        '/concepts/property-identifiers_c',
+
+        '/procedures/properties_p',
+        '/procedures/libraries_p',
+        '/procedures/subscriptions_p',
+        '/procedures/change_payment_card_p',
+        '/procedures/plans_billing_cycles_p',
+        '/procedures/writing_tips',
+        '/procedures/test_assistant'
+      ]
+    }
+  };
+</script>
+
+  <!-- Docsify Core & Plugins -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+
+  <!-- Callout Styling Script -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      function styleCallouts() {
+        document.querySelectorAll('.markdown-section blockquote').forEach(block => {
+          const firstLine = block.querySelector('p strong');
+          if (!firstLine) return;
+          const label = firstLine.textContent.trim().toLowerCase();
+          block.classList.remove('callout-tip', 'callout-note', 'callout-warning', 'callout-important');
+          if (label === 'tip!' || label === 'tip') {
+            block.classList.add('callout-tip');
+          } else if (label === 'note!' || label === 'note') {
+            block.classList.add('callout-note');
+          } else if (label === 'warning!' || label === 'warning') {
+            block.classList.add('callout-warning');
+          } else if (label === 'important!' || label === 'important') {
+            block.classList.add('callout-important');
+          } else if (label === 'example!' || label === 'example') {
+            block.classList.add('callout-example');
+          }
+        });
+      }
+      window.addEventListener('hashchange', () => setTimeout(styleCallouts, 100));
+      setTimeout(styleCallouts, 500);
+    });
+  </script>
+
+  <!-- Custom Copy Link Script -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      function injectCopyLinks() {
+        const headings = document.querySelectorAll('.markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4');
+        headings.forEach(heading => {
+          const anchor = heading.querySelector('a');
+          if (!anchor || anchor.querySelector('.copy-indicator')) return;
+
+          const span = document.createElement('span');
+          span.className = 'copy-indicator';
+          span.textContent = 'Click to copy';
+
+          span.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const url = window.location.origin + window.location.pathname + anchor.getAttribute('href');
+            navigator.clipboard.writeText(url).then(() => {
+              span.textContent = 'Copied!';
+              span.setAttribute('data-copied', 'true');
+              setTimeout(() => {
+                span.textContent = 'Click to copy';
+                span.removeAttribute('data-copied');
+              }, 1500);
+            });
+          });
+
+          anchor.appendChild(span);
+        });
+      }
+
+      window.addEventListener('hashchange', () => setTimeout(injectCopyLinks, 200));
+      setTimeout(injectCopyLinks, 500);
+    });
+  </script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const maxDepth = 2; // cambialo in 3 se vuoi anche gli h3
+    const selector = ['h2', 'h3', 'h4'].slice(0, maxDepth - 1).map(t => `${t}[id]`).join(', ');
+
+    function createInlineTOC() {
+      const content = document.querySelector('.markdown-section');
+      if (!content || content.querySelector('.inline-toc')) return;
+
+      const headings = content.querySelectorAll(selector);
+      if (!headings.length) return;
+
+      const tocContainer = document.createElement('div');
+      tocContainer.className = 'inline-toc';
+
+      const label = document.createElement('span');
+      label.className = 'inline-toc-label';
+      label.textContent = 'On this page:';
+      tocContainer.appendChild(label);
+
+      headings.forEach((heading, index) => {
+        const anchor = heading.querySelector('a');
+        if (!anchor) return;
+
+        const cleanText = heading.textContent.replace('Click to copy', '').trim();
+        const link = document.createElement('a');
+        link.href = anchor.getAttribute('href');
+        link.textContent = cleanText;
+
+        tocContainer.appendChild(link);
+
+        if (index < headings.length - 1) {
+          const sep = document.createElement('span');
+          sep.className = 'pipe-separator';
+          sep.textContent = ' | ';
+          tocContainer.appendChild(sep);
+        }
+      });
+
+      const firstH1 = content.querySelector('h1');
+      if (firstH1) {
+        content.insertBefore(tocContainer, firstH1);
+      } else {
+        content.insertBefore(tocContainer, content.firstChild);
+      }
+    }
+
+    window.addEventListener('hashchange', () => setTimeout(createInlineTOC, 300));
+    setTimeout(createInlineTOC, 500);
+  });
+</script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const maxDepth = 2;
+      const selector = ['h2', 'h3', 'h4'].slice(0, maxDepth - 1).map(t => `${t}[id]`).join(', ');
+
+      function createInlineTOC() {
+        const content = document.querySelector('.markdown-section');
+        if (!content || content.querySelector('.inline-toc')) return;
+
+        const headings = content.querySelectorAll(selector);
+        if (!headings.length) return;
+
+        const tocContainer = document.createElement('div');
+        tocContainer.className = 'inline-toc';
+
+        const label = document.createElement('span');
+        label.className = 'inline-toc-label';
+        label.textContent = 'On this page:';
+        tocContainer.appendChild(label);
+
+        headings.forEach((heading, index) => {
+          const anchor = heading.querySelector('a');
+          if (!anchor) return;
+
+          const cleanText = heading.textContent.replace('Click to copy', '').trim();
+          const link = document.createElement('a');
+          link.href = anchor.getAttribute('href');
+          link.textContent = cleanText;
+
+          tocContainer.appendChild(link);
+
+          if (index < headings.length - 1) {
+            const sep = document.createElement('span');
+            sep.className = 'pipe-separator';
+            sep.textContent = ' | ';
+            tocContainer.appendChild(sep);
+          }
+        });
+
+        const firstH1 = content.querySelector('h1');
+        if (firstH1) {
+          content.insertBefore(tocContainer, firstH1);
+        } else {
+          content.insertBefore(tocContainer, content.firstChild);
+        }
+      }
+
+      window.addEventListener('hashchange', () => setTimeout(createInlineTOC, 300));
+      setTimeout(createInlineTOC, 500);
+    });
+  </script>
+
+  <!-- 👇 SOLO QUESTO script per la search -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      function moveDocsifySearch() {
+        const sidebarSearch = document.querySelector('.sidebar .search');
+        const placeholder = document.querySelector('.header-search-placeholder');
+
+        if (!sidebarSearch || !placeholder) return;
+
+        if (placeholder.contains(sidebarSearch)) return;
+
+        placeholder.appendChild(sidebarSearch);
+      }
+
+      setTimeout(moveDocsifySearch, 800);
+      window.addEventListener('hashchange', () => {
+        setTimeout(moveDocsifySearch, 300);
+      });
+    });
+  </script>
+
+</body>
+</html>
