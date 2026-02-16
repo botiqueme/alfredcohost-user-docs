@@ -7,7 +7,7 @@ Before going live, you can test how Alfred responds to guest questions using you
 To test how Alfred responds for a specific property:
 
 1. Go to **My Properties**.
-2. Click the <img src="../media/test-icon.png" alt="test icon" style="height: 1em; vertical-align: middle;"> icon next to the property you want to test.
+2. Click the <img src="../media/test-icon.png" alt="chat message icon" style="height: 1em; vertical-align: middle;"> icon next to the property you want to test.
 3. A test chat window opens where you can interact with a test version of Alfred.
 
 The test assistant uses the information saved in that property's library, so you'll see exactly how Alfred will respond to your guests.

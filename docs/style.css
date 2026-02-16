@@ -640,16 +640,18 @@ body.home-background::before {
   pointer-events: none;
 }
 
-/* === HOMEPAGE HERO CON BACKGROUND DECORATIVO === */
+/* === HOMEPAGE: HERO + LAYOUT BASE (robusto con e senza chat aperta) === */
 
 .homepage-hero {
   position: relative;
-  aspect-ratio: 16 / 5; /* ✅ altezza fluida basata sulla larghezza */
+  min-height: 220px;
+  aspect-ratio: 16 / 5;
+  max-height: min(40vh, 320px);
   background-image: url('media/bg_visual.jpg');
-  background-size: contain;         /* ✅ mostra tutta l'immagine */
-  background-position: top center;  /* ✅ centrata in alto */
+  background-size: contain;
+  background-position: top center;
   background-repeat: no-repeat;
-  margin: 0 auto 2em auto;          /* ✅ nessun margine sopra */
+  margin: 0 auto 2em auto;
   padding: 0;
   width: 100%;
   max-width: 100%;
@@ -660,27 +662,107 @@ body.home-background::before {
 .homepage-hero-overlay {
   position: absolute;
   inset: 0;
-  padding-top: 4em;
-  padding-bottom: 4em;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.9) 80%, #fff 100%); /* ✅ nuovo gradient sfumato */
+  background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.9) 80%, #fff 100%);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* ✅ allinea il testo verso il basso */
+  justify-content: flex-end;
   align-items: center;
   text-align: center;
-  padding:  18em 2em 6em 2e; /* ✅ più spazio sopra e sotto */
+  padding: clamp(2rem, 8vw, 6rem) clamp(1rem, 4vw, 2em) clamp(2rem, 5vw, 4em) clamp(1rem, 4vw, 2em);
   color: #34495E;
+  box-sizing: border-box;
 }
 
 .homepage-hero-overlay h1 {
-  font-size: 2rem;
-  margin-bottom: 0.5em;
+  font-size: clamp(1.35rem, 4vw, 2rem);
+  margin: 0 0 0.5em 0;
   color: var(--color-primary);
+  line-height: 1.2;
 }
 
 .homepage-hero-overlay p {
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
   margin: 0;
+  line-height: 1.5;
+  max-width: 56em;
+}
+
+/* Home: contenitore principale (titoli e schede centrati) */
+.home-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 32px);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.home-wrapper h1,
+.home-wrapper h2,
+.home-wrapper p,
+.home-wrapper ul {
+  text-align: center;
+}
+
+.setup-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin: 40px auto 60px;
+  padding: 0 clamp(16px, 4vw, 48px);
+  max-width: 100%;
+}
+
+/* Setup cards: icona in alto centrata, altezza dinamica col testo (come le altre card) */
+.setup-card {
+  width: 280px !important;
+  max-width: 280px !important;
+  min-width: 0;
+  height: auto !important;
+  min-height: 200px !important;
+  padding: 28px 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.setup-card img {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 16px auto;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.setup-card h3 {
+  margin: 0 0 12px 0;
+  text-align: center;
+}
+
+.setup-card p {
+  margin: 0;
+  text-align: center;
+  flex: 1;
+  min-height: 0;
+}
+
+@media (max-width: 768px) {
+  .setup-cards-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  .setup-card {
+    width: 100% !important;
+    max-width: 280px !important;
+    height: auto !important;
+    min-height: 180px;
+  }
 }
 
 .inline-toc {
@@ -785,5 +867,178 @@ body.home-background::before {
     width: 100%;
     max-width: 100%;
     height: auto;
+  }
+}
+
+/* ------------------------ */
+/* Chatbot widget (iframe)   */
+/* ------------------------ */
+.chat-widget {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 9999;
+  font-family: var(--font-body);
+}
+
+/* Full height: from below header to above the toggle, with spacing from edges */
+.chat-widget-panel {
+  position: fixed;
+  top: 72px;
+  bottom: 96px;
+  right: 32px;
+  left: auto;
+  width: 380px;
+  max-width: calc(100vw - 80px);
+  height: auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.chat-widget-panel[aria-hidden="true"] {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+.chat-widget-panel[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.chat-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.chat-widget-toggle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(255, 59, 60, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.chat-widget-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 59, 60, 0.4);
+}
+
+.chat-widget-toggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 59, 60, 0.4);
+}
+
+.chat-widget-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* Main content adapts when chat is open: non deve andare sotto la chat (titolo sempre visibile) */
+body.chat-panel-open .content {
+  margin-right: 428px; /* 380px panel + 16px gap + 32px from viewport edge */
+  max-width: calc(100% - 428px); /* forza il contenuto a restringersi e non finire sotto la chat */
+  min-width: 0; /* permette al flex child di restringersi */
+  transition: margin-right 0.2s ease, max-width 0.2s ease;
+  overflow: visible; /* evita che titolo/hero vengano tagliati */
+  box-sizing: border-box;
+}
+
+/* === Chat open: stato ottimizzato === */
+body.chat-panel-open .markdown-section {
+  min-width: 0;
+  overflow: visible;
+}
+
+/* Hero e titolo home sempre visibili: altezza minima solida, niente collapse */
+body.chat-panel-open .homepage-hero {
+  min-height: 260px !important;
+  height: auto;
+  aspect-ratio: auto;
+  overflow: visible;
+}
+
+body.chat-panel-open .homepage-hero-overlay {
+  min-height: 220px;
+  padding: 2rem 1.5rem 2rem 1.5rem;
+}
+
+/* Schede centrate nella colonna ridotta */
+body.chat-panel-open .grid,
+body.chat-panel-open .ts-guides-grid {
+  justify-content: center !important;
+}
+
+/* Setup cards con chat aperta: stessa riga, altezza dinamica col testo */
+body.chat-panel-open .home-wrapper {
+  padding-right: 32px;
+}
+
+body.chat-panel-open .setup-cards-container {
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 24px;
+  margin-bottom: 40px;
+  padding-right: 24px; /* ulteriore spazio dalla chat */
+}
+
+body.chat-panel-open .setup-card {
+  width: 220px !important;
+  max-width: 220px !important;
+  height: auto !important;
+  min-height: 160px !important;
+  padding: 20px 14px !important;
+}
+
+/* Icona centrata, proporzioni ridotte; card si allunga col testo come il blocco successivo */
+body.chat-panel-open .setup-card img {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 12px auto;
+  display: block;
+  object-fit: contain;
+}
+
+body.chat-panel-open .setup-card h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+body.chat-panel-open .setup-card p {
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+/* Mobile: full-screen or bottom-sheet, input always visible */
+@media (max-width: 768px) {
+  .chat-widget-panel {
+    top: 64px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 16px 16px 0 0;
+  }
+
+  body.chat-panel-open .content {
+    margin-right: 0;
   }
 }
