@@ -33,10 +33,6 @@
       justify-content: space-between;
       gap: 8px;
     }
-    /* Avatar: fallback "R" in a circle. To use an image instead: replace the div with
-       <img class="chat-header-avatar" src="media/robin-avatar.png" alt=""> and add
-       object-fit: cover; to this class (remove flex, font, color). Or keep the div
-       and set background-image + background-size: cover; here, and remove the "R" text. */
     .chat-header-avatar {
       width: 40px;
       height: 40px;
@@ -119,29 +115,32 @@
       border: 1px solid #eee;
       border-bottom-left-radius: 4px;
     }
+    .message .text {
+      display: block;
+      margin-bottom: 4px;
+    }
     .message .time {
       font-size: 0.7rem;
-      opacity: 0.8;
-      margin-top: 4px;
+      opacity: 0.7;
     }
     .typing-indicator {
       align-self: flex-start;
-      padding: 12px 16px;
       background: var(--color-bg-alt);
       border: 1px solid #eee;
+      padding: 10px 14px;
       border-radius: 12px;
       border-bottom-left-radius: 4px;
-      font-size: 0.85rem;
-      color: #888;
+      display: flex;
+      gap: 4px;
+      align-items: center;
     }
     .typing-indicator span {
-      display: inline-block;
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #bbb;
-      margin: 0 2px;
-      animation: typing-bounce 0.6s ease-in-out infinite;
+      background: var(--color-text);
+      opacity: 0.5;
+      animation: typing-bounce 1s infinite;
     }
     .typing-indicator span:nth-child(2) { animation-delay: 0.1s; }
     .typing-indicator span:nth-child(3) { animation-delay: 0.2s; }
@@ -162,53 +161,53 @@
     }
     .chat-input-row input {
       flex: 1;
-      padding: 10px 14px;
+      padding: 10px 12px;
       border: 1px solid #ddd;
-      border-radius: 20px;
+      border-radius: 8px;
       font-family: var(--font);
       font-size: 0.9rem;
+      color: var(--color-text);
       outline: none;
+      transition: border 0.15s ease;
     }
     .chat-input-row input:focus {
       border-color: var(--color-primary);
-      box-shadow: 0 0 0 2px rgba(255, 59, 60, 0.15);
     }
     .chat-input-row input:disabled {
-      opacity: 0.7;
+      background: var(--color-bg-alt);
       cursor: not-allowed;
     }
     .chat-input-row button {
-      padding: 10px 18px;
+      padding: 10px 16px;
       border: none;
-      border-radius: 20px;
+      border-radius: 8px;
       background: var(--color-primary);
       color: #fff;
       font-family: var(--font);
-      font-weight: 600;
       font-size: 0.9rem;
+      font-weight: 600;
       cursor: pointer;
-      flex-shrink: 0;
+      transition: opacity 0.15s ease;
     }
     .chat-input-row button:hover {
       opacity: 0.9;
     }
     .chat-input-row button:disabled {
-      opacity: 0.6;
+      background: #ccc;
       cursor: not-allowed;
     }
   </style>
 </head>
 <body>
   <header class="chat-header">
-    <!-- Avatar: optional image → use <img class="chat-header-avatar" src="media/robin-avatar.png" alt=""> (see .chat-header-avatar in CSS) -->
     <div class="chat-header-avatar" aria-hidden="true">R</div>
     <div class="chat-header-title">
       <h1>Robin</h1>
-      <p>AI assistant for Alfred Co.Host docs</p>
+      <p>Alfred Documentation Assistant</p>
     </div>
     <div class="chat-header-actions">
-      <button type="button" class="clear-btn" id="clearBtn" aria-label="Restart conversation">Restart</button>
-      <button type="button" class="minimize-btn" id="minimizeBtn" aria-label="Minimize chat">−</button>
+      <button id="clearBtn" title="Restart conversation">🔄</button>
+      <button class="minimize-btn" id="minimizeBtn" title="Minimize">−</button>
     </div>
   </header>
 
@@ -219,16 +218,22 @@
       <input
         type="text"
         id="messageInput"
-        placeholder="Ask about the docs..."
+        placeholder="Ask me anything about Alfred..."
         autocomplete="off"
       />
-      <button type="button" id="sendBtn" aria-label="Send">Send</button>
+      <button id="sendBtn">Send</button>
     </div>
   </div>
 
   <script>
     (function () {
-      var WELCOME = 'Hi! 👋 I\'m Robin, your AI assistant for Alfred Co.Host. I can help you with questions about the Platform. How can I help?';
+      'use strict';
+
+      // 🔥 CONFIGURAZIONE ENDPOINT
+      const API_ENDPOINT = 'https://chatbot.alfredco.host/api/v1/docs_chatbot';
+      const RESTART_ENDPOINT = 'https://chatbot.alfredco.host/api/v1/docs_chatbot_restart';
+      
+      var WELCOME = "Hi! 👋 I'm Robin, your AI assistant for Alfred Co.Host. I can help you with questions about the Platform. How can I help?";
 
       var messagesEl = document.getElementById('chatMessages');
       var inputEl = document.getElementById('messageInput');
@@ -236,7 +241,7 @@
       var clearBtn = document.getElementById('clearBtn');
       var minimizeBtn = document.getElementById('minimizeBtn');
 
-      var threadId = null;
+      var threadId = null; // 🔥 Thread ID salvato nella sessione locale
       var isLoading = false;
 
       function timeLabel() {
@@ -286,27 +291,86 @@
         messagesEl.scrollTop = messagesEl.scrollHeight;
       }
 
+      // 🔄 RESTART CONVERSATION
       function clearConversation() {
+        var currentThreadId = threadId;
+        
+        // 🔥 Reset locale immediato
         threadId = null;
         messagesEl.innerHTML = '';
         showWelcome();
         setLoading(false);
-        // When backend exists: call reset endpoint, then on next send request new thread_id
+        
+        // 📡 Notifica backend (opzionale, per logging e delete thread OpenAI)
+        if (currentThreadId) {
+          fetch(RESTART_ENDPOINT, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              thread_id: currentThreadId
+            })
+          })
+          .then(function(response) {
+            if (response.ok) {
+              console.log('✅ Conversation reset confirmed by backend');
+            }
+          })
+          .catch(function(error) {
+            console.warn('⚠️ Could not notify backend of reset:', error);
+          });
+        }
       }
 
+      // 💬 SEND MESSAGE
       function sendMessage() {
         var text = (inputEl.value || '').trim();
         if (!text || isLoading) return;
+        
         addMessage(text, true);
         inputEl.value = '';
-
         setLoading(true);
-        // Placeholder: simulate backend delay. Replace with real API call (send text + threadId, get response + optional new threadId).
-        setTimeout(function () {
+
+        // 🔥 CHIAMATA AL BACKEND
+        var payload = {
+          message: text
+        };
+        
+        // 🔥 Invia thread_id solo se esiste
+        if (threadId) {
+          payload.thread_id = threadId;
+        }
+
+        fetch(API_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        })
+        .then(function(response) {
+          if (!response.ok) {
+            throw new Error('Server error: ' + response.status);
+          }
+          return response.json();
+        })
+        .then(function(data) {
           setLoading(false);
-          addMessage('This is a placeholder reply. Connect your backend to get real answers. (thread_id: ' + (threadId || 'none') + ')', false);
-          if (!threadId) threadId = 'placeholder-thread-' + Date.now();
-        }, 800);
+          
+          if (data.status === 'success' && data.data) {
+            var botResponse = data.data.response;
+            threadId = data.data.thread_id; // 🔥 Salva/aggiorna thread_id
+            addMessage(botResponse, false);
+          } else {
+            addMessage('❌ Sorry, something went wrong. Please try again.', false);
+          }
+        })
+        .catch(function(error) {
+          console.error('Error:', error);
+          setLoading(false);
+          addMessage('❌ Connection error. Please check your internet connection and try again.', false);
+        });
       }
 
       function notifyParentMinimize() {
@@ -317,16 +381,20 @@
         } catch (_) {}
       }
 
+      // 🎯 EVENT LISTENERS
       sendBtn.addEventListener('click', sendMessage);
+      
       inputEl.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
           e.preventDefault();
           sendMessage();
         }
       });
+      
       clearBtn.addEventListener('click', clearConversation);
       minimizeBtn.addEventListener('click', notifyParentMinimize);
 
+      // 🚀 INIT
       showWelcome();
 
       try {
