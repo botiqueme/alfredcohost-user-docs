@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Robin – Alfred Docs</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     :root {
       --color-primary: #FF3B3C;
@@ -119,6 +120,18 @@
       display: block;
       margin-bottom: 4px;
     }
+    /* Markdown rendering in bot messages */
+    .message.bot .text p { margin: 0 0 0.6em 0; }
+    .message.bot .text p:last-child { margin-bottom: 0; }
+    .message.bot .text strong { font-weight: 700; }
+    .message.bot .text em { font-style: italic; }
+    .message.bot .text ul, .message.bot .text ol { margin: 0.4em 0; padding-left: 1.4em; }
+    .message.bot .text li { margin: 0.2em 0; }
+    .message.bot .text code { background: rgba(0,0,0,0.06); padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; }
+    .message.bot .text pre { margin: 0.5em 0; overflow-x: auto; }
+    .message.bot .text pre code { display: block; padding: 0.6em; }
+    .message.bot .text h1, .message.bot .text h2, .message.bot .text h3 { margin: 0.6em 0 0.3em 0; font-size: 1em; font-weight: 700; }
+    .message.bot .text h1:first-child, .message.bot .text h2:first-child, .message.bot .text h3:first-child { margin-top: 0; }
     .message .time {
       font-size: 0.7rem;
       opacity: 0.7;
@@ -203,10 +216,10 @@
     <div class="chat-header-avatar" aria-hidden="true">R</div>
     <div class="chat-header-title">
       <h1>Robin</h1>
-      <p>Alfred Documentation Assistant</p>
+      <p>AI support for Platform usage</p>
     </div>
     <div class="chat-header-actions">
-      <button id="clearBtn" title="Restart conversation">🔄</button>
+      <button id="clearBtn" title="Restart conversation">Restart</button>
       <button class="minimize-btn" id="minimizeBtn" title="Minimize">−</button>
     </div>
   </header>
@@ -229,10 +242,9 @@
     (function () {
       'use strict';
 
-      // 🔥 CONFIGURAZIONE ENDPOINT
       const API_ENDPOINT = 'https://chatbot.alfredco.host/api/v1/docs_chatbot';
       const RESTART_ENDPOINT = 'https://chatbot.alfredco.host/api/v1/docs_chatbot_restart';
-      
+
       var WELCOME = "Hi! 👋 I'm Robin, your AI assistant for Alfred Co.Host. I can help you with questions about the Platform. How can I help?";
 
       var messagesEl = document.getElementById('chatMessages');
@@ -241,7 +253,7 @@
       var clearBtn = document.getElementById('clearBtn');
       var minimizeBtn = document.getElementById('minimizeBtn');
 
-      var threadId = null; // 🔥 Thread ID salvato nella sessione locale
+      var threadId = null;
       var isLoading = false;
 
       function timeLabel() {
@@ -258,7 +270,37 @@
         var div = document.createElement('div');
         div.className = 'message ' + (isUser ? 'user' : 'bot');
         div.innerHTML = '<span class="text"></span><div class="time">' + timeLabel() + '</div>';
-        div.querySelector('.text').textContent = text;
+        var textEl = div.querySelector('.text');
+        if (isUser) {
+          textEl.textContent = text;
+        } else {
+          textEl.innerHTML = typeof marked !== 'undefined' ? marked.parse(text || '') : (text || '').replace(/</g, '&lt;');
+          textEl.querySelectorAll('a').forEach(function (a) {
+            var href = a.getAttribute('href');
+            if (!href) return;
+            try {
+              var url = new URL(a.href, window.location.href);
+              var docHash = '';
+              if (url.hash && url.hash.length > 1 && url.hash.startsWith('#/')) {
+                docHash = url.hash;
+              } else {
+                var path = url.pathname.replace(/^\//, '');
+                if (path && (path.indexOf('procedures/') === 0 || path.indexOf('concepts/') === 0 || path.indexOf('get-started') === 0 || path.indexOf('library_faqs') === 0 || path.indexOf('home') === 0 || path.indexOf('.md') !== -1)) {
+                  docHash = '#/' + path;
+                }
+              }
+              if (docHash) {
+                a.addEventListener('click', function (e) {
+                  e.preventDefault();
+                  window.parent.location.hash = docHash;
+                });
+              } else {
+                a.setAttribute('target', '_parent');
+              }
+              a.setAttribute('rel', 'noopener noreferrer');
+            } catch (err) {}
+          });
+        }
         messagesEl.appendChild(div);
         scrollToBottom();
       }
@@ -291,56 +333,29 @@
         messagesEl.scrollTop = messagesEl.scrollHeight;
       }
 
-      // 🔄 RESTART CONVERSATION
       function clearConversation() {
         var currentThreadId = threadId;
-        
-        // 🔥 Reset locale immediato
         threadId = null;
         messagesEl.innerHTML = '';
         showWelcome();
         setLoading(false);
-        
-        // 📡 Notifica backend (opzionale, per logging e delete thread OpenAI)
         if (currentThreadId) {
           fetch(RESTART_ENDPOINT, {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              thread_id: currentThreadId
-            })
-          })
-          .then(function(response) {
-            if (response.ok) {
-              console.log('✅ Conversation reset confirmed by backend');
-            }
-          })
-          .catch(function(error) {
-            console.warn('⚠️ Could not notify backend of reset:', error);
-          });
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ thread_id: currentThreadId })
+          }).catch(function () {});
         }
       }
 
-      // 💬 SEND MESSAGE
       function sendMessage() {
         var text = (inputEl.value || '').trim();
         if (!text || isLoading) return;
-        
         addMessage(text, true);
         inputEl.value = '';
         setLoading(true);
-
-        // 🔥 CHIAMATA AL BACKEND
-        var payload = {
-          message: text
-        };
-        
-        // 🔥 Invia thread_id solo se esiste
-        if (threadId) {
-          payload.thread_id = threadId;
-        }
+        var payload = { message: text };
+        if (threadId) payload.thread_id = threadId;
 
         fetch(API_ENDPOINT, {
           method: 'POST',
@@ -359,15 +374,13 @@
           setLoading(false);
           
           if (data.status === 'success' && data.data) {
-            var botResponse = data.data.response;
-            threadId = data.data.thread_id; // 🔥 Salva/aggiorna thread_id
-            addMessage(botResponse, false);
+            threadId = data.data.thread_id;
+            addMessage(data.data.response, false);
           } else {
             addMessage('❌ Sorry, something went wrong. Please try again.', false);
           }
         })
-        .catch(function(error) {
-          console.error('Error:', error);
+        .catch(function () {
           setLoading(false);
           addMessage('❌ Connection error. Please check your internet connection and try again.', false);
         });
@@ -381,20 +394,13 @@
         } catch (_) {}
       }
 
-      // 🎯 EVENT LISTENERS
       sendBtn.addEventListener('click', sendMessage);
-      
       inputEl.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          sendMessage();
-        }
+        if (e.key === 'Enter') { e.preventDefault(); sendMessage(); }
       });
-      
       clearBtn.addEventListener('click', clearConversation);
       minimizeBtn.addEventListener('click', notifyParentMinimize);
 
-      // 🚀 INIT
       showWelcome();
 
       try {
