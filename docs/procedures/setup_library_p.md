@@ -53,7 +53,7 @@ Alfred's platform is designed so you can start with the essentials and build fro
 
 Ready to set up your library? Here's how:
 
-1. Go to **My Properties** > <img src="../media/library-icon.png" alt="library icon" style="height: 1em; vertical-align: middle;"> on the property you want to configure
+1. Go to **My Properties** > <img src="../media/library-icon.png" alt="book icon" style="height: 1em; vertical-align: middle;"> on the property you want to configure
 2. Navigate the **Item Categories** and fill in the items that apply to your property
 
 For the **15-minute setup**, focus on these essential categories:

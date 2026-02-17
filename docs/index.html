@@ -42,6 +42,73 @@
   <!-- Docsify mount point -->
   <div id="app" data-app></div>
 
+  <!-- Chatbot widget: nostra UI (chatbot/index.html). Per provare l'iframe del backend usare src="https://chatbot.alfredco.host/api/v1/docs_chatbot_iframe" -->
+  <div id="chat-widget" class="chat-widget">
+    <div class="chat-widget-panel" id="chat-widget-panel" aria-hidden="true">
+      <iframe
+        id="chat-iframe"
+        src="chatbot/index.html"
+        title="Robin - Alfred Docs Assistant"
+        class="chat-iframe"
+      ></iframe>
+    </div>
+    <button
+      type="button"
+      class="chat-widget-toggle"
+      id="chat-widget-toggle"
+      aria-label="Open documentation chat"
+      aria-expanded="false"
+      aria-controls="chat-widget-panel"
+    >
+      <span class="chat-widget-icon" aria-hidden="true">💬</span>
+    </button>
+  </div>
+  <script>
+    (function () {
+      var STORAGE_KEY = 'alfred-docs-chat-open';
+      var toggle = document.getElementById('chat-widget-toggle');
+      var panel = document.getElementById('chat-widget-panel');
+
+      function getIsOpen() {
+        return panel && panel.getAttribute('aria-hidden') !== 'true';
+      }
+
+      function setPanelOpen(open) {
+        if (!panel || !toggle) return;
+        panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.classList.toggle('chat-panel-open', open);
+        try {
+          sessionStorage.setItem(STORAGE_KEY, open ? '1' : '0');
+        } catch (_) {}
+      }
+
+      function initChatWidget() {
+        if (!toggle || !panel) return;
+        var stored = false;
+        try {
+          stored = sessionStorage.getItem(STORAGE_KEY) === '1';
+        } catch (_) {}
+        setPanelOpen(stored);
+
+        toggle.addEventListener('click', function () {
+          setPanelOpen(!getIsOpen());
+        });
+      }
+
+      window.addEventListener('DOMContentLoaded', initChatWidget);
+      window.addEventListener('hashchange', function () {
+        if (getIsOpen()) setPanelOpen(true);
+      });
+
+      window.addEventListener('message', function (e) {
+        if (e.data && e.data.type === 'alfred-chat-minimize') {
+          setPanelOpen(false);
+        }
+      });
+    })();
+  </script>
+
   <!-- Docsify Configuration -->
   <script>
   window.$docsify = {
