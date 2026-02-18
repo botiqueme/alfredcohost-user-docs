@@ -221,6 +221,87 @@ a:hover, .sidebar a:hover {
   text-decoration: underline;
 }
 
+/* Language switcher dropdown in header */
+.lang-switcher {
+  position: relative;
+  margin-right: 16px;
+}
+.lang-switcher-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid rgba(52, 73, 94, 0.18);
+  border-radius: 20px;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text, #34495e);
+  transition: border-color 0.2s, background 0.2s;
+}
+.lang-switcher-toggle:hover {
+  border-color: var(--color-primary, #FF3B3C);
+  background: rgba(255, 59, 60, 0.04);
+}
+img.lang-flag {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.lang-switcher-toggle img.lang-flag {
+  width: 24px;
+  height: 24px;
+}
+.lang-switcher-dropdown a img.lang-flag {
+  margin-right: 8px;
+}
+.lang-switcher-arrow {
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+.lang-switcher-dropdown.open ~ .lang-switcher-toggle .lang-switcher-arrow,
+.lang-switcher-toggle[aria-expanded="true"] .lang-switcher-arrow {
+  transform: rotate(-90deg);
+}
+.lang-switcher-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 140px;
+  background: #fff;
+  border: 1px solid rgba(52, 73, 94, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  z-index: 1000;
+  padding: 4px 0;
+}
+.lang-switcher-dropdown.open {
+  display: block;
+}
+.lang-switcher-dropdown a {
+  display: block;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text, #34495e);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.lang-switcher-dropdown a:hover {
+  background: rgba(255, 59, 60, 0.06);
+  color: var(--color-primary, #FF3B3C);
+}
+.lang-switcher-dropdown a.active {
+  color: var(--color-primary, #FF3B3C);
+  font-weight: 700;
+}
+
 .header-right {
   display: flex;
   align-items: center;

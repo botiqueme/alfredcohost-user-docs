@@ -1,0 +1,7 @@
+# Docsify uses hash-based routing (#/en/page.md).
+# This SPA fallback ensures direct URL access returns index.html.
+# Static files (.md, .css, .js, images) are served first (force=false is default).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
