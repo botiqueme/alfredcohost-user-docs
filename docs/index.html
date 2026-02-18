@@ -114,7 +114,20 @@
   window.$docsify = {
     name: 'Alfred Co.Host docs',
     homepage: 'en/README.md',
+    loadNavbar: true,
     loadSidebar: true,
+    alias: {
+      '/en/(.*)': '/en/$1',
+      '/fr/(.*)': '/fr/$1',
+      '/it/(.*)': '/it/$1',
+      '/es/(.*)': '/es/$1',
+    },
+    nameLink: {
+      '/en/': '#/en/',
+      '/fr/': '#/fr/',
+      '/it/': '#/it/',
+      '/es/': '#/es/',
+    },
     subMaxLevel: 1,
     themeColor: '#FF3B3C',
 
