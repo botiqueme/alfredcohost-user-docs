@@ -289,11 +289,6 @@
         catch (_) { return 'en'; }
       }
 
-      function getCurrentPageUrl() {
-        try { return window.parent.location.hash || ''; }
-        catch (_) { return ''; }
-      }
-
       var lang = getPreferredLanguage();
       var t = i18n[lang] || i18n.en;
 
@@ -424,8 +419,6 @@
         t = i18n[lang] || i18n.en;
         var payload = {
           message: text
-          // preferred_language: lang,
-          // current_page_url: getCurrentPageUrl()
         };
         if (threadId) payload.thread_id = threadId;
 
