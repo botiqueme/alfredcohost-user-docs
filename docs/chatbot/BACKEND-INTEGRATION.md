@@ -1,186 +1,181 @@
 # Guida integrazione backend – Robin (chat docs)
 
-Documento per lo sviluppatore backend: cosa deve implementare e **dove** collegarsi nel frontend.
+Documento per lo sviluppatore backend: stato attuale dell'integrazione e cosa resta da fare.
 
 ---
 
 ## Contesto
 
-- **Frontend**: chat in iframe (`docs/chatbot/index.html`) aperta da un widget nella doc (bottone in basso a destra).
-- **Flusso**: l'utente apre la chat → vede il messaggio di benvenuto → invia messaggi → il backend risponde. Il frontend gestisce già UI, stato `thread_id`, loading, Restart e minimize.
-- **File da modificare**: un solo file lato frontend, **`docs/chatbot/index.html`**, nella sezione `<script>` in fondo alla pagina.
+- **Frontend**: chat in iframe (`docs/chatbot/index.html`) caricata da un widget nella documentazione Docsify (bottone 💬 in basso a destra).
+- **Flusso**: l'utente apre la chat → vede il messaggio di benvenuto (nella sua lingua) → invia messaggi → il backend risponde.
+- **Multi-lingua**: la documentazione supporta 4 lingue (`en`, `fr`, `it`, `es`). Il chatbot adatta la UI alla lingua scelta dall'utente e la comunica al backend ad ogni richiesta.
 
 ---
 
-## Endpoint richiesti
+## Endpoint attuali
 
-Il backend deve esporre **tre** endpoint (base URL da configurare nel frontend, es. variabile o config).
+Il frontend chiama **due** endpoint, già configurati e funzionanti:
 
-### 1. Crea thread (nuova conversazione)
+| Endpoint | URL |
+|----------|-----|
+| **Invia messaggio** | `POST https://chatbot.alfredco.host/api/v1/docs_chatbot` |
+| **Restart conversazione** | `POST https://chatbot.alfredco.host/api/v1/docs_chatbot_restart` |
 
-**Quando si chiama**: alla **prima** invio messaggio dell'utente (quando il frontend non ha ancora un `thread_id`), oppure dopo un "Restart" al primo messaggio successivo.
+### 1. Invia messaggio
 
-| | Dettaglio |
-|---|-----------|
-| **Metodo** | `POST` |
-| **URL suggerito** | `POST /api/chat/thread` (o simile) |
-| **Body** | Opzionale: `{}` o `{ "source": "docs" }` |
-| **Risposta attesa** | `{ "thread_id": "uuid-o-stringa-univoca" }` |
-| **Errori** | 4xx/5xx gestiti dal frontend come "errore generico" (messaggio + retry opzionale). |
+**Quando**: ogni volta che l'utente clicca "Send" / "Invia" / "Envoyer" / "Enviar".
 
-Il frontend salverà `thread_id` in memoria e lo userà per tutti i messaggi successivi fino a Restart.
+**Payload inviato dal frontend**:
 
----
-
-### 2. Invia messaggio e ricevi risposta
-
-**Quando si chiama**: ogni volta che l'utente clicca "Send" (o Invio), dopo aver eventualmente ottenuto un `thread_id` dal punto 1.
-
-| | Dettaglio |
-|---|-----------|
-| **Metodo** | `POST` |
-| **URL suggerito** | `POST /api/chat/message` (o simile) |
-| **Body** | `{ "thread_id": "<id>", "message": "<testo utente>" }` |
-| **Risposta attesa** | `{ "reply": "<testo risposta assistente>" }` |
-| **Errori** | 4xx/5xx: frontend può mostrare messaggio di errore e tenere il messaggio utente visibile (retry "later"). |
-
-Se il backend restituisce un nuovo `thread_id` (es. dopo reset lato server), il frontend può aggiornare la variabile `threadId` con il valore ricevuto (opzionale, da concordare).
-
----
-
-### 3. Reset thread (chiudi conversazione)
-
-**Quando si chiama**: quando l'utente clicca **"Restart"** nella chat.
-
-| | Dettaglio |
-|---|-----------|
-| **Metodo** | `POST` o `DELETE` |
-| **URL suggerito** | `POST /api/chat/thread/reset` oppure `DELETE /api/chat/thread/:thread_id` |
-| **Body / URL** | `{ "thread_id": "<id>" }` nel body, oppure `thread_id` nell'URL. |
-| **Risposta attesa** | 200 OK (body irrilevante, es. `{ "ok": true }`). |
-| **Errori** | 4xx/5xx: il frontend può comunque azzerare `thread_id` e messaggi in locale (conversazione resettata lato UI). |
-
-Dopo la chiamata (o in caso di errore), il frontend azzera `thread_id` e svuota i messaggi; al prossimo invio si richiederà un nuovo thread (endpoint 1).
-
----
-
-## Dove collegare il backend nel frontend
-
-**File**: `docs/chatbot/index.html`  
-**Sezione**: lo script in fondo alla pagina (circa righe 229–337).
-
-### 1. Base URL dell'API
-
-In cima allo script, aggiungere una variabile per l'URL base del backend (es. da sostituire in build o da configurare in un solo punto):
-
-```javascript
-var API_BASE = 'https://your-backend.example.com';  // TODO: configurare
-```
-
----
-
-### 2. Ottenere un nuovo `thread_id`
-
-**Dove**: la prima volta che l'utente invia un messaggio **senza** avere ancora `thread_id`, il frontend deve chiamare l'endpoint "crea thread" e poi usare l'id ricevuto per "invia messaggio".
-
-**Codice attuale da sostituire**: dentro `sendMessage()`, il blocco che oggi fa:
-
-- `setLoading(true)`
-- `setTimeout(...)` con risposta placeholder e `if (!threadId) threadId = 'placeholder-thread-' + Date.now();`
-- `setLoading(false)`
-
-**Cosa fare**:
-
-1. Se `threadId === null`, chiamare prima `POST /api/chat/thread`, leggere `thread_id` dalla risposta e assegnare `threadId = data.thread_id`.
-2. Poi chiamare `POST /api/chat/message` con `{ thread_id: threadId, message: text }`.
-3. In risposta: mostrare `data.reply` come messaggio del bot (e togliere la risposta placeholder).
-4. Gestire errori di rete o HTTP: `setLoading(false)`, eventualmente mostrare un messaggio tipo "Errore di connessione. Riprova." (dettagli in "Error handling" sotto).
-
-Pseudocodice da integrare nella `sendMessage()`:
-
-```javascript
-function ensureThread(callback) {
-  if (threadId) return callback();
-  fetch(API_BASE + '/api/chat/thread', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' })
-    .then(function (r) { return r.json(); })
-    .then(function (data) { threadId = data.thread_id; callback(); })
-    .catch(function () { callback(true); }); // true = errore
-}
-
-function sendMessage() {
-  // ... (validazione text, addMessage(text, true), inputEl.value = '', setLoading(true))
-  ensureThread(function (err) {
-    if (err) { setLoading(false); addMessage('Impossibile avviare la conversazione. Riprova.', false); return; }
-    fetch(API_BASE + '/api/chat/message', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ thread_id: threadId, message: text })
-    })
-      .then(function (r) { return r.json(); })
-      .then(function (data) { setLoading(false); addMessage(data.reply, false); })
-      .catch(function () { setLoading(false); addMessage('Errore di connessione. Riprova.', false); });
-  });
+```json
+{
+  "message": "come aggiungo una proprietà?",
+  "thread_id": "abc123",
+  "preferred_language": "it",
+  "current_page_url": "#/it/procedures/properties_p.md"
 }
 ```
 
-Adattare nomi endpoint e proprietà (`reply`, `thread_id`) a ciò che il backend espone realmente.
+| Campo | Tipo | Note |
+|-------|------|------|
+| `message` | string | Testo dell'utente. Sempre presente. |
+| `thread_id` | string \| null | ID conversazione restituito dal backend alla prima risposta. `null` al primo messaggio. |
+| `preferred_language` | string | Codice lingua scelto dall'utente: `en`, `fr`, `it`, `es`. **Nuovo campo.** |
+| `current_page_url` | string | Hash della pagina docs che l'utente sta visualizzando, es. `#/it/procedures/properties_p.md`. **Nuovo campo.** |
 
----
+**Risposta attesa dal backend**:
 
-### 3. Restart: chiamare l'endpoint di reset
-
-**Dove**: funzione `clearConversation()` (circa riga 289).
-
-**Codice attuale**: azzera `threadId`, svuota i messaggi, mostra di nuovo il welcome. C'è già un commento: "When backend exists: call reset endpoint".
-
-**Cosa fare**: prima di azzerare `threadId` e svuotare i messaggi, se `threadId` è valorizzato chiamare l'endpoint di reset (es. `POST /api/chat/thread/reset` con body `{ thread_id: threadId }`). Poi eseguire come oggi: `threadId = null`, svuotare la lista messaggi, `showWelcome()`, `setLoading(false)`. In caso di errore HTTP si può comunque procedere con il reset lato UI.
-
-Esempio:
-
-```javascript
-function clearConversation() {
-  if (threadId) {
-    fetch(API_BASE + '/api/chat/thread/reset', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ thread_id: threadId })
-    }).catch(function () {});
+```json
+{
+  "status": "success",
+  "data": {
+    "thread_id": "abc123",
+    "response": "Per aggiungere una proprietà, vai su..."
   }
-  threadId = null;
-  messagesEl.innerHTML = '';
-  showWelcome();
-  setLoading(false);
 }
+```
+
+**Nota su `preferred_language`**: attualmente l'AI del chatbot deduce già la lingua dal testo del messaggio utente. Il campo `preferred_language` serve come rinforzo esplicito, utile soprattutto:
+- Al primo messaggio, quando non c'è ancora contesto
+- Se l'utente scrive in una lingua diversa da quella dell'interfaccia
+- Per istruire il modello a rispondere sempre nella lingua della documentazione scelta
+
+**Nota su `current_page_url`**: permette al backend di contestualizzare la risposta. Se l'utente sta leggendo la pagina "Gestire le proprietà" e chiede "come faccio?", il backend può usare questa informazione per dare una risposta più pertinente.
+
+---
+
+### 2. Restart conversazione
+
+**Quando**: l'utente clicca "Restart" / "Riavvia" / "Redémarrer" / "Reiniciar".
+
+**Payload**:
+
+```json
+{
+  "thread_id": "abc123"
+}
+```
+
+**Risposta**: qualsiasi 200 OK. Il frontend azzera comunque `thread_id` e messaggi in locale.
+
+---
+
+## Cosa gestisce il frontend (già implementato)
+
+| Funzionalità | Stato |
+|---|---|
+| UI chat completa (messaggi, input, loading, typing indicator) | ✅ |
+| Gestione `thread_id` (salvataggio in memoria, reset) | ✅ |
+| Rendering Markdown nelle risposte (via `marked.js`) | ✅ |
+| Interfaccia tradotta in 4 lingue (welcome, placeholder, bottoni, errori) | ✅ |
+| Aggiornamento lingua in tempo reale (cambio lingua senza ricaricare) | ✅ |
+| Invio `preferred_language` e `current_page_url` nel payload | ✅ |
+| Apertura/chiusura panel, minimize, persistenza in `sessionStorage` | ✅ |
+
+---
+
+## Cosa deve fare il backend (TODO)
+
+### Priorità 1: Usare `preferred_language`
+
+Il campo è già inviato dal frontend. Il backend deve:
+1. Leggere `preferred_language` dal body della richiesta
+2. Usarlo nel prompt del modello AI (es. "Rispondi sempre in {preferred_language}")
+
+Se il backend non lo gestisce, non si rompe nulla: il campo viene semplicemente ignorato e l'AI continua a dedurre la lingua dal testo.
+
+### Priorità 2: Usare `current_page_url`
+
+Il campo è già inviato dal frontend. Il backend può:
+1. Estrarre il percorso del file .md dall'hash (es. `#/it/procedures/properties_p.md` → `procedures/properties_p`)
+2. Usarlo come contesto aggiuntivo nel prompt (es. "L'utente sta leggendo la pagina: Gestire le proprietà")
+
+### Priorità 3: Link nelle risposte (STANDBY)
+
+Attualmente il frontend ha un handler che tenta di convertire i link nelle risposte del bot in link navigabili nella documentazione. Questo handler è **pre-esistente** e **non è stato aggiornato** per il multi-lingua.
+
+**Stato attuale**: se il backend restituisce link come `/procedures/properties_p.md`, l'handler li converte in `#/procedures/properties_p.md` (senza prefisso lingua).
+
+**Da fare in futuro**: aggiornare l'handler per anteporre la lingua corretta ai link, oppure far restituire al backend link già con il prefisso lingua (es. `#/it/procedures/properties_p.md`). Vedere i commenti `TODO: LINK LANGUAGE PREFIX` nel codice di `chatbot/index.html`.
+
+---
+
+## CORS
+
+Le chiamate dal frontend al backend sono **cross-origin** (il sito docs è su Netlify, il backend su `chatbot.alfredco.host`). Il backend deve rispondere con gli header CORS appropriati:
+
+```
+Access-Control-Allow-Origin: <origine del sito docs>
+Access-Control-Allow-Methods: POST, OPTIONS
+Access-Control-Allow-Headers: Content-Type
 ```
 
 ---
 
-## Riepilogo punti di intervento
+## Architettura lingua
 
-| Cosa | File | Dove |
-|------|------|------|
-| Base URL API | `docs/chatbot/index.html` | In cima allo script (variabile `API_BASE` o simile). |
-| Crea thread | `docs/chatbot/index.html` | In `sendMessage()`: prima di inviare il primo messaggio, se `threadId === null` → chiamare endpoint crea thread e salvare `thread_id`. |
-| Invia messaggio + mostra risposta | `docs/chatbot/index.html` | In `sendMessage()`: sostituire il `setTimeout` placeholder con la chiamata a "invia messaggio", poi mostrare `reply` e fare `setLoading(false)`. |
-| Reset thread | `docs/chatbot/index.html` | In `clearConversation()`: se c'è `threadId`, chiamare endpoint reset; poi azzerare `threadId` e messaggi come già fatto. |
+```
+┌─────────────────────────────────────┐
+│  Docsify (index.html)               │
+│                                     │
+│  localStorage: preferredLanguage=it │
+│                                     │
+│  ┌───────────────────────────────┐  │
+│  │  chatbot/index.html (iframe)  │  │
+│  │                               │  │
+│  │  1. Legge lingua dal parent   │  │
+│  │     localStorage              │  │
+│  │  2. Traduce UI (i18n)        │  │
+│  │  3. Invia preferred_language  │  │
+│  │     nel payload API           │  │
+│  │  4. Ascolta postMessage per   │  │
+│  │     aggiornamenti lingua      │  │
+│  └───────────────────────────────┘  │
+│                                     │
+│  Quando il panel si apre, il parent │
+│  invia postMessage con la lingua    │
+│  corrente → il chatbot si aggiorna  │
+└─────────────────────────────────────┘
+         │
+         ▼ POST /api/v1/docs_chatbot
+┌─────────────────────────────────────┐
+│  Backend (chatbot.alfredco.host)    │
+│                                     │
+│  Riceve: message, thread_id,        │
+│          preferred_language,         │
+│          current_page_url            │
+│                                     │
+│  TODO: usare preferred_language e   │
+│        current_page_url nel prompt  │
+└─────────────────────────────────────┘
+```
 
 ---
 
-## CORS e ambiente
+## File di riferimento
 
-- La chat viene servita dal sito delle doc (stesso dominio o sotto un path tipo `.../docs/`). Le chiamate al backend saranno **cross-origin** se il backend è su altro dominio.
-- Il backend deve rispondere con **CORS** adeguati (es. `Access-Control-Allow-Origin` per l'origine del sito doc, o un pattern concordato) alle richieste `POST` (e eventualmente `OPTIONS`) verso gli endpoint sopra.
-- Per sviluppo locale: configurare `API_BASE` con l'URL del backend locale (es. `http://localhost:8080`) e assicurarsi che il backend accetti l'origine del frontend (es. `http://localhost:3000`).
-
----
-
-## Messaggio di benvenuto
-
-Il testo di benvenuto è **solo lato frontend** (variabile `WELCOME` nello script). Il backend non deve fornirlo; può eventualmente sovrascriverlo in una versione futura se si passa a "welcome dal backend" dopo la creazione del thread.
-
----
-
-## Riferimenti
-
-- **Spec frontend e stato attuale**: `docs/chatbot/SPEC-RECAP.md`
-- **UI e flusso**: il frontend gestisce già persistenza apertura/chiusura, minimize, Restart (UI), loading e typing; il backend deve solo fornire i tre endpoint e il frontend deve sostituire i placeholder con le chiamate reali come sopra.
+| File | Cosa contiene |
+|------|---------------|
+| `docs/chatbot/index.html` | Frontend completo del chatbot (UI + logica + i18n) |
+| `docs/index.html` | Pagina Docsify principale (widget chatbot + language switcher) |
+| `docs/chatbot/BACKEND-INTEGRATION.md` | Questo documento |

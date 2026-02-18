@@ -245,13 +245,68 @@
       const API_ENDPOINT = 'https://chatbot.alfredco.host/api/v1/docs_chatbot';
       const RESTART_ENDPOINT = 'https://chatbot.alfredco.host/api/v1/docs_chatbot_restart';
 
-      var WELCOME = "Hi! 👋 I'm Robin, your AI assistant for Alfred Co.Host. I can help you with questions about the Platform. How can I help?";
+      var i18n = {
+        en: {
+          welcome: "Hi! 👋 I'm Robin, your AI assistant for Alfred Co.Host. I can help you with questions about the Platform. How can I help?",
+          subtitle: 'AI support for Platform usage',
+          placeholder: 'Ask me anything about Alfred...',
+          send: 'Send',
+          restart: 'Restart',
+          errorServer: '❌ Sorry, something went wrong. Please try again.',
+          errorNetwork: '❌ Connection error. Please check your internet connection and try again.'
+        },
+        fr: {
+          welcome: "Bonjour ! 👋 Je suis Robin, votre assistant IA pour Alfred Co.Host. Je peux vous aider avec vos questions sur la Plateforme. Comment puis-je vous aider ?",
+          subtitle: 'Assistant IA pour la Plateforme',
+          placeholder: 'Posez-moi une question sur Alfred...',
+          send: 'Envoyer',
+          restart: 'Redémarrer',
+          errorServer: '❌ Désolé, une erreur est survenue. Veuillez réessayer.',
+          errorNetwork: '❌ Erreur de connexion. Vérifiez votre connexion internet et réessayez.'
+        },
+        it: {
+          welcome: "Ciao! 👋 Sono Robin, il tuo assistente IA per Alfred Co.Host. Posso aiutarti con domande sulla Piattaforma. Come posso aiutarti?",
+          subtitle: 'Assistente IA per la Piattaforma',
+          placeholder: 'Chiedimi qualcosa su Alfred...',
+          send: 'Invia',
+          restart: 'Riavvia',
+          errorServer: '❌ Si è verificato un errore. Riprova.',
+          errorNetwork: '❌ Errore di connessione. Controlla la tua connessione internet e riprova.'
+        },
+        es: {
+          welcome: "¡Hola! 👋 Soy Robin, tu asistente IA para Alfred Co.Host. Puedo ayudarte con preguntas sobre la Plataforma. ¿En qué puedo ayudarte?",
+          subtitle: 'Asistente IA para la Plataforma',
+          placeholder: 'Pregúntame sobre Alfred...',
+          send: 'Enviar',
+          restart: 'Reiniciar',
+          errorServer: '❌ Lo siento, algo salió mal. Inténtalo de nuevo.',
+          errorNetwork: '❌ Error de conexión. Revisa tu conexión a internet e inténtalo de nuevo.'
+        }
+      };
+
+      function getPreferredLanguage() {
+        try { return window.parent.localStorage.getItem('preferredLanguage') || 'en'; }
+        catch (_) { return 'en'; }
+      }
+
+      function getCurrentPageUrl() {
+        try { return window.parent.location.hash || ''; }
+        catch (_) { return ''; }
+      }
+
+      var lang = getPreferredLanguage();
+      var t = i18n[lang] || i18n.en;
 
       var messagesEl = document.getElementById('chatMessages');
       var inputEl = document.getElementById('messageInput');
       var sendBtn = document.getElementById('sendBtn');
       var clearBtn = document.getElementById('clearBtn');
       var minimizeBtn = document.getElementById('minimizeBtn');
+
+      inputEl.placeholder = t.placeholder;
+      sendBtn.textContent = t.send;
+      clearBtn.textContent = t.restart;
+      document.querySelector('.chat-header p').textContent = t.subtitle;
 
       var threadId = null;
       var isLoading = false;
@@ -263,7 +318,7 @@
       function showWelcome() {
         var hasMessages = messagesEl.querySelectorAll('.message').length > 0;
         if (hasMessages) return;
-        addMessage(WELCOME, false);
+        addMessage(t.welcome, false);
       }
 
       function addMessage(text, isUser) {
@@ -275,6 +330,12 @@
           textEl.textContent = text;
         } else {
           textEl.innerHTML = typeof marked !== 'undefined' ? marked.parse(text || '') : (text || '').replace(/</g, '&lt;');
+          // TODO: LINK LANGUAGE PREFIX
+          // This handler converts links in bot responses to navigable doc links.
+          // It does NOT yet add the language prefix (e.g. /it/, /fr/) to the hash.
+          // Future improvement: prepend '/' + lang + '/' to docHash so links
+          // navigate to the correct language version of the page.
+          // See BACKEND-INTEGRATION.md "Priorità 3: Link nelle risposte" for details.
           textEl.querySelectorAll('a').forEach(function (a) {
             var href = a.getAttribute('href');
             if (!href) return;
@@ -336,6 +397,12 @@
       function clearConversation() {
         var currentThreadId = threadId;
         threadId = null;
+        lang = getPreferredLanguage();
+        t = i18n[lang] || i18n.en;
+        inputEl.placeholder = t.placeholder;
+        sendBtn.textContent = t.send;
+        clearBtn.textContent = t.restart;
+        document.querySelector('.chat-header p').textContent = t.subtitle;
         messagesEl.innerHTML = '';
         showWelcome();
         setLoading(false);
@@ -354,7 +421,13 @@
         addMessage(text, true);
         inputEl.value = '';
         setLoading(true);
-        var payload = { message: text };
+        lang = getPreferredLanguage();
+        t = i18n[lang] || i18n.en;
+        var payload = {
+          message: text,
+          preferred_language: lang,
+          current_page_url: getCurrentPageUrl()
+        };
         if (threadId) payload.thread_id = threadId;
 
         fetch(API_ENDPOINT, {
@@ -377,12 +450,12 @@
             threadId = data.data.thread_id;
             addMessage(data.data.response, false);
           } else {
-            addMessage('❌ Sorry, something went wrong. Please try again.', false);
+            addMessage(t.errorServer, false);
           }
         })
         .catch(function () {
           setLoading(false);
-          addMessage('❌ Connection error. Please check your internet connection and try again.', false);
+          addMessage(t.errorNetwork, false);
         });
       }
 
@@ -393,6 +466,27 @@
           }
         } catch (_) {}
       }
+
+      function applyLanguage(newLang) {
+        if (!i18n[newLang] || newLang === lang) return;
+        lang = newLang;
+        t = i18n[lang];
+        inputEl.placeholder = t.placeholder;
+        sendBtn.textContent = t.send;
+        clearBtn.textContent = t.restart;
+        document.querySelector('.chat-header p').textContent = t.subtitle;
+        var hasUserMessages = messagesEl.querySelector('.message.user');
+        if (!hasUserMessages) {
+          messagesEl.innerHTML = '';
+          showWelcome();
+        }
+      }
+
+      window.addEventListener('message', function (e) {
+        if (e.data && e.data.type === 'alfred-lang-update' && e.data.lang) {
+          applyLanguage(e.data.lang);
+        }
+      });
 
       sendBtn.addEventListener('click', sendMessage);
       inputEl.addEventListener('keydown', function (e) {

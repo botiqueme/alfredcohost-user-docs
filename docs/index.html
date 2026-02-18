@@ -93,6 +93,13 @@
         try {
           sessionStorage.setItem(STORAGE_KEY, open ? '1' : '0');
         } catch (_) {}
+        if (open) {
+          var iframe = document.getElementById('chat-iframe');
+          if (iframe && iframe.contentWindow) {
+            var lang = localStorage.getItem('preferredLanguage') || 'en';
+            iframe.contentWindow.postMessage({ type: 'alfred-lang-update', lang: lang }, '*');
+          }
+        }
       }
 
       function initChatWidget() {
