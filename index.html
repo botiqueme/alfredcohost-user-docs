@@ -23,18 +23,30 @@
   <!-- Custom Header -->
   <header class="custom-header">
     <div class="header-left">
-      <a href="#/home.md">
+      <a href="#/en/">
       <img src="media/alfred_logo.jpg" alt="Alfred Logo" class="logo" />
       </a>
     </div>
     <div class="header-actions">
       <div class="header-center">
-        <a href="#/get-started.md">Get started</a>
-        <a href="#/library_faqs.md">FAQ</a>
+        <a href="#/en/get-started.md">Get started</a>
+        <a href="#/en/library_faqs.md">FAQ</a>
         <a href="https://app.alfredco.host" target="_blank" rel="noopener noreferrer">Go to Platform</a>
       </div>
       <div class="header-right">
         <div class="header-search-placeholder"></div>
+        <div class="lang-switcher" aria-label="Language">
+          <button class="lang-switcher-toggle" id="lang-toggle" aria-expanded="false" aria-haspopup="true">
+            <span class="lang-switcher-arrow">‹</span>
+            <img class="lang-flag" id="lang-current-flag" src="https://hatscripts.github.io/circle-flags/flags/gb.svg" alt="" />
+          </button>
+          <div class="lang-switcher-dropdown" id="lang-dropdown">
+            <a href="#/en/" data-lang="en" class="active"><img class="lang-flag" src="https://hatscripts.github.io/circle-flags/flags/gb.svg" alt="" /> English</a>
+            <a href="#/fr/" data-lang="fr"><img class="lang-flag" src="https://hatscripts.github.io/circle-flags/flags/fr.svg" alt="" /> Français</a>
+            <a href="#/it/" data-lang="it"><img class="lang-flag" src="https://hatscripts.github.io/circle-flags/flags/it.svg" alt="" /> Italiano</a>
+            <a href="#/es/" data-lang="es"><img class="lang-flag" src="https://hatscripts.github.io/circle-flags/flags/es.svg" alt="" /> Español</a>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -81,6 +93,13 @@
         try {
           sessionStorage.setItem(STORAGE_KEY, open ? '1' : '0');
         } catch (_) {}
+        if (open) {
+          var iframe = document.getElementById('chat-iframe');
+          if (iframe && iframe.contentWindow) {
+            var lang = localStorage.getItem('preferredLanguage') || 'en';
+            iframe.contentWindow.postMessage({ type: 'alfred-lang-update', lang: lang }, '*');
+          }
+        }
       }
 
       function initChatWidget() {
@@ -109,12 +128,126 @@
     })();
   </script>
 
+  <!-- Language detection + localStorage (SCOPE 5) -->
+  <script>
+  (function() {
+    const supportedLangs = ['en', 'fr', 'it', 'es'];
+    const defaultLang = 'en';
+
+    var path = window.location.hash || window.location.pathname;
+    var matchedInPath = supportedLangs.find(function(l) { return path.indexOf('/' + l + '/') !== -1 || path.endsWith('/' + l); });
+    if (matchedInPath) {
+      localStorage.setItem('preferredLanguage', matchedInPath);
+      return;
+    }
+
+    var saved = localStorage.getItem('preferredLanguage');
+    if (saved && supportedLangs.indexOf(saved) !== -1) {
+      window.location.hash = '/' + saved + '/';
+      return;
+    }
+
+    var browserLang = (navigator.language || navigator.userLanguage || '').slice(0, 2).toLowerCase();
+    var detected = supportedLangs.indexOf(browserLang) !== -1 ? browserLang : defaultLang;
+    localStorage.setItem('preferredLanguage', detected);
+    window.location.hash = '/' + detected + '/';
+  })();
+  </script>
+
+  <!-- Client-side link language rewriting (SCOPE 6) -->
+  <script>
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a');
+    if (!link) return;
+
+    if (link.closest('.lang-switcher')) return;
+
+    var href = link.getAttribute('href');
+    if (!href || href.indexOf('/en/') === -1) return;
+
+    var lang = localStorage.getItem('preferredLanguage') || 'en';
+    if (lang === 'en') return;
+
+    e.preventDefault();
+    var newHref = href.replace('/en/', '/' + lang + '/');
+    window.location.href = newHref;
+  });
+  </script>
+
+  <!-- Language switcher dropdown (SCOPE 3) -->
+  <script>
+  (function() {
+    var flagCodes = { en: 'gb', fr: 'fr', it: 'it', es: 'es' };
+    var supported = ['en', 'fr', 'it', 'es'];
+    var toggle = document.getElementById('lang-toggle');
+    var dropdown = document.getElementById('lang-dropdown');
+    var currentFlag = document.getElementById('lang-current-flag');
+    var flagBase = 'https://hatscripts.github.io/circle-flags/flags/';
+
+    function currentLang() {
+      var hash = window.location.hash || '';
+      var m = hash.match(/#\/(\w{2})\//);
+      return (m && supported.indexOf(m[1]) !== -1) ? m[1] : (localStorage.getItem('preferredLanguage') || 'en');
+    }
+
+    function refresh() {
+      var lang = currentLang();
+      currentFlag.src = flagBase + (flagCodes[lang] || 'gb') + '.svg';
+      var links = dropdown.querySelectorAll('a');
+      for (var i = 0; i < links.length; i++) {
+        links[i].classList.toggle('active', links[i].getAttribute('data-lang') === lang);
+      }
+    }
+
+    toggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var open = dropdown.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', function() {
+      dropdown.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+
+    dropdown.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a || !a.dataset.lang) return;
+      e.preventDefault();
+      var newLang = a.dataset.lang;
+      localStorage.setItem('preferredLanguage', newLang);
+      dropdown.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+
+      var hash = window.location.hash || '';
+      var swapped = hash.replace(/#\/(\w{2})\//, '#/' + newLang + '/');
+      if (swapped === hash && hash.indexOf('#/' + newLang + '/') === -1) {
+        swapped = '#/' + newLang + '/';
+      }
+      window.location.hash = swapped.replace('#', '');
+    });
+
+    refresh();
+    window.addEventListener('hashchange', refresh);
+  })();
+  </script>
+
   <!-- Docsify Configuration -->
   <script>
   window.$docsify = {
     name: 'Alfred Co.Host docs',
-    homepage: 'home.md',
+    homepage: 'en/README.md',
+    loadNavbar: false,
     loadSidebar: true,
+    alias: {
+      '/(en|fr|it|es)/.*/_sidebar.md': '/$1/_sidebar.md',
+    },
+    nameLink: {
+      '/en/': '#/en/',
+      '/fr/': '#/fr/',
+      '/it/': '#/it/',
+      '/es/': '#/es/',
+    },
     subMaxLevel: 1,
     themeColor: '#FF3B3C',
 
@@ -125,25 +258,88 @@
       depth: 2,
 
       // 👇 IMPORTANTISSIMO: nuova cache separata
-      namespace: 'alfred-docs-v3',
+      namespace: 'alfred-docs-v4-multilang',
 
-      // 🔒 WHITELIST SOLO pagine valide
       paths: [
-        '/get-started',
-        '/concepts/properties_c',
-        '/concepts/libraries_c',
-        '/concepts/manage_subscriptions_c',
-        '/concepts/plans_billing_cycles_c',
-        '/concepts/property-identifiers_c',
+        '/en/get-started',
+        '/en/library_faqs',
+        '/en/concepts/properties_c',
+        '/en/concepts/libraries_c',
+        '/en/concepts/plans_billing_cycles_c',
+        '/en/concepts/property-identifiers_c',
+        '/en/concepts/what-alfred-can-do_c',
+        '/en/concepts/hands_off_c',
+        '/en/procedures/properties_p',
+        '/en/procedures/libraries_p',
+        '/en/procedures/subscriptions_p',
+        '/en/procedures/change_payment_card_p',
+        '/en/procedures/setup_library_p',
+        '/en/procedures/writing_tips',
+        '/en/procedures/writing_policies',
+        '/en/procedures/writing_custom_items',
+        '/en/procedures/test_assistant',
 
-        '/procedures/properties_p',
-        '/procedures/libraries_p',
-        '/procedures/subscriptions_p',
-        '/procedures/change_payment_card_p',
-        '/procedures/plans_billing_cycles_p',
-        '/procedures/writing_tips',
-        '/procedures/test_assistant'
+        '/fr/get-started',
+        '/fr/library_faqs',
+        '/fr/concepts/properties_c',
+        '/fr/concepts/libraries_c',
+        '/fr/concepts/plans_billing_cycles_c',
+        '/fr/concepts/property-identifiers_c',
+        '/fr/concepts/what-alfred-can-do_c',
+        '/fr/concepts/hands_off_c',
+        '/fr/procedures/properties_p',
+        '/fr/procedures/libraries_p',
+        '/fr/procedures/subscriptions_p',
+        '/fr/procedures/change_payment_card_p',
+        '/fr/procedures/setup_library_p',
+        '/fr/procedures/writing_tips',
+        '/fr/procedures/writing_policies',
+        '/fr/procedures/writing_custom_items',
+        '/fr/procedures/test_assistant',
+
+        '/it/get-started',
+        '/it/library_faqs',
+        '/it/concepts/properties_c',
+        '/it/concepts/libraries_c',
+        '/it/concepts/plans_billing_cycles_c',
+        '/it/concepts/property-identifiers_c',
+        '/it/concepts/what-alfred-can-do_c',
+        '/it/concepts/hands_off_c',
+        '/it/procedures/properties_p',
+        '/it/procedures/libraries_p',
+        '/it/procedures/subscriptions_p',
+        '/it/procedures/change_payment_card_p',
+        '/it/procedures/setup_library_p',
+        '/it/procedures/writing_tips',
+        '/it/procedures/writing_policies',
+        '/it/procedures/writing_custom_items',
+        '/it/procedures/test_assistant',
+
+        '/es/get-started',
+        '/es/library_faqs',
+        '/es/concepts/properties_c',
+        '/es/concepts/libraries_c',
+        '/es/concepts/plans_billing_cycles_c',
+        '/es/concepts/property-identifiers_c',
+        '/es/concepts/what-alfred-can-do_c',
+        '/es/concepts/hands_off_c',
+        '/es/procedures/properties_p',
+        '/es/procedures/libraries_p',
+        '/es/procedures/subscriptions_p',
+        '/es/procedures/change_payment_card_p',
+        '/es/procedures/setup_library_p',
+        '/es/procedures/writing_tips',
+        '/es/procedures/writing_policies',
+        '/es/procedures/writing_custom_items',
+        '/es/procedures/test_assistant'
       ]
+    },
+
+    glossary: {
+      en: '/en/_glossary.md',
+      fr: '/fr/_glossary.md',
+      it: '/it/_glossary.md',
+      es: '/es/_glossary.md',
     }
   };
 </script>
@@ -151,6 +347,7 @@
   <!-- Docsify Core & Plugins -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-glossary/dist/docsify-glossary.min.js"></script>
 
   <!-- Callout Styling Script -->
   <script>

@@ -8,22 +8,22 @@ Clear, practical workflows that show you exactly how to complete tasks in Alfred
 
 <div class="ts-guides-grid">
 
-  <a class="card ts-guide-card" href="#/procedures/properties_p.md">
+  <a class="card ts-guide-card" href="#/en/procedures/properties_p.md">
     <h3>Manage properties</h3>
     <p>Create, edit, or delete properties in your host dashboard.</p>
   </a>
 
-  <a class="card ts-guide-card" href="#/procedures/setup_library_p.md">
+  <a class="card ts-guide-card" href="#/en/procedures/setup_library_p.md">
     <h3>Set up your library</h3>
     <p>Get started with your library setup — from quick launch to full control.</p>
   </a>
 
-  <a class="card ts-guide-card" href="#/procedures/libraries_p.md">
+  <a class="card ts-guide-card" href="#/en/procedures/libraries_p.md">
     <h3>Add library content</h3>
     <p>Add text, media, or custom items to your property library so Alfred can use them in replies.</p>
   </a>
 
-  <a class="card ts-guide-card" href="#/procedures/test_assistant.md">
+  <a class="card ts-guide-card" href="#/en/procedures/test_assistant.md">
     <h3>Test assistant</h3>
     <p>Test how Alfred responds before going live. Make sure everything works perfectly for your guests.</p>
   </a>
@@ -34,17 +34,17 @@ Clear, practical workflows that show you exactly how to complete tasks in Alfred
 
 <div class="ts-guides-grid">
 
-  <a class="card ts-guide-card" href="#/procedures/writing_tips.md">
+  <a class="card ts-guide-card" href="#/en/procedures/writing_tips.md">
     <h3>How to write great library items</h3>
     <p>Learn best practices for writing clear, effective library content that helps Alfred communicate with guests.</p>
   </a>
 
-  <a class="card ts-guide-card" href="#/procedures/writing_custom_items.md">
+  <a class="card ts-guide-card" href="#/en/procedures/writing_custom_items.md">
     <h3>Writing custom items</h3>
     <p>Add custom items to your library to cover property-specific details beyond standard categories.</p>
   </a>
 
-  <a class="card ts-guide-card" href="#/procedures/writing_policies.md">
+  <a class="card ts-guide-card" href="#/en/procedures/writing_policies.md">
     <h3>Writing internal policies</h3>
     <p>Create custom policies to control Alfred's behavior in specific situations.</p>
   </a>
@@ -55,12 +55,12 @@ Clear, practical workflows that show you exactly how to complete tasks in Alfred
 
 <div class="ts-guides-grid">
 
-  <a class="card ts-guide-card" href="#/procedures/subscriptions_p.md">
+  <a class="card ts-guide-card" href="#/en/procedures/subscriptions_p.md">
     <h3>Manage subscriptions</h3>
     <p>Manage property subscriptions and control when your assistant is live.</p>
   </a>
 
-  <a class="card ts-guide-card" href="#/procedures/change_payment_card_p.md">
+  <a class="card ts-guide-card" href="#/en/procedures/change_payment_card_p.md">
     <h3>Change payment card</h3>
     <p>Update the payment card used for all your Alfred Co.Host subscriptions.</p>
   </a>
