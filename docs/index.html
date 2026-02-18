@@ -35,6 +35,18 @@
       </div>
       <div class="header-right">
         <div class="header-search-placeholder"></div>
+        <div class="lang-switcher" aria-label="Language">
+          <button class="lang-switcher-toggle" id="lang-toggle" aria-expanded="false" aria-haspopup="true">
+            <span class="lang-switcher-arrow">‹</span>
+            <img class="lang-flag" id="lang-current-flag" src="https://hatscripts.github.io/circle-flags/flags/gb.svg" alt="" />
+          </button>
+          <div class="lang-switcher-dropdown" id="lang-dropdown">
+            <a href="#/en/" data-lang="en" class="active"><img class="lang-flag" src="https://hatscripts.github.io/circle-flags/flags/gb.svg" alt="" /> English</a>
+            <a href="#/fr/" data-lang="fr"><img class="lang-flag" src="https://hatscripts.github.io/circle-flags/flags/fr.svg" alt="" /> Français</a>
+            <a href="#/it/" data-lang="it"><img class="lang-flag" src="https://hatscripts.github.io/circle-flags/flags/it.svg" alt="" /> Italiano</a>
+            <a href="#/es/" data-lang="es"><img class="lang-flag" src="https://hatscripts.github.io/circle-flags/flags/es.svg" alt="" /> Español</a>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -109,12 +121,108 @@
     })();
   </script>
 
+  <!-- Language detection + localStorage (SCOPE 5) -->
+  <script>
+  (function() {
+    const supportedLangs = ['en', 'fr', 'it', 'es'];
+    const defaultLang = 'en';
+
+    var path = window.location.hash || window.location.pathname;
+    var matchedInPath = supportedLangs.find(function(l) { return path.indexOf('/' + l + '/') !== -1 || path.endsWith('/' + l); });
+    if (matchedInPath) {
+      localStorage.setItem('preferredLanguage', matchedInPath);
+      return;
+    }
+
+    var saved = localStorage.getItem('preferredLanguage');
+    if (saved && supportedLangs.indexOf(saved) !== -1) {
+      window.location.hash = '/' + saved + '/';
+      return;
+    }
+
+    var browserLang = (navigator.language || navigator.userLanguage || '').slice(0, 2).toLowerCase();
+    var detected = supportedLangs.indexOf(browserLang) !== -1 ? browserLang : defaultLang;
+    localStorage.setItem('preferredLanguage', detected);
+    window.location.hash = '/' + detected + '/';
+  })();
+  </script>
+
+  <!-- Client-side link language rewriting (SCOPE 6) -->
+  <script>
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a');
+    if (!link) return;
+
+    if (link.closest('.lang-switcher')) return;
+
+    var href = link.getAttribute('href');
+    if (!href || href.indexOf('/en/') === -1) return;
+
+    var lang = localStorage.getItem('preferredLanguage') || 'en';
+    if (lang === 'en') return;
+
+    e.preventDefault();
+    var newHref = href.replace('/en/', '/' + lang + '/');
+    window.location.href = newHref;
+  });
+  </script>
+
+  <!-- Language switcher dropdown (SCOPE 3) -->
+  <script>
+  (function() {
+    var flagCodes = { en: 'gb', fr: 'fr', it: 'it', es: 'es' };
+    var supported = ['en', 'fr', 'it', 'es'];
+    var toggle = document.getElementById('lang-toggle');
+    var dropdown = document.getElementById('lang-dropdown');
+    var currentFlag = document.getElementById('lang-current-flag');
+    var flagBase = 'https://hatscripts.github.io/circle-flags/flags/';
+
+    function currentLang() {
+      var hash = window.location.hash || '';
+      var m = hash.match(/#\/(\w{2})\//);
+      return (m && supported.indexOf(m[1]) !== -1) ? m[1] : (localStorage.getItem('preferredLanguage') || 'en');
+    }
+
+    function refresh() {
+      var lang = currentLang();
+      currentFlag.src = flagBase + (flagCodes[lang] || 'gb') + '.svg';
+      var links = dropdown.querySelectorAll('a');
+      for (var i = 0; i < links.length; i++) {
+        links[i].classList.toggle('active', links[i].getAttribute('data-lang') === lang);
+      }
+    }
+
+    toggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var open = dropdown.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', function() {
+      dropdown.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+
+    dropdown.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (a && a.dataset.lang) {
+        localStorage.setItem('preferredLanguage', a.dataset.lang);
+        dropdown.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    refresh();
+    window.addEventListener('hashchange', refresh);
+  })();
+  </script>
+
   <!-- Docsify Configuration -->
   <script>
   window.$docsify = {
     name: 'Alfred Co.Host docs',
     homepage: 'en/README.md',
-    loadNavbar: true,
+    loadNavbar: false,
     loadSidebar: true,
     alias: {
       '/en/(.*)': '/en/$1',
@@ -157,6 +265,13 @@
         '/procedures/writing_tips',
         '/procedures/test_assistant'
       ]
+    },
+
+    glossary: {
+      en: '/en/_glossary.md',
+      fr: '/fr/_glossary.md',
+      it: '/it/_glossary.md',
+      es: '/es/_glossary.md',
     }
   };
 </script>
@@ -164,6 +279,7 @@
   <!-- Docsify Core & Plugins -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-glossary/dist/docsify-glossary.min.js"></script>
 
   <!-- Callout Styling Script -->
   <script>

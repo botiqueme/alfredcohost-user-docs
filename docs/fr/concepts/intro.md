@@ -7,27 +7,27 @@ Vous ne savez pas par où commencer ? Cette page vous présente les concepts cl�
 <div class="ts-guides-grid">
 
   <a class="card ts-guide-card" href="#/fr/concepts/what-alfred-can-do_c.md">
-    <h3>What Alfred can do</h3>
+    <h3>Ce qu'Alfred peut faire</h3>
     <p>Découvrez les capacités d'Alfred et comment il accompagne vos voyageurs 24h/24 via les messageries.</p>
   </a>
 
   <a class="card ts-guide-card" href="#/fr/concepts/properties_c.md">
-    <h3>Properties</h3>
+    <h3>Propriétés</h3>
     <p>Apprenez comment fonctionnent les properties et comment Alfred associe les voyageurs à la bonne unité.</p>
   </a>
 
   <a class="card ts-guide-card" href="#/fr/concepts/libraries_c.md">
-    <h3>Libraries</h3>
+    <h3>Bibliothèques</h3>
     <p>Construisez l'information qu'Alfred utilise pour répondre aux voyageurs pour chaque propriété.</p>
   </a>
 
   <a class="card ts-guide-card" href="#/fr/concepts/plans_billing_cycles_c.md">
-    <h3>Plans & billing cycles</h3>
+    <h3>Plans et cycles de facturation</h3>
     <p>Comprenez le fonctionnement des plans, abonnements et cycles de facturation sur vos propriétés.</p>
   </a>
 
   <a class="card ts-guide-card" href="#/fr/concepts/property-identifiers_c.md">
-    <h3>Property identifiers</h3>
+    <h3>Identifiants de propriété</h3>
     <p>Les identifiants dont Alfred a besoin pour associer chaque voyageur au bon appartement.</p>
   </a>
 

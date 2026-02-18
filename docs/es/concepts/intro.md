@@ -12,12 +12,12 @@
   </a>
 
   <a class="card ts-guide-card" href="#/es/concepts/properties_c.md">
-    <h3>Properties</h3>
+    <h3>Propiedades</h3>
     <p>Aprende cómo funcionan las properties y cómo Alfred asocia a cada huésped con la unidad correcta.</p>
   </a>
 
   <a class="card ts-guide-card" href="#/es/concepts/libraries_c.md">
-    <h3>Libraries</h3>
+    <h3>Bibliotecas</h3>
     <p>Construye la información que Alfred usa para responder a los huéspedes en cada propiedad.</p>
   </a>
 
@@ -27,7 +27,7 @@
   </a>
 
   <a class="card ts-guide-card" href="#/es/concepts/property-identifiers_c.md">
-    <h3>Property identifiers</h3>
+    <h3>Identificadores de propiedad</h3>
     <p>Los identificadores que Alfred necesita para conectar a cada huésped con el apartamento correcto.</p>
   </a>
 

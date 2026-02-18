@@ -17,7 +17,7 @@ Non sai da dove iniziare? Questa pagina ti guida attraverso i concetti chiave di
   </a>
 
   <a class="card ts-guide-card" href="#/it/concepts/libraries_c.md">
-    <h3>Libraries</h3>
+    <h3>Librerie</h3>
     <p>Costruisci le informazioni che Alfred usa per rispondere agli ospiti per ogni proprietà.</p>
   </a>
 
@@ -27,7 +27,7 @@ Non sai da dove iniziare? Questa pagina ti guida attraverso i concetti chiave di
   </a>
 
   <a class="card ts-guide-card" href="#/it/concepts/property-identifiers_c.md">
-    <h3>Property identifiers</h3>
+    <h3>Identificatori di proprietà</h3>
     <p>Gli identificatori che Alfred usa per collegare ogni ospite all'appartamento giusto.</p>
   </a>
 
