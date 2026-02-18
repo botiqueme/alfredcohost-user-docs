@@ -212,11 +212,19 @@
 
     dropdown.addEventListener('click', function(e) {
       var a = e.target.closest('a');
-      if (a && a.dataset.lang) {
-        localStorage.setItem('preferredLanguage', a.dataset.lang);
-        dropdown.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
+      if (!a || !a.dataset.lang) return;
+      e.preventDefault();
+      var newLang = a.dataset.lang;
+      localStorage.setItem('preferredLanguage', newLang);
+      dropdown.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+
+      var hash = window.location.hash || '';
+      var swapped = hash.replace(/#\/(\w{2})\//, '#/' + newLang + '/');
+      if (swapped === hash && hash.indexOf('#/' + newLang + '/') === -1) {
+        swapped = '#/' + newLang + '/';
       }
+      window.location.hash = swapped.replace('#', '');
     });
 
     refresh();
