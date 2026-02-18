@@ -330,12 +330,6 @@
           textEl.textContent = text;
         } else {
           textEl.innerHTML = typeof marked !== 'undefined' ? marked.parse(text || '') : (text || '').replace(/</g, '&lt;');
-          // TODO: LINK LANGUAGE PREFIX
-          // This handler converts links in bot responses to navigable doc links.
-          // It does NOT yet add the language prefix (e.g. /it/, /fr/) to the hash.
-          // Future improvement: prepend '/' + lang + '/' to docHash so links
-          // navigate to the correct language version of the page.
-          // See BACKEND-INTEGRATION.md "Priorità 3: Link nelle risposte" for details.
           textEl.querySelectorAll('a').forEach(function (a) {
             var href = a.getAttribute('href');
             if (!href) return;
@@ -353,7 +347,12 @@
               if (docHash) {
                 a.addEventListener('click', function (e) {
                   e.preventDefault();
-                  window.parent.location.hash = docHash;
+                  var lang = getPreferredLanguage();
+                  var localized = docHash.replace(/#\/(en|fr|it|es)\//, '#/' + lang + '/');
+                  if (localized === docHash && docHash.indexOf('#/' + lang + '/') === -1) {
+                    localized = docHash.replace('#/', '#/' + lang + '/');
+                  }
+                  window.parent.location.hash = localized.replace('#', '');
                 });
               } else {
                 a.setAttribute('target', '_parent');
@@ -424,9 +423,9 @@
         lang = getPreferredLanguage();
         t = i18n[lang] || i18n.en;
         var payload = {
-          message: text,
-          preferred_language: lang,
-          current_page_url: getCurrentPageUrl()
+          message: text
+          // preferred_language: lang,
+          // current_page_url: getCurrentPageUrl()
         };
         if (threadId) payload.thread_id = threadId;
 
