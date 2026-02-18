@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robin – Alfred Docs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root {
+      --color-primary: #FF3B3C;
+      --color-text: #34495E;
+      --color-bg: #ffffff;
+      --color-bg-alt: #f8f9fa;
+      --font: 'Montserrat', sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--color-bg);
+      color: var(--color-text);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-header {
+      padding: 10px 12px 10px 16px;
+      border-bottom: 1px solid #eee;
+      background: var(--color-bg);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .chat-header-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-right: 10px;
+    }
+    .chat-header-title {
+      flex: 1;
+      min-width: 0;
+    }
+    .chat-header h1 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+    .chat-header p {
+      margin: 2px 0 0 0;
+      font-size: 0.75rem;
+      color: var(--color-text);
+      opacity: 0.85;
+    }
+    .chat-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .chat-header-actions button {
+      padding: 6px 10px;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--color-text);
+      font-family: var(--font);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .chat-header-actions button:hover {
+      background: var(--color-bg-alt);
+    }
+    .chat-header-actions button.minimize-btn {
+      padding: 8px;
+      font-size: 1rem;
+      line-height: 1;
+    }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .message {
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .message.user {
+      align-self: flex-end;
+      background: var(--color-primary);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .message.bot {
+      align-self: flex-start;
+      background: var(--color-bg-alt);
+      border: 1px solid #eee;
+      border-bottom-left-radius: 4px;
+    }
+    .message .text {
+      display: block;
+      margin-bottom: 4px;
+    }
+    /* Markdown rendering in bot messages */
+    .message.bot .text p { margin: 0 0 0.6em 0; }
+    .message.bot .text p:last-child { margin-bottom: 0; }
+    .message.bot .text strong { font-weight: 700; }
+    .message.bot .text em { font-style: italic; }
+    .message.bot .text ul, .message.bot .text ol { margin: 0.4em 0; padding-left: 1.4em; }
+    .message.bot .text li { margin: 0.2em 0; }
+    .message.bot .text code { background: rgba(0,0,0,0.06); padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; }
+    .message.bot .text pre { margin: 0.5em 0; overflow-x: auto; }
+    .message.bot .text pre code { display: block; padding: 0.6em; }
+    .message.bot .text h1, .message.bot .text h2, .message.bot .text h3 { margin: 0.6em 0 0.3em 0; font-size: 1em; font-weight: 700; }
+    .message.bot .text h1:first-child, .message.bot .text h2:first-child, .message.bot .text h3:first-child { margin-top: 0; }
+    .message .time {
+      font-size: 0.7rem;
+      opacity: 0.7;
+    }
+    .typing-indicator {
+      align-self: flex-start;
+      background: var(--color-bg-alt);
+      border: 1px solid #eee;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border-bottom-left-radius: 4px;
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .typing-indicator span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-text);
+      opacity: 0.5;
+      animation: typing-bounce 1s infinite;
+    }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.1s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.2s; }
+    @keyframes typing-bounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-4px); }
+    }
+    .chat-input-wrap {
+      padding: 12px 16px;
+      border-top: 1px solid #eee;
+      background: var(--color-bg);
+      flex-shrink: 0;
+    }
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .chat-input-row input {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 0.9rem;
+      color: var(--color-text);
+      outline: none;
+      transition: border 0.15s ease;
+    }
+    .chat-input-row input:focus {
+      border-color: var(--color-primary);
+    }
+    .chat-input-row input:disabled {
+      background: var(--color-bg-alt);
+      cursor: not-allowed;
+    }
+    .chat-input-row button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: var(--font);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+    }
+    .chat-input-row button:hover {
+      opacity: 0.9;
+    }
+    .chat-input-row button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <header class="chat-header">
+    <div class="chat-header-avatar" aria-hidden="true">R</div>
+    <div class="chat-header-title">
+      <h1>Robin</h1>
+      <p>AI support for Platform usage</p>
+    </div>
+    <div class="chat-header-actions">
+      <button id="clearBtn" title="Restart conversation">Restart</button>
+      <button class="minimize-btn" id="minimizeBtn" title="Minimize">−</button>
+    </div>
+  </header>
+
+  <div class="chat-messages" id="chatMessages"></div>
+
+  <div class="chat-input-wrap">
+    <div class="chat-input-row">
+      <input
+        type="text"
+        id="messageInput"
+        placeholder="Ask me anything about Alfred..."
+        autocomplete="off"
+      />
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const API_ENDPOINT = 'https://chatbot.alfredco.host/api/v1/docs_chatbot';
+      const RESTART_ENDPOINT = 'https://chatbot.alfredco.host/api/v1/docs_chatbot_restart';
+
+      var i18n = {
+        en: {
+          welcome: "Hi! 👋 I'm Robin, your AI assistant for Alfred Co.Host. I can help you with questions about the Platform. How can I help?",
+          subtitle: 'AI support for Platform usage',
+          placeholder: 'Ask me anything about Alfred...',
+          send: 'Send',
+          restart: 'Restart',
+          errorServer: '❌ Sorry, something went wrong. Please try again.',
+          errorNetwork: '❌ Connection error. Please check your internet connection and try again.'
+        },
+        fr: {
+          welcome: "Bonjour ! 👋 Je suis Robin, votre assistant IA pour Alfred Co.Host. Je peux vous aider avec vos questions sur la Plateforme. Comment puis-je vous aider ?",
+          subtitle: 'Assistant IA pour la Plateforme',
+          placeholder: 'Posez-moi une question sur Alfred...',
+          send: 'Envoyer',
+          restart: 'Redémarrer',
+          errorServer: '❌ Désolé, une erreur est survenue. Veuillez réessayer.',
+          errorNetwork: '❌ Erreur de connexion. Vérifiez votre connexion internet et réessayez.'
+        },
+        it: {
+          welcome: "Ciao! 👋 Sono Robin, il tuo assistente IA per Alfred Co.Host. Posso aiutarti con domande sulla Piattaforma. Come posso aiutarti?",
+          subtitle: 'Assistente IA per la Piattaforma',
+          placeholder: 'Chiedimi qualcosa su Alfred...',
+          send: 'Invia',
+          restart: 'Riavvia',
+          errorServer: '❌ Si è verificato un errore. Riprova.',
+          errorNetwork: '❌ Errore di connessione. Controlla la tua connessione internet e riprova.'
+        },
+        es: {
+          welcome: "¡Hola! 👋 Soy Robin, tu asistente IA para Alfred Co.Host. Puedo ayudarte con preguntas sobre la Plataforma. ¿En qué puedo ayudarte?",
+          subtitle: 'Asistente IA para la Plataforma',
+          placeholder: 'Pregúntame sobre Alfred...',
+          send: 'Enviar',
+          restart: 'Reiniciar',
+          errorServer: '❌ Lo siento, algo salió mal. Inténtalo de nuevo.',
+          errorNetwork: '❌ Error de conexión. Revisa tu conexión a internet e inténtalo de nuevo.'
+        }
+      };
+
+      function getPreferredLanguage() {
+        try { return window.parent.localStorage.getItem('preferredLanguage') || 'en'; }
+        catch (_) { return 'en'; }
+      }
+
+      function getCurrentPageUrl() {
+        try { return window.parent.location.hash || ''; }
+        catch (_) { return ''; }
+      }
+
+      var lang = getPreferredLanguage();
+      var t = i18n[lang] || i18n.en;
+
+      var messagesEl = document.getElementById('chatMessages');
+      var inputEl = document.getElementById('messageInput');
+      var sendBtn = document.getElementById('sendBtn');
+      var clearBtn = document.getElementById('clearBtn');
+      var minimizeBtn = document.getElementById('minimizeBtn');
+
+      inputEl.placeholder = t.placeholder;
+      sendBtn.textContent = t.send;
+      clearBtn.textContent = t.restart;
+      document.querySelector('.chat-header p').textContent = t.subtitle;
+
+      var threadId = null;
+      var isLoading = false;
+
+      function timeLabel() {
+        return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      }
+
+      function showWelcome() {
+        var hasMessages = messagesEl.querySelectorAll('.message').length > 0;
+        if (hasMessages) return;
+        addMessage(t.welcome, false);
+      }
+
+      function addMessage(text, isUser) {
+        var div = document.createElement('div');
+        div.className = 'message ' + (isUser ? 'user' : 'bot');
+        div.innerHTML = '<span class="text"></span><div class="time">' + timeLabel() + '</div>';
+        var textEl = div.querySelector('.text');
+        if (isUser) {
+          textEl.textContent = text;
+        } else {
+          textEl.innerHTML = typeof marked !== 'undefined' ? marked.parse(text || '') : (text || '').replace(/</g, '&lt;');
+          // TODO: LINK LANGUAGE PREFIX
+          // This handler converts links in bot responses to navigable doc links.
+          // It does NOT yet add the language prefix (e.g. /it/, /fr/) to the hash.
+          // Future improvement: prepend '/' + lang + '/' to docHash so links
+          // navigate to the correct language version of the page.
+          // See BACKEND-INTEGRATION.md "Priorità 3: Link nelle risposte" for details.
+          textEl.querySelectorAll('a').forEach(function (a) {
+            var href = a.getAttribute('href');
+            if (!href) return;
+            try {
+              var url = new URL(a.href, window.location.href);
+              var docHash = '';
+              if (url.hash && url.hash.length > 1 && url.hash.startsWith('#/')) {
+                docHash = url.hash;
+              } else {
+                var path = url.pathname.replace(/^\//, '');
+                if (path && (path.indexOf('procedures/') === 0 || path.indexOf('concepts/') === 0 || path.indexOf('get-started') === 0 || path.indexOf('library_faqs') === 0 || path.indexOf('home') === 0 || path.indexOf('.md') !== -1)) {
+                  docHash = '#/' + path;
+                }
+              }
+              if (docHash) {
+                a.addEventListener('click', function (e) {
+                  e.preventDefault();
+                  window.parent.location.hash = docHash;
+                });
+              } else {
+                a.setAttribute('target', '_parent');
+              }
+              a.setAttribute('rel', 'noopener noreferrer');
+            } catch (err) {}
+          });
+        }
+        messagesEl.appendChild(div);
+        scrollToBottom();
+      }
+
+      function removeTypingIndicator() {
+        var el = document.getElementById('typing-indicator');
+        if (el && el.parentNode) el.parentNode.removeChild(el);
+      }
+
+      function showTypingIndicator() {
+        removeTypingIndicator();
+        var div = document.createElement('div');
+        div.id = 'typing-indicator';
+        div.className = 'typing-indicator';
+        div.setAttribute('aria-live', 'polite');
+        div.innerHTML = '<span></span><span></span><span></span>';
+        messagesEl.appendChild(div);
+        scrollToBottom();
+      }
+
+      function setLoading(loading) {
+        isLoading = loading;
+        inputEl.disabled = loading;
+        sendBtn.disabled = loading;
+        if (loading) showTypingIndicator();
+        else removeTypingIndicator();
+      }
+
+      function scrollToBottom() {
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      function clearConversation() {
+        var currentThreadId = threadId;
+        threadId = null;
+        lang = getPreferredLanguage();
+        t = i18n[lang] || i18n.en;
+        inputEl.placeholder = t.placeholder;
+        sendBtn.textContent = t.send;
+        clearBtn.textContent = t.restart;
+        document.querySelector('.chat-header p').textContent = t.subtitle;
+        messagesEl.innerHTML = '';
+        showWelcome();
+        setLoading(false);
+        if (currentThreadId) {
+          fetch(RESTART_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ thread_id: currentThreadId })
+          }).catch(function () {});
+        }
+      }
+
+      function sendMessage() {
+        var text = (inputEl.value || '').trim();
+        if (!text || isLoading) return;
+        addMessage(text, true);
+        inputEl.value = '';
+        setLoading(true);
+        lang = getPreferredLanguage();
+        t = i18n[lang] || i18n.en;
+        var payload = {
+          message: text,
+          preferred_language: lang,
+          current_page_url: getCurrentPageUrl()
+        };
+        if (threadId) payload.thread_id = threadId;
+
+        fetch(API_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        })
+        .then(function(response) {
+          if (!response.ok) {
+            throw new Error('Server error: ' + response.status);
+          }
+          return response.json();
+        })
+        .then(function(data) {
+          setLoading(false);
+          
+          if (data.status === 'success' && data.data) {
+            threadId = data.data.thread_id;
+            addMessage(data.data.response, false);
+          } else {
+            addMessage(t.errorServer, false);
+          }
+        })
+        .catch(function () {
+          setLoading(false);
+          addMessage(t.errorNetwork, false);
+        });
+      }
+
+      function notifyParentMinimize() {
+        try {
+          if (window.parent !== window) {
+            window.parent.postMessage({ type: 'alfred-chat-minimize' }, '*');
+          }
+        } catch (_) {}
+      }
+
+      function applyLanguage(newLang) {
+        if (!i18n[newLang] || newLang === lang) return;
+        lang = newLang;
+        t = i18n[lang];
+        inputEl.placeholder = t.placeholder;
+        sendBtn.textContent = t.send;
+        clearBtn.textContent = t.restart;
+        document.querySelector('.chat-header p').textContent = t.subtitle;
+        var hasUserMessages = messagesEl.querySelector('.message.user');
+        if (!hasUserMessages) {
+          messagesEl.innerHTML = '';
+          showWelcome();
+        }
+      }
+
+      window.addEventListener('message', function (e) {
+        if (e.data && e.data.type === 'alfred-lang-update' && e.data.lang) {
+          applyLanguage(e.data.lang);
+        }
+      });
+
+      sendBtn.addEventListener('click', sendMessage);
+      inputEl.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); sendMessage(); }
+      });
+      clearBtn.addEventListener('click', clearConversation);
+      minimizeBtn.addEventListener('click', notifyParentMinimize);
+
+      showWelcome();
+
+      try {
+        if (window.parent !== window) {
+          window.parent.postMessage({ type: 'alfred-chat-loaded' }, '*');
+        }
+      } catch (_) {}
+    })();
+  </script>
+</body>
+</html>
