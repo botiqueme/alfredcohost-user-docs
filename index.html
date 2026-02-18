@@ -232,10 +232,7 @@
     loadNavbar: false,
     loadSidebar: true,
     alias: {
-      '/en/(.*)': '/en/$1',
-      '/fr/(.*)': '/fr/$1',
-      '/it/(.*)': '/it/$1',
-      '/es/(.*)': '/es/$1',
+      '/(en|fr|it|es)/.*/_sidebar.md': '/$1/_sidebar.md',
     },
     nameLink: {
       '/en/': '#/en/',
