@@ -6,32 +6,32 @@ Not sure where to start? This page walks you through Alfred’s core concepts an
 
 <div class="ts-guides-grid">
 
-  <a class="card ts-guide-card" href="#/concepts/what-alfred-can-do_c.md">
+  <a class="card ts-guide-card" href="#/en/concepts/what-alfred-can-do_c.md">
     <h3>What Alfred can do</h3>
     <p>Discover Alfred's capabilities and how it helps your guests 24/7 through messaging platforms.</p>
   </a>
 
-  <a class="card ts-guide-card" href="#/concepts/properties_c.md">
+  <a class="card ts-guide-card" href="#/en/concepts/properties_c.md">
     <h3>Properties</h3>
     <p>Learn how properties work and how Alfred links guests to the right unit.</p>
   </a>
 
-  <a class="card ts-guide-card" href="#/concepts/libraries_c.md">
+  <a class="card ts-guide-card" href="#/en/concepts/libraries_c.md">
     <h3>Libraries</h3>
     <p>Build the information Alfred uses to answer guests for each property.</p>
   </a>
 
-  <a class="card ts-guide-card" href="#/concepts/plans_billing_cycles_c.md">
+  <a class="card ts-guide-card" href="#/en/concepts/plans_billing_cycles_c.md">
     <h3>Plans & billing cycles</h3>
     <p>Learn how plans, subscriptions, and billing cycles work across your properties.</p>
   </a>
 
-  <a class="card ts-guide-card" href="#/concepts/property-identifiers_c.md">
+  <a class="card ts-guide-card" href="#/en/concepts/property-identifiers_c.md">
     <h3>Property identifiers</h3>
     <p>Understand the identifiers Alfred needs to connect each guest to the right apartment.</p>
   </a>
 
-  <a class="card ts-guide-card" href="#/concepts/hands_off_c.md">
+  <a class="card ts-guide-card" href="#/en/concepts/hands_off_c.md">
     <h3>Hands off</h3>
     <p>Learn how Alfred escalates conversations to your team when guests need human help.</p>
   </a>
